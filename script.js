@@ -22,6 +22,81 @@ async function loadTools() {
     }
 }
 
+// PDF Helper
+async function loadPDFLib() {
+    if (window.PDFLib) return;
+    return new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';
+        script.onload = resolve;
+        document.head.appendChild(script);
+    });
+}
+
+async function handlePDF(id, data) {
+    await loadPDFLib();
+    const { PDFDocument, rgb } = PDFLib;
+
+    if (id === 'txt2pdf') {
+        const pdfDoc = await PDFDocument.create();
+        const page = pdfDoc.addPage();
+        const { width, height } = page.getSize();
+
+        // Simple text wrapping or just writing text
+        // Note: pdf-lib text drawing is basic. For long text we need wrapping logic.
+        // For this MVP, we will print small text or just dump it.
+        const fontSize = 12;
+        page.drawText(data.txt, {
+            x: 50,
+            y: height - 50,
+            size: fontSize,
+            color: rgb(0, 0, 0),
+            maxWidth: width - 100,
+            lineHeight: fontSize + 2,
+        });
+
+        const pdfBytes = await pdfDoc.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        // Open PDF in new tab/iframe
+        return `<iframe src="${url}" width="100%" height="500px" style="border:none;"></iframe>`;
+    }
+    return 'PDF Tool Not Implemented Yet';
+}
+
+async function handleImageWorker(id, file) {
+    if (!file) return 'Please select an image first.';
+
+    // Create Bitmap
+    const bmp = await createImageBitmap(file);
+
+    return new Promise((resolve) => {
+        worker.onmessage = function (e) {
+            const { result } = e.data;
+            if (result instanceof ImageBitmap) {
+                // Draw to canvas
+                const cvs = document.createElement('canvas');
+                cvs.width = result.width;
+                cvs.height = result.height;
+                const ctx = cvs.getContext('2d');
+                ctx.drawImage(result, 0, 0);
+                resolve(cvs); // Return canvas element
+
+                // Restore default worker message handler for other tools
+                worker.onmessage = function (ev) {
+                    const { result: res } = ev.data;
+                    const out = document.getElementById('mOutVal');
+                    out.innerText = res;
+                    document.getElementById('mOutBox').style.display = 'block';
+                };
+            } else {
+                resolve(result);
+            }
+        };
+        worker.postMessage({ id, data: { bitmap: bmp } }, [bmp]);
+    });
+}
+
 const engine = {
     // Student
     'cnt': (d) => `الكلمات: ${d.txt.trim().split(/\s+/).length} | الأحرف: ${d.txt.length}`,
@@ -247,6 +322,8 @@ async function initPage(category) {
 
 function openTool(tool) {
     activeToolId = tool.id;
+    Memory.addHistory(tool.id);
+    Memory.set('last_tool', tool.id);
     document.getElementById('mTitle').innerHTML = `${tool.icon} ${tool.name}`;
 
     const fields = document.getElementById('mFields');
@@ -300,7 +377,15 @@ async function runTool() {
         // List of tools processed by worker
         const workerTools = ['cnt', 'rev', 'cln', 'upr', 'lwr', 'cap', 'bin', 'bde', 'rep', 'eml', 'url', 'num', 'slug', 'wpm', 'sort', 'sortr', 'remdup', 'bmi', 'avg', 'jsn', 'gen'];
 
-        if (workerTools.includes(activeToolId)) {
+        if (activeToolId === 'txt2pdf') {
+            document.getElementById('mOutVal').innerHTML = '⏳ جاري إنشاء ملف PDF...';
+            document.getElementById('mOutBox').style.display = 'block';
+            res = await handlePDF(activeToolId, data);
+        } else if (['imgbw', 'flip', 'blur'].includes(activeToolId)) {
+            document.getElementById('mOutVal').innerHTML = '⏳ جاري معالجة الصورة...';
+            document.getElementById('mOutBox').style.display = 'block';
+            res = await handleImageWorker(activeToolId, data.img);
+        } else if (workerTools.includes(activeToolId)) {
             document.getElementById('mOutVal').innerHTML = '⏳ جاري المعالجة...';
             document.getElementById('mOutBox').style.display = 'block';
             worker.postMessage({ id: activeToolId, data: data });
@@ -332,11 +417,39 @@ async function runTool() {
     }
 }
 
+// --- Smart UX & Memory ---
+const Memory = {
+    get: (k) => JSON.parse(localStorage.getItem(k) || 'null'),
+    set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
+
+    // History
+    addHistory: (id) => {
+        let h = Memory.get('history') || [];
+        h = h.filter(x => x !== id); // Remove duplicates
+        h.unshift(id); // Add to top
+        if (h.length > 5) h.pop(); // Keep last 5
+        Memory.set('history', h);
+    },
+
+    // Fisher-Yates Shuffle
+    shuffle: (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+};
+
 // Global Init
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modal').onclick = (e) => {
         if (e.target.id === 'modal') closeModal();
     }
+
+    // Check for history
+    const lastTool = Memory.get('last_tool');
+    if (lastTool) console.log('Welcome back! Last tool used:', lastTool);
 });
 
 function search(q) {

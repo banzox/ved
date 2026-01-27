@@ -78,12 +78,11 @@ self.onmessage = function (e) {
                 result = Math.random().toString(36).slice(-data.len);
                 break;
 
-            // Default: If not handled here, send back error or handled in main thread
             default:
                 result = 'NOT_HANDLED';
         }
     } catch (err) {
-        result = `ERORR: ${err.message}`;
+        result = `ERROR: ${err.message}`;
     }
 
     self.postMessage({ result });
