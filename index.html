@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | الرئيسية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="sidebar">
+        <a href="index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
+        <div class="nav-menu">
+            <a href="student.html" class="nav-item"><i>📝</i> <span>نصوص وطلاب</span></a>
+            <a href="math.html" class="nav-item"><i>🔢</i> <span>حساب ومال</span></a>
+            <a href="conv.html" class="nav-item"><i>🔄</i> <span>تحويلات</span></a>
+            <a href="dev.html" class="nav-item"><i>💻</i> <span>مطورين</span></a>
+            <a href="social.html" class="nav-item"><i>📱</i> <span>اجتماعي</span></a>
+            <a href="files.html" class="nav-item"><i>📂</i> <span>ملفات</span></a>
+            <a href="game.html" class="nav-item"><i>🎮</i> <span>ألعاب</span></a>
+        </div>
+        <div class="pro-card">
+            <h4>NextGear Pro</h4>
+            <button class="pro-btn" onclick="window.open('http://nextgear.space')">ترقية الآن</button>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1>مرحباً بك 👋</h1>
+                <p>اختر قسماً من القائمة أو ابحث عن أداة مباشرة.</p>
+            </div>
+            <div class="search">
+                <input type="text" id="search" placeholder="بحث شامل..." oninput="search(this.value)"> 🔍
+            </div>
+        </div>
+
+        <!-- Featured Grid -->
+        <div class="grid" id="grid">
+            <div class="tool-card banner" onclick="window.open('http://nextgear.space')">
+                <div class="icon-box" style="background:rgba(255,255,255,0.1);color:white">☁️</div>
+                <div class="tool-name">استضافة Cloudflare</div>
+                <div class="tool-desc">استضافة سريعة وآمنة لمشاريعك القادمة.</div>
+            </div>
+
+            <div class="tool-card" onclick="window.location.href='student.html'">
+                <div class="icon-box">📝</div>
+                <div class="tool-name">أدوات النصوص</div>
+                <div class="tool-desc">عداد كلمات، تنظيف، وعكس النصوص.</div>
+            </div>
+
+            <div class="tool-card" onclick="window.location.href='math.html'">
+                <div class="icon-box">🔢</div>
+                <div class="tool-name">الحاسبات</div>
+                <div class="tool-desc">حساب العمر، BMI، والزكاة.</div>
+            </div>
+
+            <div class="tool-card" onclick="window.location.href='dev.html'">
+                <div class="icon-box">💻</div>
+                <div class="tool-name">المطورين</div>
+                <div class="tool-desc">JSON فوت، Base64، و UUID.</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
