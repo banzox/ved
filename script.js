@@ -39,21 +39,44 @@ async function handlePDF(id, data) {
 
     if (id === 'txt2pdf') {
         const pdfDoc = await PDFDocument.create();
-        const page = pdfDoc.addPage();
+        let page = pdfDoc.addPage();
         const { width, height } = page.getSize();
-
-        // Simple text wrapping or just writing text
-        // Note: pdf-lib text drawing is basic. For long text we need wrapping logic.
-        // For this MVP, we will print small text or just dump it.
         const fontSize = 12;
-        page.drawText(data.txt, {
-            x: 50,
-            y: height - 50,
-            size: fontSize,
-            color: rgb(0, 0, 0),
-            maxWidth: width - 100,
-            lineHeight: fontSize + 2,
-        });
+        const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+
+        // Professional Text Wrapping
+        const text = data.txt || '';
+        const lines = text.split('\n');
+        let y = height - 50;
+        const margin = 50;
+        const maxWidth = width - (margin * 2);
+
+        for (const line of lines) {
+            let currentLine = '';
+            const words = line.split(' ');
+
+            for (const word of words) {
+                const testLine = currentLine + (currentLine ? ' ' : '') + word;
+                const textWidth = font.widthOfTextAtSize(testLine, fontSize);
+
+                if (textWidth > maxWidth) {
+                    // Draw current line and start new one
+                    if (y < 50) { // New page if bottom reached
+                        page = pdfDoc.addPage();
+                        y = height - 50;
+                    }
+                    page.drawText(currentLine, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) });
+                    y -= (fontSize + 5);
+                    currentLine = word;
+                } else {
+                    currentLine = testLine;
+                }
+            }
+            // Draw last part of line
+            if (y < 50) { page = pdfDoc.addPage(); y = height - 50; }
+            page.drawText(currentLine, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) });
+            y -= (fontSize + 5);
+        }
 
         const pdfBytes = await pdfDoc.save();
         const blob = new Blob([pdfBytes], { type: 'application/pdf' });
@@ -109,10 +132,13 @@ const engine = {
     'bde': (d) => d.txt.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join(''),
     'rep': (d) => Array(Number(d.cnt) || 5).fill(d.txt).join(' '),
     'eml': (d) => (d.txt.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi) || []).join('\n'),
-    'url': (d) => (d.txt.match(/https?:\/\/[^\s]+/g) || []).join('\n'),
+    'url': (d) => (d.txt.match(/(https?:\/\/[^\s]+|www\.[^\s]+)/g) || []).join('\n'),
     'num': (d) => (d.txt.match(/\d+/g) || []).join(' '),
     'slug': (d) => d.txt.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
-    'morse': (d) => ".... . .-.. .-.. ---",
+    'morse': (d) => {
+        const morseCode = { 'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 'g': '--.', 'h': '....', 'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..', 'm': '--', 'n': '-.', 'o': '---', 'p': '.--.', 'q': '--.-', 'r': '.-.', 's': '...', 't': '-', 'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-', 'y': '-.--', 'z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', ' ': '/' };
+        return d.txt.toLowerCase().split('').map(c => morseCode[c] || c).join(' ');
+    },
     'wpm': (d) => `الوقت المقدر: ${(d.txt.trim().split(/\s+/).length / 200).toFixed(1)} دقيقة`,
     'sort': (d) => d.txt.split('\n').sort().join('\n'),
     'sortr': (d) => d.txt.split('\n').sort().reverse().join('\n'),
@@ -127,11 +153,19 @@ const engine = {
 
     // Math
     'age': (d) => { const dif = Date.now() - new Date(d.bd).getTime(); return `عمرك: ${Math.floor(dif / 31557600000)} سنة`; },
-    'bmi': (d) => { const h = d.h / 100; const b = (d.w / (h * h)).toFixed(2); return `BMI: ${b} (${b < 25 ? 'طبيعي' : 'زائد'})`; },
+    'bmi': (d) => { const h = d.h / 100; const b = (d.w / (h * h)).toFixed(2); return `BMI: ${b} (${b < 18.5 ? 'نحيف' : b < 25 ? 'طبيعي' : 'سمنة'})`; },
     'vat': (d) => `السعر شامل الضريبة: ${(d.p * 1.15).toFixed(2)}`,
     'disc': (d) => `السعر بعد الخصم: ${(d.price * (1 - d.perc / 100)).toFixed(2)}`,
-    'loan': (d) => `القسط: ${(d.amount / d.months).toFixed(2)} شهرياً`,
-    'zak': (d) => `الزكاة الواجبة: ${(d.money / 40).toFixed(2)}`,
+    'loan': (d) => {
+        // Amortization Formula: A = P * r * (1+r)^n / ((1+r)^n - 1)
+        // Default interest if simplified: assuming d.months includes interest? No, standard tool usually implies simple division OR amortization.
+        // Let's stick to simple division but formatted better, or ask user? 
+        // User asked for "Professional". Professional loan calc needs interest rate. 
+        // Since we don't have interest input in JSON, we'll keep simple division but clarify output.
+        // Or we can assume 0% interest for "Simple Payment Split".
+        return `القسط الشهري (بدون فوائد): ${(d.amount / d.months).toFixed(2)}`;
+    },
+    'zak': (d) => `الزكاة الواجبة: ${(d.money / 40).toFixed(2)} (2.5%)`,
     'sav': (d) => `ستجمع في السنة: ${d.m * 12}`,
     'sal': (d) => `ساعة عملك تساوي: ${(d.s / (30 * 8)).toFixed(2)}`,
     'tip': (d) => `الإكرامية: ${(d.bill * d.perc / 100).toFixed(2)} | الإجمالي: ${(d.bill * (1 + d.perc / 100)).toFixed(2)}`,
@@ -139,38 +173,38 @@ const engine = {
     'cir': (d) => `المساحة: ${(Math.PI * d.r * d.r).toFixed(2)}`,
     'tri': (d) => `المساحة: ${(0.5 * d.b * d.h).toFixed(2)}`,
     'pwd': (d) => Math.pow(d.b, d.e),
-    'pct': (d) => (d.pc / 100) * d.val,
-    'sqrt': (d) => Math.sqrt(d.v),
-    'avg': (d) => { const n = d.nums.split(' ').map(Number); return n.reduce((a, b) => a + b, 0) / n.length; },
+    'pct': (d) => ((d.pc / 100) * d.val).toFixed(2),
+    'sqrt': (d) => Math.sqrt(d.v).toFixed(4),
+    'avg': (d) => { const n = d.nums.split(' ').map(Number); return (n.reduce((a, b) => a + b, 0) / n.length).toFixed(2); },
     'min': (d) => Math.min(...d.nums.split(' ').map(Number)),
     'max': (d) => Math.max(...d.nums.split(' ').map(Number)),
     'rand': (d) => Math.floor(Math.random() * (d.max - d.min + 1) + d.min),
     'hyp': (d) => Math.hypot(d.a, d.b).toFixed(2),
 
     // Conv
-    'c2f': (d) => (d.v * 9 / 5) + 32,
-    'f2c': (d) => (d.v - 32) * 5 / 9,
-    'k2m': (d) => d.v * 0.621371,
-    'm2k': (d) => d.v / 0.621371,
-    'k2l': (d) => d.v * 2.20462,
-    'l2k': (d) => d.v / 2.20462,
-    'cm2i': (d) => d.v / 2.54,
-    'i2cm': (d) => d.v * 2.54,
-    'm2g': (d) => d.v / 1024,
-    'g2m': (d) => d.v * 1024,
-    'pxr': (d) => d.v / 16 + ' rem',
-    'r2p': (d) => d.v * 16 + ' px',
+    'c2f': (d) => ((d.v * 9 / 5) + 32).toFixed(1),
+    'f2c': (d) => ((d.v - 32) * 5 / 9).toFixed(1),
+    'k2m': (d) => (d.v * 0.621371).toFixed(2),
+    'm2k': (d) => (d.v / 0.621371).toFixed(2),
+    'k2l': (d) => (d.v * 2.20462).toFixed(2),
+    'l2k': (d) => (d.v / 2.20462).toFixed(2),
+    'cm2i': (d) => (d.v / 2.54).toFixed(2),
+    'i2cm': (d) => (d.v * 2.54).toFixed(2),
+    'm2g': (d) => (d.v / 1024).toFixed(4),
+    'g2m': (d) => (d.v * 1024).toFixed(2),
+    'pxr': (d) => (d.v / 16).toFixed(3) + ' rem',
+    'r2p': (d) => (d.v * 16).toFixed(0) + ' px',
     'l2ml': (d) => d.v * 1000,
     'ml2l': (d) => d.v / 1000,
     'd2h': (d) => d.v * 24,
     'h2m': (d) => d.v * 60,
     'm2s': (d) => d.v * 60,
-    'kh2mp': (d) => d.v * 0.621371,
-    'mp2kh': (d) => d.v / 0.621371,
-    'psi': (d) => d.v * 0.0689476,
+    'kh2mp': (d) => (d.v * 0.621371).toFixed(1),
+    'mp2kh': (d) => (d.v / 0.621371).toFixed(1),
+    'psi': (d) => (d.v * 0.0689476).toFixed(2),
 
     // Dev
-    'jsn': (d) => JSON.stringify(JSON.parse(d.txt), null, 2),
+    'jsn': (d) => { try { return JSON.stringify(JSON.parse(d.txt), null, 2); } catch { return 'Invalid JSON'; } },
     'b64': (d) => btoa(d.txt),
     'dec': (d) => atob(d.txt),
     'ue': (d) => encodeURIComponent(d.txt),
@@ -178,8 +212,8 @@ const engine = {
     'gen': (d) => Math.random().toString(36).slice(-d.len),
     'css': (d) => { let c = d.hex.replace('#', ''); return `rgb(${parseInt(c.substr(0, 2), 16)}, ${parseInt(c.substr(2, 2), 16)}, ${parseInt(c.substr(4, 2), 16)})` },
     'rgb': (d) => '#' + ((1 << 24) + (Number(d.r) << 16) + (Number(d.g) << 8) + Number(d.b)).toString(16).slice(1),
-    'uuid': () => "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => { var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8); return v.toString(16); }),
-    'ip': () => "127.0.0.1 (Localhost)",
+    'uuid': () => crypto.randomUUID(),
+    'ip': () => "يجب استخدام خدمة خارجية (API) لمعرفة IP", // Professional honesty
     'sql': (d) => d.txt.replace(/SELECT|FROM|WHERE|AND|OR|ORDER BY|LIMIT/g, "\n$&"),
     'lorem': (d) => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ".repeat(d.n),
     'htmle': (d) => d.txt.replace(/[\u00A0-\u9999<>&]/g, i => '&#' + i.charCodeAt(0) + ';'),
@@ -189,26 +223,47 @@ const engine = {
     // Social
     'bio': (d) => `✨ ${d.txt} ✨`,
     'wht': (d) => window.open(`https://wa.me/${d.num}`),
-    'tag': () => "#explorer #trend #viral #fyp #new #love",
-    'lnk': (d) => d.url.startsWith('https') ? 'آمن (SSL Available)' : 'غير آمن (HTTP)',
-    'memo': (d) => `تم الحفظ: ${d.txt.substring(0, 20)}...`,
-    'caption': () => "الحياة رحلة وليست وجهة. 🌍 #travel",
-    'yt': () => "كيف تبرمج موقع بدقيقة? 💻",
+    'tag': () => ['#explorer', '#saudi', '#trend', '#viral', '#fyp', '#new', '#design', '#tech'].sort(() => 0.5 - Math.random()).slice(0, 5).join(' '),
+    'lnk': (d) => d.url.startsWith('https') ? '✅ آمن (SSL Secured)' : '⚠️ غير آمن (HTTP)',
+    'memo': (d) => { Memory.set('memo_tmp', d.txt); return `تم الحفظ بنجاح!`; },
+    'caption': () => {
+        const caps = ["الحياة رحلة، استمتع بالطريق 🛣️", "كن أنت التغيير الذي تريده في العالم 🌍", "ابتسم، فالحياة جميلة 😊", "النجاح يبدأ بخطوة 🚀"];
+        return caps[Math.floor(Math.random() * caps.length)];
+    },
+    'yt': () => {
+        const ideas = ["فلوق يوم كامل", "شرح مهارة جديدة", "رد فعل (Reaction)", "تحدي مع الأصدقاء", "مراجعة منتج تقني"];
+        return ideas[Math.floor(Math.random() * ideas.length)];
+    },
     'tweet': (d) => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(d.txt)}`),
-    'qr': (d) => window.open(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${d.txt}`),
-    'passc': (d) => d.txt.length > 8 ? 'قوية ✅' : 'ضعيفة ❌',
+    'qr': (d) => window.open(`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${d.txt}`),
+    'passc': (d) => {
+        const s = d.txt.length;
+        if (s < 6) return 'ضعيفة جداً 🔴';
+        if (s < 10) return 'متوسطة 🟡';
+        if (d.txt.match(/[A-Z]/) && d.txt.match(/[0-9]/)) return 'قوية وممتازة 🟢';
+        return 'جيدة 🔵';
+    },
 
     // Game
     'dice': () => Math.floor(Math.random() * 6) + 1,
-    'rps': (d) => { const c = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]; return `أنت: ${d.c} | الحاسوب: ${c} | ${d.c == c ? 'تعادل' : 'جرب مرة أخرى'}` },
-    'love': (d) => `نسبة الحب بين ${d.n1} و ${d.n2} هي ${Math.floor(Math.random() * 100)}% ❤️`,
-    'coin': () => Math.random() > 0.5 ? 'وجه' : 'قفا',
-    'guess': (d) => { let r = Math.floor(Math.random() * 10) + 1; return d.v == r ? 'صح! 🎉' : `خطأ، الرقم كان ${r}` },
-    'joke': () => "مرة واحد حب يطور نفسه، لقى التحديث بفلوس 😂",
-    'fact': () => "هل تعلم أن العسل لا يفسد أبداً؟",
-    'quote': () => "لا تؤجل عمل اليوم إلى الغد.",
-    'emoj': (d) => d.txt.replace(/love/g, '❤️').replace(/happy/g, '😊').replace(/sad/g, '😢'),
-    'decision': (d) => Math.random() > 0.5 ? 'نعم، توكل على الله' : 'لا، ابحث عن خيار آخر',
+    'rps': (d) => { const c = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]; return `أنت: ${d.c} | الحاسوب: ${c} | ${d.c == c ? 'تعادل 😐' : ((d.c == 'rock' && c == 'scissors') || (d.c == 'paper' && c == 'rock') || (d.c == 'scissors' && c == 'paper')) ? 'فزت! 🎉' : 'خسرت 😢'}` },
+    'love': (d) => `نسبة التوافق بين ${d.n1} و ${d.n2} هي ${Math.floor(Math.random() * 30 + 70)}% ❤️ (مجرد لعبة)`,
+    'coin': () => Math.random() > 0.5 ? 'وجه (صورة)' : 'قفا (كتابة)',
+    'guess': (d) => { let r = Math.floor(Math.random() * 10) + 1; return d.v == r ? 'إجابة صحيحة! 🎉' : `خطأ، الرقم المخفي كان ${r}` },
+    'joke': () => {
+        const j = ["مرة واحد حب يطور نفسه، لقى التحديث بفلوس 😂", "ليش السمك يخاف من التكنولوجيا؟ عشان الشبكة 🕸️", "طالب نام في المحاضرة، حلم أنه يجاوب، صحي لقى نفسه يصفق 👏"];
+        return j[Math.floor(Math.random() * j.length)];
+    },
+    'fact': () => {
+        const f = ["العسل هو الطعام الوحيد الذي لا يفسد.", "قلب الروبيان يقع في رأسه.", "الأخطبوط له 3 قلوب.", "الفضاء صامت تماماً."];
+        return f[Math.floor(Math.random() * f.length)];
+    },
+    'quote': () => {
+        const q = ["لا تؤجل عمل اليوم إلى الغد.", "الوقت كالسيف إن لم تقطعه قطعك.", "العلم نور والجهل ظلام.", "كن صبوراً فالدروس تأتي مع الوقت."];
+        return q[Math.floor(Math.random() * q.length)];
+    },
+    'emoj': (d) => d.txt.replace(/love/g, '❤️').replace(/happy/g, '😊').replace(/sad/g, '😢').replace(/fire/g, '🔥').replace(/star/g, '⭐'),
+    'decision': (d) => Math.random() > 0.5 ? 'نعم، فكرة جيدة ✅' : 'لا، تجنب هذا الأمر ❌',
 
     // Files
     'img2png': (d) => convertImg(d.img, 'image/png', 'png'),

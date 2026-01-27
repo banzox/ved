@@ -59,6 +59,39 @@ self.onmessage = function (e) {
                 result = [...new Set(data.txt.split('\n'))].join('\n');
                 break;
 
+            // --- Image ---
+            case 'imgbw':
+            case 'flip':
+            case 'blur':
+                // Data must contain 'bitmap' (ImageBitmap)
+                if (data.bitmap) {
+                    const bmp = data.bitmap;
+                    const cvs = new OffscreenCanvas(bmp.width, bmp.height);
+                    const ctx = cvs.getContext('2d');
+
+                    // Optimization: Use native Filters where possible (GPU accelerated)
+                    if (id === 'imgbw') {
+                        ctx.filter = 'grayscale(100%)';
+                        ctx.drawImage(bmp, 0, 0);
+                    } else if (id === 'blur') {
+                        ctx.filter = 'blur(10px)'; // Increased blur for better effect
+                        ctx.drawImage(bmp, 0, 0);
+                    } else if (id === 'flip') {
+                        ctx.translate(cvs.width, 0);
+                        ctx.scale(-1, 1);
+                        ctx.drawImage(bmp, 0, 0);
+                    } else {
+                        // Default Fallback (should not be reached for these specific IDs)
+                        ctx.drawImage(bmp, 0, 0);
+                    }
+
+                    // Convert back to ImageBitmap efficiently
+                    const newBmp = cvs.transferToImageBitmap();
+                    self.postMessage({ id, result: newBmp }, [newBmp]);
+                    return; // Special return for images
+                }
+                break;
+
             // --- Math ---
             case 'bmi':
                 const h = data.h / 100;
