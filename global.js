@@ -20,7 +20,7 @@
     // This will be populated with all 100 tools locally
     window.searchIndex = [
         // --- Video ---
-        { id: 'yt_thumb', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/thumb.html', cat: 'video' },
+        { id: 'yt_thumb', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/yt-thumb.html', cat: 'video' },
 
         // --- Math ---
         { id: 'bmi', n: { ar: 'حاسبة الوزن (BMI)', en: 'BMI Calculator' }, url: 'tools/math/bmi.html', cat: 'math' },
