@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Temperature Converter</title>
+</head>
+
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="tool_title">محول الحرارة</h1>
+                <p data-i18n="tool_desc">تحويل فوري بين سيليسيوس وفهرنهايت.</p>
+            </div>
+        </div>
+
+        <div class="tool-view active" style="display:block; max-width:800px; margin:0 auto">
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px">
+                <div class="field">
+                    <label>Celsius (°C)</label>
+                    <input type="number" id="cInput" placeholder="0">
+                </div>
+                <div class="field">
+                    <label>Fahrenheit (°F)</label>
+                    <input type="number" id="fInput" placeholder="32">
+                </div>
+            </div>
+
+            <div style="margin-top:20px; text-align:center; color:#64748b">
+                Kelvin: <span id="kVal" style="font-weight:bold; color:#333">273.15</span> K
+            </div>
+
+        </div>
+    </main>
+
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+
+    <script>
+        const pageDict = {
+            'ar': { 'tool_title': 'محول الحرارة', 'tool_desc': 'التحويل بين وحدات الحرارة.' },
+            'en': { 'tool_title': 'Temperature Converter', 'tool_desc': 'Convert temperature units.' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang;
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerText = dict[key];
+            });
+
+            // Events
+            const cIn = document.getElementById('cInput');
+            const fIn = document.getElementById('fInput');
+            const kOut = document.getElementById('kVal');
+
+            cIn.addEventListener('input', () => {
+                const c = parseFloat(cIn.value);
+                if (isNaN(c)) { fIn.value = ''; kOut.innerText = '-'; return; }
+                fIn.value = (c * 9 / 5 + 32).toFixed(2);
+                kOut.innerText = (c + 273.15).toFixed(2);
+            });
+
+            fIn.addEventListener('input', () => {
+                const f = parseFloat(fIn.value);
+                if (isNaN(f)) { cIn.value = ''; kOut.innerText = '-'; return; }
+                const c = (f - 32) * 5 / 9;
+                cIn.value = c.toFixed(2);
+                kOut.innerText = (c + 273.15).toFixed(2);
+            });
+        });
+    </script>
+</body>
+
+</html>

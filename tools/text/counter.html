@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Text Counter</title>
+</head>
+
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="tool_title">عداد الكلمات والأحرف</h1>
+                <p data-i18n="tool_desc">احسب عدد الكلمات والأحرف والجمل في أي نص فوراً.</p>
+            </div>
+        </div>
+
+        <div class="tool-view active" style="display:block; max-width:800px; margin:0 auto">
+
+            <div class="field">
+                <label data-i18n="input_label">الصق النص هنا:</label>
+                <textarea id="txtInput" rows="8" placeholder="..."></textarea>
+            </div>
+
+            <!-- Dashboard -->
+            <div
+                style="display:grid; grid-template-columns:repeat(4, 1fr); gap:15px; margin-top:20px; text-align:center">
+                <div style="background:#eff6ff; padding:15px; border-radius:10px; color:#1e40af">
+                    <div style="font-size:2rem; font-weight:bold" id="cntWords">0</div>
+                    <div data-i18n="words">كلمات</div>
+                </div>
+                <div style="background:#f0fdf4; padding:15px; border-radius:10px; color:#166534">
+                    <div style="font-size:2rem; font-weight:bold" id="cntChars">0</div>
+                    <div data-i18n="chars">أحرف</div>
+                </div>
+                <div style="background:#fff7ed; padding:15px; border-radius:10px; color:#9a3412">
+                    <div style="font-size:2rem; font-weight:bold" id="cntLines">0</div>
+                    <div data-i18n="lines">أسطر</div>
+                </div>
+                <div style="background:#f5f3ff; padding:15px; border-radius:10px; color:#5b21b6">
+                    <div style="font-size:2rem; font-weight:bold" id="cntSentences">0</div>
+                    <div data-i18n="sentences">جمل</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+
+    <script>
+        const pageDict = {
+            'ar': {
+                'tool_title': 'عداد الكلمات', 'tool_desc': 'تحليل فوري للنصوص.',
+                'input_label': 'النص:', 'words': 'كلمات', 'chars': 'أحرف', 'lines': 'أسطر', 'sentences': 'جمل'
+            },
+            'en': {
+                'tool_title': 'Word Counter', 'tool_desc': 'Instant text analysis.',
+                'input_label': 'Your Text:', 'words': 'Words', 'chars': 'Chars', 'lines': 'Lines', 'sentences': 'Sentences'
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang;
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerText = dict[key];
+            });
+
+            // Auto-Focus
+            document.getElementById('txtInput').focus();
+        });
+
+        // Reactive Logic
+        document.getElementById('txtInput').addEventListener('input', function () {
+            const txt = this.value;
+
+            // Words (split by whitespace, filter empty)
+            const words = txt.trim().split(/\s+/).filter(x => x).length;
+
+            // Chars
+            const chars = txt.length;
+
+            // Lines
+            const lines = txt.split(/\r\n|\r|\n/).length; // Check if empty?
+            const realLines = txt.trim() === '' ? 0 : lines;
+
+            // Sentences (roughly split by . ! ?)
+            const sentences = txt.split(/[.!?]+/).filter(x => x.trim()).length;
+
+            document.getElementById('cntWords').innerText = words;
+            document.getElementById('cntChars').innerText = chars;
+            document.getElementById('cntLines').innerText = realLines;
+            document.getElementById('cntSentences').innerText = sentences;
+        });
+    </script>
+</body>
+
+</html>

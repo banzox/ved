@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Text <> Binary</title>
+</head>
+
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="tool_title">نص ↔ ثنائي</h1>
+                <p data-i18n="tool_desc">تشفير النصوص إلى 0101 وبالعكس.</p>
+            </div>
+        </div>
+
+        <div class="tool-view active" style="display:block; max-width:800px; margin:0 auto">
+
+            <div style="display:flex; gap:10px; margin-bottom:20px;">
+                <button class="pro-btn" onclick="setMode('enc')" id="btnEnc" style="background:var(--primary)">🔏 نص إلى
+                    ثنائي</button>
+                <button class="pro-btn" onclick="setMode('dec')" id="btnDec" style="background:var(--secondary)">🔓
+                    ثنائي إلى نص</button>
+            </div>
+
+            <div class="field">
+                <label id="lblInput" data-i18n="input_label">النص:</label>
+                <textarea id="txtInput" rows="5"></textarea>
+            </div>
+
+            <button class="run-btn" onclick="process()" data-i18n="action_btn">تحويل</button>
+
+            <div class="output-area" id="output" style="display:none">
+                <div class="output-val" id="outputVal" style="word-break:break-all; font-family:monospace"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+
+    <script>
+        const pageDict = {
+            'ar': { 'tool_title': 'نص ↔ ثنائي', 'tool_desc': 'التحويل بين النصوص ولغة الآلة.', 'input_label': 'النص', 'action_btn': 'تحويل' },
+            'en': { 'tool_title': 'Text ↔ Binary', 'tool_desc': 'Convert text to machine code.', 'input_label': 'Input', 'action_btn': 'Convert' }
+        };
+
+        let mode = 'enc';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang;
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerText = dict[key];
+            });
+        });
+
+        function setMode(m) {
+            mode = m;
+            document.getElementById('btnEnc').style.background = m === 'enc' ? 'var(--primary)' : 'var(--secondary)';
+            document.getElementById('btnDec').style.background = m === 'dec' ? 'var(--primary)' : 'var(--secondary)';
+            document.getElementById('txtInput').placeholder = m === 'enc' ? 'Hello World' : '01001000 01100101...';
+        }
+
+        function process() {
+            const txt = document.getElementById('txtInput').value.trim();
+            if (!txt) return;
+
+            let res = '';
+            if (mode === 'enc') {
+                res = txt.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+            } else {
+                res = txt.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join('');
+            }
+
+            document.getElementById('output').style.display = 'block';
+            document.getElementById('outputVal').innerText = res;
+        }
+    </script>
+</body>
+
+</html>

@@ -16,6 +16,32 @@
     // Let's rely on the relative path of the script tag itself if it's relative.
     const relativeRoot = myScript.getAttribute('src').replace('global.js', '');
 
+    // --- Search Index (The Registry) ---
+    // This will be populated with all 100 tools locally
+    window.searchIndex = [
+        { id: 'bmi', n: { ar: 'حاسبة الوزن (BMI)', en: 'BMI Calculator' }, url: 'bmi.html', cat: 'math' },
+        { id: 'yt', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/yt-thumb.html', cat: 'video' },
+        { id: 'cnt', n: { ar: 'عداد الكلمات', en: 'Word Counter' }, url: 'tools/text/counter.html', cat: 'text' },
+        { id: 'pdf_txt', n: { ar: 'تحويل نص لـ PDF', en: 'Text to PDF' }, url: 'tools/pdf/txt2pdf.html', cat: 'pdf' },
+        { id: 'rev', n: { ar: 'عكس النصوص', en: 'Text Reverser' }, url: 'tools/text/reverse.html', cat: 'text' },
+        { id: 'bin', n: { ar: 'تحويل ثنائي (Binary)', en: 'Binary Converter' }, url: 'tools/text/binary.html', cat: 'text' },
+        { id: 'age', n: { ar: 'حاسبة العمر', en: 'Age Calculator' }, url: 'tools/math/age.html', cat: 'math' },
+        { id: 'temp', n: { ar: 'محول الحرارة', en: 'Temperature Converter' }, url: 'tools/conv/temperature.html', cat: 'conv' },
+        { id: 'img_res', n: { ar: 'تغيير حجم الصورة', en: 'Image Resizer' }, url: 'tools/image/resize.html', cat: 'image' },
+        { id: 'img_cmp', n: { ar: 'ضغط الصور', en: 'Image Compressor' }, url: 'tools/image/compress.html', cat: 'image' }
+    ];
+
+    window.searchTools = (query) => {
+        if (!query) return [];
+        query = query.toLowerCase();
+        return window.searchIndex.filter(t =>
+            t.n.ar.includes(query) || t.n.en.toLowerCase().includes(query)
+        ).map(t => ({
+            name: currentLang === 'ar' ? t.n.ar : t.n.en,
+            url: relativeRoot + t.url
+        }));
+    };
+
     // --- 2. i18n Setup ---
     const supportedLangs = ['ar', 'en', 'es', 'fr', 'pt', 'ru', 'tr', 'id', 'de', 'hi'];
     const currentLang = localStorage.getItem('ng_lang') || 'ar';
@@ -150,7 +176,38 @@
         }
     }
 
-    // Expose helpers
-    window.NextGear = { lang: currentLang, t: t, dir: isRTL ? 'rtl' : 'ltr' };
+    // --- 6. Helpers (Image Processor) ---
+    window.processImage = function (file, callback) {
+        return new Promise((resolve, reject) => {
+            if (!file) return resolve('❌ Select image first');
+            if (!file.type.startsWith('image/')) return resolve('❌ Not an image');
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const cvs = document.createElement('canvas');
+                    const ctx = cvs.getContext('2d');
+                    try {
+                        const resUrl = callback(ctx, cvs, img);
+                        resolve(resUrl);
+                    } catch (err) {
+                        console.error(err);
+                        resolve('❌ Error processing image');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    };
+
+    // Expose Global Helper
+    window.NextGear = {
+        lang: currentLang,
+        t: t,
+        dir: isRTL ? 'rtl' : 'ltr',
+        root: relativeRoot
+    };
 
 })();
