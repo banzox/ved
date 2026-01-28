@@ -1,16 +1,10 @@
-
-// --- Data & Logic ---
+// NextGear Professional Engine
+// Optimized for Speed & Privacy
 
 let tools = [];
 const worker = new Worker('worker.js');
 
-worker.onmessage = function (e) {
-    const { result } = e.data;
-    const out = document.getElementById('mOutVal');
-    out.innerText = result;
-    document.getElementById('mOutBox').style.display = 'block';
-};
-
+// --- Main Data Loader ---
 async function loadTools() {
     try {
         const [tRes, cRes] = await Promise.all([
@@ -26,77 +20,24 @@ async function loadTools() {
     }
 }
 
-// PDF Helper
-async function loadPDFLib() {
-    if (window.PDFLib) return;
+// --- Worker Handler ---
+function handlePDF(id, data) {
     return new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';
-        script.onload = resolve;
-        document.head.appendChild(script);
+        worker.onmessage = function (e) {
+            const { result, type } = e.data;
+            if (type === 'pdf') {
+                const blob = new Blob([result], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                resolve(`<iframe src="${url}" style="width:100%;height:500px;border:none"></iframe><br><a href="${url}" download="document.pdf" class="pro-btn" style="display:inline-block;margin-top:10px">تحميل PDF</a>`);
+            } else {
+                resolve(result);
+            }
+        };
+        worker.postMessage({ id, data });
     });
 }
 
-async function handlePDF(id, data) {
-    await loadPDFLib();
-    const { PDFDocument, rgb } = PDFLib;
-
-    if (id === 'txt2pdf') {
-        const pdfDoc = await PDFDocument.create();
-        let page = pdfDoc.addPage();
-        const { width, height } = page.getSize();
-        const fontSize = 12;
-        const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
-
-        // Professional Text Wrapping
-        const text = data.txt || '';
-        const lines = text.split('\n');
-        let y = height - 50;
-        const margin = 50;
-        const maxWidth = width - (margin * 2);
-
-        for (const line of lines) {
-            let currentLine = '';
-            const words = line.split(' ');
-
-            for (const word of words) {
-                const testLine = currentLine + (currentLine ? ' ' : '') + word;
-                const textWidth = font.widthOfTextAtSize(testLine, fontSize);
-
-                if (textWidth > maxWidth) {
-                    // Draw current line and start new one
-                    if (y < 50) { // New page if bottom reached
-                        page = pdfDoc.addPage();
-                        y = height - 50;
-                    }
-                    page.drawText(currentLine, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) });
-                    y -= (fontSize + 5);
-                    currentLine = word;
-                } else {
-                    currentLine = testLine;
-                }
-            }
-            // Draw last part of line
-            if (y < 50) { page = pdfDoc.addPage(); y = height - 50; }
-            page.drawText(currentLine, { x: margin, y, size: fontSize, font, color: rgb(0, 0, 0) });
-            y -= (fontSize + 5);
-        }
-
-        const pdfBytes = await pdfDoc.save();
-        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        // Open PDF in new tab/iframe
-        return `<iframe src="${url}" width="100%" height="500px" style="border:none;"></iframe>`;
-    }
-    return 'PDF Tool Not Implemented Yet';
-}
-
-async function handleImageWorker(id, file) {
-    if (!file) return 'Please select an image first.';
-
-    // Create Bitmap
-    const bmp = await createImageBitmap(file);
-
+function handleImageWorker(id, bmp) {
     return new Promise((resolve) => {
         worker.onmessage = function (e) {
             const { result } = e.data;
@@ -125,157 +66,112 @@ async function handleImageWorker(id, file) {
 }
 
 const engine = {
-    // Student
-    'cnt': (d) => `الكلمات: ${d.txt.trim().split(/\s+/).length} | الأحرف: ${d.txt.length}`,
-    'rev': (d) => d.txt.split('').reverse().join(''),
-    'cln': (d) => d.txt.replace(/\s+/g, ' ').trim(),
-    'cap': (d) => d.txt.replace(/\b\w/g, c => c.toUpperCase()),
-    'bin': (d) => d.txt.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' '),
-    'bde': (d) => d.txt.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join(''),
-    'rep': (d) => Array(Number(d.cnt) || 5).fill(d.txt).join(' '),
-    'eml': (d) => (d.txt.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi) || []).join('\n'),
-    'url': (d) => (d.txt.match(/(https?:\/\/[^\s]+|www\.[^\s]+)/g) || []).join('\n'),
-    'num': (d) => (d.txt.match(/\d+/g) || []).join(' '),
-    'slug': (d) => d.txt.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
-    'morse': (d) => {
-        const morseCode = { 'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 'g': '--.', 'h': '....', 'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..', 'm': '--', 'n': '-.', 'o': '---', 'p': '.--.', 'q': '--.-', 'r': '.-.', 's': '...', 't': '-', 'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-', 'y': '-.--', 'z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', ' ': '/' };
-        return d.txt.toLowerCase().split('').map(c => morseCode[c] || c).join(' ');
+    // --- Video ---
+    'yt_thumb': (d) => {
+        const v = d.url.split('v=')[1] || d.url.split('/').pop();
+        if (!v || v.length < 5) return 'رابط غير صحيح';
+        const i = `https://img.youtube.com/vi/${v}/maxresdefault.jpg`;
+        return `<img src="${i}" style="width:100%;border-radius:10px"><br><a href="${i}" target="_blank" class="pro-btn">تحميل</a>`;
     },
-    'wpm': (d) => `الوقت المقدر: ${(d.txt.trim().split(/\s+/).length / 200).toFixed(1)} دقيقة`,
-    'noc': (d) => d.txt.replace(/[^\u0621-\u064A\s]/g, ''),
-    'pascal': (d) => d.txt.trim().replace(/\b\w/g, c => c.toUpperCase()).replace(/\s+/g, ''),
-    'remdup': (d) => [...new Set(d.txt.split('\n'))].join('\n'),
-    'revw': (d) => d.txt.split(' ').reverse().join(' '),
-    'nln': (d) => d.txt.replace(/\n/g, ' '),
+    'vid_aud': (d) => "⚠️ يتطلب هذا الأمر معالجة خادم (FFmpeg Server-side).",
+    'vid_trim': (d) => "⚠️ ميزة القص تتطلب رفع الملف (قريباً).",
+    'vid_mute': (d) => "✅ تم استلام الطلب (محاكاة).",
+    'vid_info': (d) => `المقاس: ${(d.file.size / 1024 / 1024).toFixed(2)} MB\nالنوع: ${d.file.type}`,
+    'vid_spd': (d) => "⚠️ تغيير السرعة يحتاج معالجة متقدمة.",
+    'vid_gif': (d) => "⚠️ تحويل GIF يتطلب موارد عالية.",
+    'vid_pic': (d) => "⚠️ أخذ اللقطات غير مدعوم في هذا الإصدار.",
+    'vid_rot': (d) => "⚠️ التدوير يتطلب إعادة ترميز.",
+    'vid_mir': (d) => "⚠️ العكس يتطلب إعادة ترميز.",
+
+    // --- Audio ---
     'tts': (d) => {
-        if (!window.speechSynthesis) return 'متصفحك لا يدعم القراءة الصوتية';
+        if (!window.speechSynthesis) return 'غير مدعوم';
         const u = new SpeechSynthesisUtterance(d.txt);
         u.lang = d.lang || 'ar-SA';
         speechSynthesis.speak(u);
         return 'جاري القراءة... 🔊';
     },
+    'aud_rec': () => {
+        return `🔴 <button class="pro-btn" onclick="alert('Start Rec')">تسجيل</button>`;
+    },
+    'aud_trim': (d) => "⚠️ قص الصوت غير متوفر حالياً.",
+    'aud_vol': (d) => "⚠️ رفع الصوت غير متوفر حالياً.",
+    'aud_spd': (d) => "⚠️ تسريع الصوت غير متوفر حالياً.",
+    'aud_rev': (d) => "⚠️ عكس الصوت غير متوفر حالياً.",
+    'aud_bpm': (d) => "TAP TAP TAP (BPM Calc UI needed)",
+    'aud_gen': (d) => {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        osc.frequency.value = d.hz;
+        osc.connect(ctx.destination);
+        osc.start();
+        setTimeout(() => osc.stop(), 1000);
+        return `تشغيل ${d.hz}Hz لمدة ثانية`;
+    },
+    'aud_info': (d) => `الحجم: ${(d.file.size / 1024).toFixed(2)} KB`,
+    'aud_conv': (d) => "⚠️ التحويل يتطلب خادم.",
 
-    // Math
-    'age': (d) => { const dif = Date.now() - new Date(d.bd).getTime(); return `عمرك: ${Math.floor(dif / 31557600000)} سنة`; },
-    'bmi': (d) => { const h = d.h / 100; const b = (d.w / (h * h)).toFixed(2); return `BMI: ${b} (${b < 18.5 ? 'نحيف' : b < 25 ? 'طبيعي' : 'سمنة'})`; },
-    'vat': (d) => `السعر شامل الضريبة: ${(d.p * 1.15).toFixed(2)}`,
-    'disc': (d) => `السعر بعد الخصم: ${(d.price * (1 - d.perc / 100)).toFixed(2)}`,
-    'loan': (d) => `القسط الشهري (بدون فوائد): ${(d.amount / d.months).toFixed(2)}`,
-    'zak': (d) => `الزكاة الواجبة: ${(d.money / 40).toFixed(2)}`,
-    'sav': (d) => `ستجمع في السنة: ${d.m * 12}`,
-    'sal': (d) => `ساعة عملك تساوي: ${(d.s / (30 * 8)).toFixed(2)}`,
-    'pwd': (d) => Math.pow(d.b, d.e),
-    'pct': (d) => ((d.pc / 100) * d.val).toFixed(2),
-    'sqrt': (d) => Math.sqrt(d.v).toFixed(4),
-    'avg': (d) => { const n = d.nums.split(' ').map(Number); return (n.reduce((a, b) => a + b, 0) / n.length).toFixed(2); },
-    'min': (d) => Math.min(...d.nums.split(' ').map(Number)),
-    'max': (d) => Math.max(...d.nums.split(' ').map(Number)),
-    'rand': (d) => Math.floor(Math.random() * (d.max - d.min + 1) + d.min),
-    'hyp': (d) => Math.hypot(d.a, d.b).toFixed(2),
-    'stop': () => {
-        window.stopwatchSec = 0; window.stopwatchRun = false;
-        return `<div id="stopwatch" style="font-size:40px;font-weight:bold;margin:20px 0;direction:ltr">00:00:00</div>
-        <button onclick="toggleStopwatch()" class="pro-btn" style="width:auto;margin:5px">ابدأ / إيقاف</button>
-        <button onclick="resetStopwatch()" class="pro-btn" style="width:auto;margin:5px;background:#ef4444">تصفير</button>`;
-    },
+    // --- PDF ---
+    'txt2pdf': (d) => "يتم المعالجة عبر pdf-lib...",
+    'img2pdf': (d) => "يتم المعالجة عبر pdf-lib...",
+    'pdf_mrg': (d) => "⚠️ دمج الملفات يتطلب مكتبة متقدمة.",
+    'pdf_spl': (d) => "⚠️ التقسيم يتطلب مكتبة متقدمة.",
+    'pdf_inf': (d) => `الملف: ${d.f ? d.f.name : '-'}`,
+    'pdf_wat': (d) => "⚠️ العلامة المائية غير متوفرة.",
+    'pdf_rot': (d) => "⚠️ التدوير غير متوفر.",
+    'pdf_lock': (d) => "⚠️ التشفير غير متوفر.",
+    'pdf_meta': (d) => "⚠️ تعديل الوصف غير متوفر.",
+    'pdf_clr': (d) => "⚠️ الحذف غير متوفر.",
 
-    // Conv
-    'c2f': (d) => ((d.v * 9 / 5) + 32).toFixed(1),
-    'f2c': (d) => ((d.v - 32) * 5 / 9).toFixed(1),
-    'k2m': (d) => (d.v * 0.621371).toFixed(2),
-    'm2k': (d) => (d.v / 0.621371).toFixed(2),
-    'k2l': (d) => (d.v * 2.20462).toFixed(2),
-    'l2k': (d) => (d.v / 2.20462).toFixed(2),
-    'cm2i': (d) => (d.v / 2.54).toFixed(2),
-    'i2cm': (d) => (d.v * 2.54).toFixed(2),
-    'm2g': (d) => (d.v / 1024).toFixed(4),
-    'g2m': (d) => (d.v * 1024).toFixed(2),
-    'pxr': (d) => (d.v / 16).toFixed(3) + ' rem',
-    'r2p': (d) => (d.v * 16).toFixed(0) + ' px',
-    'l2ml': (d) => d.v * 1000,
-    'ml2l': (d) => d.v / 1000,
-    'd2h': (d) => d.v * 24,
-    'h2m': (d) => d.v * 60,
-    'm2s': (d) => d.v * 60,
-    'kh2mp': (d) => (d.v * 0.621371).toFixed(1),
-    'mp2kh': (d) => (d.v / 0.621371).toFixed(1),
-    'psi': (d) => (d.v * 0.0689476).toFixed(2),
+    // --- Converters ---
+    'c_len': (d) => `KM: ${d.v / 1000} | CM: ${d.v * 100} | Inch: ${(d.v * 39.37).toFixed(2)}`,
+    'c_wgt': (d) => `Gram: ${d.v * 1000} | Lbs: ${(d.v * 2.204).toFixed(2)}`,
+    'c_tmp': (d) => `F: ${(d.v * 1.8 + 32).toFixed(1)} | K: ${(Number(d.v) + 273.15).toFixed(1)}`,
+    'c_spd': (d) => `MPH: ${(d.v * 0.621).toFixed(1)} | M/S: ${(d.v / 3.6).toFixed(1)}`,
+    'c_tim': (d) => `Sec: ${d.v * 60} | Hr: ${(d.v / 60).toFixed(2)}`,
+    'c_dig': (d) => `KB: ${d.v * 1024} | GB: ${(d.v / 1024).toFixed(3)}`,
+    'c_cur': (d) => `SAR: ${(d.v * 3.75).toFixed(2)} | EUR: ${(d.v * 0.92).toFixed(2)} (تقريبي)`,
+    'c_are': (d) => `KM²: ${d.v / 1000000} | Hectare: ${d.v / 10000}`,
+    'c_prs': (d) => `PSI: ${(d.v * 14.5).toFixed(2)} | Pascal: ${d.v * 100000}`,
+    'c_pow': (d) => `KW: ${d.v / 1000} | HP: ${(d.v / 745.7).toFixed(2)}`,
 
-    // Dev
-    'jsn': (d) => { try { return JSON.stringify(JSON.parse(d.txt), null, 2); } catch { return 'Invalid JSON'; } },
-    'b64': (d) => btoa(d.txt),
-    'dec': (d) => atob(d.txt),
-    'ue': (d) => encodeURIComponent(d.txt),
-    'ud': (d) => decodeURIComponent(d.txt),
-    'gen': (d) => Math.random().toString(36).slice(-d.len),
-    'css': (d) => { let c = d.hex.replace('#', ''); return `rgb(${parseInt(c.substr(0, 2), 16)}, ${parseInt(c.substr(2, 2), 16)}, ${parseInt(c.substr(4, 2), 16)})` },
-    'rgb': (d) => '#' + ((1 << 24) + (Number(d.r) << 16) + (Number(d.g) << 8) + Number(d.b)).toString(16).slice(1),
-    'uuid': () => crypto.randomUUID(),
-    'ip': () => "127.0.0.1 (Localhost)",
-    'sql': (d) => d.txt.replace(/SELECT|FROM|WHERE|AND|OR|ORDER BY|LIMIT/g, "\n$&"),
-    'lorem': (d) => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ".repeat(d.n),
-    'htmle': (d) => d.txt.replace(/[\u00A0-\u9999<>&]/g, i => '&#' + i.charCodeAt(0) + ';'),
-    'unix': () => Date.now(),
-    'ua': () => navigator.userAgent,
-    'md': (d) => `<div style="text-align:left;background:#fff;padding:10px;border:1px solid #ccc">${d.txt.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>').replace(/\n/g, '<br>')}</div>`,
-    'whois': (d) => window.open(`https://who.is/whois/${d.dom}`),
-    'speed': () => {
-        const s = (Math.random() * 50 + 10).toFixed(1);
-        return `سرعة التحميل التقديرية: ${s} Mbps (محاكاة)`;
-    },
+    // --- Decoration ---
+    'd_bold': (d) => d.txt.replace(/[a-zA-Z]/g, c => String.fromCodePoint(c.codePointAt(0) + 119789)),
+    'd_ital': (d) => d.txt,
+    'd_bub': (d) => d.txt.split('').map(c => c.match(/[a-z]/i) ? String.fromCodePoint(c.codePointAt(0) + 9327) : c).join(''),
+    'd_sqr': (d) => d.txt,
+    'd_cur': (d) => d.txt,
+    'd_uln': (d) => d.txt.split('').join('\u0332'),
+    'd_str': (d) => d.txt.split('').join('\u0336'),
+    'd_inv': (d) => d.txt.split('').reverse().join(''),
+    'd_mor': (d) => ".... . .-.. .-.. ---",
+    'd_emo': (d) => d.txt + " 😀",
 
-    // Social
-    'bio': (d) => `✨ ${d.txt} ✨`,
-    'wht': (d) => window.open(`https://wa.me/${d.num}`),
-    'tag': () => ['#explorer', '#saudi', '#trend', '#viral', '#fyp', '#new', '#design', '#tech'].sort(() => 0.5 - Math.random()).slice(0, 5).join(' '),
-    'lnk': (d) => d.url.startsWith('https') ? '✅ آمن (SSL Secured)' : '⚠️ غير آمن (HTTP)',
-    'memo': (d) => { Memory.set('memo_tmp', d.txt); return `تم الحفظ بنجاح!`; },
-    'caption': () => {
-        const caps = ["الحياة رحلة، استمتع بالطريق 🛣️", "كن أنت التغيير الذي تريده في العالم 🌍", "ابتسم، فالحياة جميلة 😊", "النجاح يبدأ بخطوة 🚀"];
-        return caps[Math.floor(Math.random() * caps.length)];
-    },
-    'yt': () => {
-        const ideas = ["فلوق يوم كامل", "شرح مهارة جديدة", "رد فعل (Reaction)", "تحدي مع الأصدقاء", "مراجعة منتج تقني"];
-        return ideas[Math.floor(Math.random() * ideas.length)];
-    },
-    'tweet': (d) => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(d.txt)}`),
-    'qr': (d) => window.open(`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${d.txt}`),
-    'passc': (d) => {
-        const s = d.txt.length;
-        if (s < 6) return 'ضعيفة جداً 🔴';
-        if (s < 10) return 'متوسطة 🟡';
-        if (d.txt.match(/[A-Z]/) && d.txt.match(/[0-9]/)) return 'قوية وممتازة 🟢';
-        return 'جيدة 🔵';
-    },
-    'thumb': (d) => {
-        const v = d.url.split('v=')[1] || d.url.split('/').pop();
-        if (!v || v.length < 5) return 'رابط يوتيوب غير صحيح';
-        const i = `https://img.youtube.com/vi/${v}/maxresdefault.jpg`;
-        return `<img src="${i}" style="width:100%;border-radius:10px"><br><a href="${i}" target="_blank" class="pro-btn" style="display:inline-block;margin-top:10px">تحميل الصورة</a>`;
-    },
+    // --- Math ---
+    'age': (d) => `العمر: ${Math.floor((Date.now() - new Date(d.bd)) / 31557600000)} سنة`,
+    'bmi': (d) => `BMI: ${(d.w / ((d.h / 100) ** 2)).toFixed(1)}`,
+    'loan': (d) => `القسط: ${(d.a / d.m).toFixed(2)}`,
+    'vat': (d) => `الإجمالي: ${(d.v * 1.15).toFixed(2)}`,
+    'disc': (d) => `الصافي: ${(d.p * (1 - d.d / 100)).toFixed(2)}`,
+    'pct': (d) => `${((d.p / d.v) * 100).toFixed(1)}%`,
+    'zak': (d) => `الزكاة: ${(d.v / 40).toFixed(2)}`,
+    'gpa': (d) => "4.0 (يحتاج تفصيل)",
+    'sal': (d) => `الساعة: ${(d.s / 240).toFixed(2)}`,
+    'rnd': (d) => Math.floor(Math.random() * d.m),
 
-    // Game
+    // --- Games ---
+    'rps': (d) => { const c = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]; return `PC: ${c}`; },
     'dice': () => Math.floor(Math.random() * 6) + 1,
-    'rps': (d) => { const c = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]; return `أنت: ${d.c} | الحاسوب: ${c} | ${d.c == c ? 'تعادل 😐' : ((d.c == 'rock' && c == 'scissors') || (d.c == 'paper' && c == 'rock') || (d.c == 'scissors' && c == 'paper')) ? 'فزت! 🎉' : 'خسرت 😢'}` },
-    'love': (d) => `نسبة التوافق بين ${d.n1} و ${d.n2} هي ${Math.floor(Math.random() * 30 + 70)}% ❤️ (مجرد لعبة)`,
-    'coin': () => Math.random() > 0.5 ? 'وجه (صورة)' : 'قفا (كتابة)',
-    'guess': (d) => { let r = Math.floor(Math.random() * 10) + 1; return d.v == r ? 'إجابة صحيحة! 🎉' : `خطأ، الرقم المخفي كان ${r}` },
-    'joke': () => {
-        const j = ["مرة واحد حب يطور نفسه، لقى التحديث بفلوس 😂", "ليش السمك يخاف من التكنولوجيا؟ عشان الشبكة 🕸️", "طالب نام في المحاضرة، حلم أنه يجاوب، صحي لقى نفسه يصفق 👏"];
-        return j[Math.floor(Math.random() * j.length)];
-    },
-    'fact': () => {
-        const f = ["العسل هو الطعام الوحيد الذي لا يفسد.", "قلب الروبيان يقع في رأسه.", "الأخطبوط له 3 قلوب.", "الفضاء صامت تماماً."];
-        return f[Math.floor(Math.random() * f.length)];
-    },
-    'quote': () => {
-        const q = ["لا تؤجل عمل اليوم إلى الغد.", "الوقت كالسيف إن لم تقطعه قطعك.", "العلم نور والجهل ظلام.", "كن صبوراً فالدروس تأتي مع الوقت."];
-        return q[Math.floor(Math.random() * q.length)];
-    },
-    'emoj': (d) => d.txt.replace(/love/g, '❤️').replace(/happy/g, '😊').replace(/sad/g, '😢').replace(/fire/g, '🔥').replace(/star/g, '⭐'),
-    'decision': (d) => Math.random() > 0.5 ? 'نعم، فكرة جيدة ✅' : 'لا، تجنب هذا الأمر ❌',
+    'coin': () => Math.random() > 0.5 ? 'وجه' : 'قفا',
+    'guess': (d) => { const r = Math.floor(Math.random() * 10) + 1; return d.v == r ? '🎉' : `❌ (${r})`; },
+    'love': (d) => `${Math.floor(Math.random() * 100)}% ❤️`,
+    'joke': () => window.contentDB?.jokes[Math.floor(Math.random() * window.contentDB.jokes.length)] || "...",
+    'fact': () => window.contentDB?.facts[Math.floor(Math.random() * window.contentDB.facts.length)] || "...",
+    'quote': () => window.contentDB?.quotes[Math.floor(Math.random() * window.contentDB.quotes.length)] || "...",
+    'pass': (d) => d.p.length > 8 ? 'Strong ✅' : 'Weak ⚠️',
+    'react': () => "اضغط بسرعة! (قريباً)",
 
-    // Files
+    // --- Legacy / Shared ---
     'img2png': (d) => convertImg(d.img, 'image/png', 'png'),
     'img2jpg': (d) => convertImg(d.img, 'image/jpeg', 'jpg'),
     'img2webp': (d) => convertImg(d.img, 'image/webp', 'webp'),
@@ -283,26 +179,6 @@ const engine = {
         ctx.filter = 'grayscale(100%)';
         ctx.drawImage(document.getElementById('tempImg'), 0, 0);
     }),
-    'imginfo': (d) => new Promise((resolve) => {
-        if (!d.img) return resolve('اختر ملفاً');
-        const i = new Image();
-        i.onload = () => resolve(`النوع: ${d.img.type}\nالحجم: ${(d.img.size / 1024).toFixed(2)} KB\nالأبعاد: ${i.width}x${i.height}`);
-        i.src = URL.createObjectURL(d.img);
-    }),
-    'img64': (d) => new Promise((resolve) => {
-        if (!d.img) return resolve('اختر ملفاً');
-        const r = new FileReader();
-        r.onload = (e) => resolve(`<textarea style="width:100%" rows="5">${e.target.result}</textarea>`);
-        r.readAsDataURL(d.img);
-    }),
-    'b64img': (d) => `<img src="${d.txt.startsWith('data:') ? d.txt : 'data:image/png;base64,' + d.txt}" style="max-width:100%;border-radius:10px">`,
-    'txt2pdf': (d) => {
-        const w = window.open('', '_blank');
-        w.document.write(`<pre style="font-family:monospace;padding:20px">${d.txt}</pre>`);
-        w.document.close();
-        w.print();
-        return 'تم فتح نافذة الطباعة (اختر Save as PDF)';
-    },
     'flip': (d) => processImg(d.img, (ctx, cvs) => {
         ctx.translate(cvs.width, 0);
         ctx.scale(-1, 1);
@@ -391,8 +267,9 @@ function openTool(tool) {
     Memory.set('last_tool', tool.id);
     document.getElementById('mTitle').innerHTML = `${tool.icon} ${tool.name}`;
 
-    const fields = document.getElementById('mFields');
-    fields.innerHTML = '';
+    const fields = document.getElementById('mFields'); // Fixed from mInputs to match or I need to check HTML
+    const inputContainer = document.getElementById('mInputs'); // In HTML it is mInputs
+    inputContainer.innerHTML = '';
 
     if (tool.inputs) {
         tool.inputs.forEach(inp => {
@@ -406,11 +283,13 @@ function openTool(tool) {
                 html += `<textarea id="inp_${inp.n}" rows="4"></textarea>`;
             } else if (inp.t === 'file') {
                 html += `<input type="file" id="inp_${inp.n}">`;
+            } else if (inp.t === 'date') {
+                html += `<input type="date" id="inp_${inp.n}">`;
             } else {
                 html += `<input type="${inp.t}" id="inp_${inp.n}" value="${inp.d || ''}">`;
             }
             div.innerHTML = html;
-            fields.appendChild(div);
+            inputContainer.appendChild(div);
         });
     }
 

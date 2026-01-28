@@ -14,13 +14,13 @@
         <a href="index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
         <div class="nav-menu">
             <a href="index.html" class="nav-item active"><i>🏠</i> <span>الرئيسية</span></a>
-            <a href="student.html" class="nav-item"><i>📝</i> <span>نصوص وطلاب</span></a>
-            <a href="math.html" class="nav-item"><i>🔢</i> <span>حساب ومال</span></a>
-            <a href="conv.html" class="nav-item"><i>🔄</i> <span>تحويلات</span></a>
-            <a href="dev.html" class="nav-item"><i>💻</i> <span>مطورين</span></a>
-            <a href="social.html" class="nav-item"><i>📱</i> <span>اجتماعي</span></a>
-            <a href="files.html" class="nav-item"><i>📂</i> <span>ملفات</span></a>
-            <a href="game.html" class="nav-item"><i>🎮</i> <span>ألعاب</span></a>
+            <a href="video.html" class="nav-item"><i>🎞️</i> <span>فيديو</span></a>
+            <a href="audio.html" class="nav-item"><i>🎵</i> <span>صوتيات</span></a>
+            <a href="pdf.html" class="nav-item"><i>📄</i> <span>ملفات PDF</span></a>
+            <a href="converters.html" class="nav-item"><i>🔄</i> <span>محولات</span></a>
+            <a href="decoration.html" class="nav-item"><i>✨</i> <span>زخرفة</span></a>
+            <a href="math.html" class="nav-item"><i>🔢</i> <span>حساب</span></a>
+            <a href="games.html" class="nav-item"><i>🎮</i> <span>ألعاب</span></a>
         </div>
         <div class="pro-card">
             <h4>NextGear Pro</h4>
@@ -32,7 +32,7 @@
         <div class="header-area">
             <div class="page-info">
                 <h1>مرحباً بك 👋</h1>
-                <p>اختر قسماً من القائمة أو ابحث عن أداة مباشرة.</p>
+                <p>أكبر مكتبة أدوات عربية مجانية (70+ أداة).</p>
             </div>
             <div class="search">
                 <input type="text" id="search" placeholder="بحث شامل..." oninput="search(this.value)"> 🔍
@@ -41,24 +41,46 @@
 
         <!-- Featured Grid -->
         <div class="grid" id="grid">
-            <!-- Cloudflare Banner Removed -->
+            <div class="tool-card" onclick="window.location.href='video.html'">
+                <div class="icon-box">🎞️</div>
+                <div class="tool-name">فيديو</div>
+                <div class="tool-desc">تحميل، قص، وكتم الفيديو.</div>
+            </div>
 
-            <div class="tool-card" onclick="window.location.href='student.html'">
-                <div class="icon-box">📝</div>
-                <div class="tool-name">أدوات النصوص</div>
-                <div class="tool-desc">عداد كلمات، تنظيف، وعكس النصوص.</div>
+            <div class="tool-card" onclick="window.location.href='audio.html'">
+                <div class="icon-box">🎵</div>
+                <div class="tool-name">صوتيات</div>
+                <div class="tool-desc">تحويل، تسجيل، وقص الصوت.</div>
+            </div>
+
+            <div class="tool-card" onclick="window.location.href='pdf.html'">
+                <div class="icon-box">📄</div>
+                <div class="tool-name">أدوات PDF</div>
+                <div class="tool-desc">دمج، تقسيم، وتحويل PDF.</div>
+            </div>
+
+            <div class="tool-card" onclick="window.location.href='converters.html'">
+                <div class="icon-box">🔄</div>
+                <div class="tool-name">محولات</div>
+                <div class="tool-desc">وحدات، عملات، وطاقة.</div>
+            </div>
+
+            <div class="tool-card" onclick="window.location.href='decoration.html'">
+                <div class="icon-box">✨</div>
+                <div class="tool-name">زخرفة</div>
+                <div class="tool-desc">تجميل النصوص وأسماء.</div>
             </div>
 
             <div class="tool-card" onclick="window.location.href='math.html'">
                 <div class="icon-box">🔢</div>
-                <div class="tool-name">الحاسبات</div>
-                <div class="tool-desc">حساب العمر، BMI، والزكاة.</div>
+                <div class="tool-name">حساب</div>
+                <div class="tool-desc">عمر، قروض، وزكاة.</div>
             </div>
 
-            <div class="tool-card" onclick="window.location.href='dev.html'">
-                <div class="icon-box">💻</div>
-                <div class="tool-name">المطورين</div>
-                <div class="tool-desc">JSON فوت، Base64، و UUID.</div>
+            <div class="tool-card" onclick="window.location.href='games.html'">
+                <div class="icon-box">🎮</div>
+                <div class="tool-name">ألعاب</div>
+                <div class="tool-desc">ترفيه ومسابقات.</div>
             </div>
         </div>
     </main>
