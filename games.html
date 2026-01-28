@@ -2,38 +2,23 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGear | الألعاب والترفيه</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NextGear | الألعاب والترفيه</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
 <body>
-    <nav class="sidebar">
-        <a href="index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
-                        <div class="nav-menu">
-            <a href="index.html" class="nav-item"><i>🏠</i> <span>الرئيسية</span></a>
-            <a href="video.html" class="nav-item"><i>🎞️</i> <span>فيديو</span></a>
-            <a href="audio.html" class="nav-item"><i>🎵</i> <span>صوتيات</span></a>
-            <a href="image.html" class="nav-item"><i>🖼️</i> <span>صور</span></a>
-            <a href="pdf.html" class="nav-item"><i>📄</i> <span>ملفات PDF</span></a>
-            <a href="converters.html" class="nav-item"><i>🔄</i> <span>محولات</span></a>
-            <a href="css.html" class="nav-item"><i>🎨</i> <span>CSS</span></a>
-            <a href="decoration.html" class="nav-item"><i>✨</i> <span>زخرفة</span></a>
-            <a href="math.html" class="nav-item"><i>🔢</i> <span>حساب</span></a>
-            <a href="games.html" class="nav-item active"><i>🎮</i> <span>ألعاب</span></a>
-            <a href="misc.html" class="nav-item"><i>🛠️</i> <span>منوعات</span></a>
-        </div>
-        <div class="pro-card">
-            <h4>NextGear Pro</h4>
-            <button class="pro-btn" onclick="window.open('http://nextgear.space')">ترقية الآن</button>
-        </div>
-    </nav>
+    <div id="app-header"></div>
     <main class="main">
         <div class="header-area">
             <div class="page-info">
                 <h1>الألعاب والترفيه 🎮</h1>
-                <p>نكت، حقائق، وتحديات مسلية.</p>
+                <p>ألعاب خفيفة ومسابقات ممتعة.</p>
             </div>
         </div>
         <div class="grid" id="grid"></div>
@@ -48,17 +33,19 @@
                     onclick="closeModal()">✕</button>
             </div>
             <div id="mInputs"></div>
-            <button class="run-btn" onclick="runTool()">بدء المعالجة 🚀</button>
+            <button class="run-btn" onclick="runTool()">بدء اللعب 🚀</button>
             <div class="output-area" id="mOutBox">
                 <div class="output-val" id="mOutVal"></div>
             </div>
         </div>
     </div>
 
+    <div id="app-footer"></div>
+    <script src="global.js"></script>
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            initPage('game'); // Note: JSON category is 'game' singular
+            initPage('game');
         });
     </script>
 </body>

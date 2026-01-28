@@ -9,31 +9,12 @@
 </head>
 
 <body>
-    <nav class="sidebar">
-        <a href="index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
-                        <div class="nav-menu">
-            <a href="index.html" class="nav-item"><i>🏠</i> <span>الرئيسية</span></a>
-            <a href="video.html" class="nav-item"><i>🎞️</i> <span>فيديو</span></a>
-            <a href="audio.html" class="nav-item"><i>🎵</i> <span>صوتيات</span></a>
-            <a href="image.html" class="nav-item"><i>🖼️</i> <span>صور</span></a>
-            <a href="pdf.html" class="nav-item"><i>📄</i> <span>ملفات PDF</span></a>
-            <a href="converters.html" class="nav-item"><i>🔄</i> <span>محولات</span></a>
-            <a href="css.html" class="nav-item"><i>🎨</i> <span>CSS</span></a>
-            <a href="decoration.html" class="nav-item"><i>✨</i> <span>زخرفة</span></a>
-            <a href="math.html" class="nav-item active"><i>🔢</i> <span>حساب</span></a>
-            <a href="games.html" class="nav-item"><i>🎮</i> <span>ألعاب</span></a>
-            <a href="misc.html" class="nav-item"><i>🛠️</i> <span>منوعات</span></a>
-        </div>
-        <div class="pro-card">
-            <h4>NextGear Pro</h4>
-            <button class="pro-btn" onclick="window.open('http://nextgear.space')">ترقية الآن</button>
-        </div>
-    </nav>
+    <div id="app-header"></div>
     <main class="main">
         <div class="header-area">
             <div class="page-info">
                 <h1>أدوات الحساب والمال 🔢</h1>
-                <p>حاسبة القروض، الزكاة، والعمر.</p>
+                <p>حاسبات العمر، القروض، والزكاة.</p>
             </div>
         </div>
         <div class="grid" id="grid"></div>
@@ -55,6 +36,8 @@
         </div>
     </div>
 
+    <div id="app-footer"></div>
+    <script src="global.js"></script>
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

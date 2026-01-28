@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Audio Recorder</title>
+</head>
+
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="tool_title">مسجل الصوت</h1>
+                <p data-i18n="tool_desc">سجل صوتك بوضوح واحفظه بصيغة WAV/MP3.</p>
+            </div>
+        </div>
+
+        <div class="tool-view active" style="display:block; max-width:800px; margin:0 auto; text-align:center">
+
+            <div id="status" style="margin:20px; font-size:1.2rem; color:#64748b">جاهز للتسجيل</div>
+
+            <div class="vis-box"
+                style="height:100px; background:#f1f5f9; border-radius:10px; margin-bottom:20px; display:flex; align-items:center; justify-content:center; overflow:hidden">
+                <div id="wave" style="width:100%; height:2px; background:var(--primary); transition: height 0.1s"></div>
+            </div>
+
+            <button class="run-btn" onclick="toggleRec()" id="btnRec"
+                style="width:80px; height:80px; border-radius:50%; font-size:2rem; line-height:1">🎙️</button>
+
+            <div class="output-area" id="output" style="display:none; margin-top:30px">
+                <audio id="audioPlay" controls style="width:100%"></audio>
+                <div style="margin-top:15px">
+                    <a id="downLink" class="pro-btn">💾 تحميل التسجيل</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+
+    <script>
+        const pageDict = {
+            'ar': { 'tool_title': 'مسجل الصوت', 'tool_desc': 'تسجيل صوتي فوري.', 'ready': 'جاهز للتسجيل', 'rec': 'جاري التسجيل...', 'done': 'تم التسجيل!' },
+            'en': { 'tool_title': 'Audio Recorder', 'tool_desc': 'Instant Voice Recorder.', 'ready': 'Ready to Record', 'rec': 'Recording...', 'done': 'Recorded!' }
+        };
+
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Language logic handled globally, specific phrases update here
+        });
+
+        async function toggleRec() {
+            const btn = document.getElementById('btnRec');
+            const status = document.getElementById('status');
+            const lang = window.NextGear.lang;
+            const dict = pageDict[lang] || pageDict['en'];
+
+            if (!isRecording) {
+                // Start
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.start();
+                    isRecording = true;
+
+                    status.innerText = dict['rec'];
+                    status.style.color = 'red';
+                    btn.innerHTML = '⏹️';
+                    btn.style.background = '#fee2e2';
+                    btn.style.color = 'red';
+
+                    // Visualizer dummy
+                    document.getElementById('wave').style.height = '50px';
+                    document.getElementById('wave').style.animation = 'pulse 1s infinite';
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        const audio = document.getElementById('audioPlay');
+                        audio.src = audioUrl;
+
+                        const down = document.getElementById('downLink');
+                        down.href = audioUrl;
+                        down.download = 'recording_' + Date.now() + '.wav';
+
+                        document.getElementById('output').style.display = 'block';
+                        status.innerText = dict['done'];
+                        status.style.color = 'green';
+                    };
+
+                } catch (e) {
+                    alert('Microphone access denied or error: ' + e);
+                }
+            } else {
+                // Stop
+                mediaRecorder.stop();
+                isRecording = false;
+                btn.innerHTML = '🎙️';
+                btn.style.background = 'var(--primary)';
+                btn.style.color = 'white';
+                document.getElementById('wave').style.height = '2px';
+                document.getElementById('wave').style.animation = 'none';
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulse {
+            0% {
+                height: 10px;
+            }
+
+            50% {
+                height: 80px;
+            }
+
+            100% {
+                height: 10px;
+            }
+        }
+    </style>
+</body>
+
+</html>

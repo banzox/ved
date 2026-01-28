@@ -1803,19 +1803,24 @@ async function initPage(category) {
     // Ensure Tool View Container Exists
     let toolView = document.getElementById('tool-view');
     if (!toolView) {
+        // If we are on a dashboard page (like student.html), we might not need tool-view at all if everything is migrated
+        // But for hybrid, we keep it.
         const main = document.querySelector('.main');
-        toolView = document.createElement('div');
-        toolView.id = 'tool-view';
-        toolView.className = 'tool-view';
-        main.appendChild(toolView);
+        if (main) {
+            toolView = document.createElement('div');
+            toolView.id = 'tool-view';
+            toolView.className = 'tool-view';
+            main.appendChild(toolView);
+        }
     }
 
     const grid = document.getElementById('grid');
+    if (!grid) return; // Guard
     grid.innerHTML = '';
 
     // Reset View State
     grid.style.display = 'grid';
-    toolView.style.display = 'none';
+    if (toolView) toolView.style.display = 'none';
     const hdr = document.querySelector('.header-area');
     if (hdr) hdr.style.display = 'flex';
 
@@ -1830,8 +1835,15 @@ async function initPage(category) {
         `;
         if (t.isBanner) {
             card.onclick = () => window.open(t.link);
-        } else {
-            card.onclick = () => openTool(t);
+            // Check Global Registry for Migration
+            const migratedTool = window.searchIndex ? window.searchIndex.find(x => x.id === t.id) : null;
+            if (migratedTool) {
+                // Determine root path from global helper or simple heuristic
+                const root = window.NextGear && window.NextGear.root ? window.NextGear.root : '';
+                card.onclick = () => window.location.href = root + migratedTool.url;
+            } else {
+                card.onclick = () => openTool(t);
+            }
         }
         grid.appendChild(card);
     });

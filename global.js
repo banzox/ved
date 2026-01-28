@@ -28,7 +28,10 @@
         { id: 'age', n: { ar: 'حاسبة العمر', en: 'Age Calculator' }, url: 'tools/math/age.html', cat: 'math' },
         { id: 'temp', n: { ar: 'محول الحرارة', en: 'Temperature Converter' }, url: 'tools/conv/temperature.html', cat: 'conv' },
         { id: 'img_res', n: { ar: 'تغيير حجم الصورة', en: 'Image Resizer' }, url: 'tools/image/resize.html', cat: 'image' },
-        { id: 'img_cmp', n: { ar: 'ضغط الصور', en: 'Image Compressor' }, url: 'tools/image/compress.html', cat: 'image' }
+        { id: 'img_cmp', n: { ar: 'ضغط الصور', en: 'Image Compressor' }, url: 'tools/image/compress.html', cat: 'image' },
+        { id: 'aud_rec', n: { ar: 'مسجل الصوت', en: 'Audio Recorder' }, url: 'tools/audio/record.html', cat: 'audio' },
+        { id: 'decor', n: { ar: 'زخرفة النصوص', en: 'Text Decoration' }, url: 'tools/text/decor.html', cat: 'text' },
+        { id: 'xo', n: { ar: 'لعبة X-O', en: 'Tic Tac Toe' }, url: 'tools/game/xo.html', cat: 'game' }
     ];
 
     window.searchTools = (query) => {

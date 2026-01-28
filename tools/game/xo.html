@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Tic Tac Toe</title>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .cell {
+            background: #f1f5f9;
+            height: 100px;
+            border-radius: 10px;
+            border: none;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            transition: 0.2s
+        }
+
+        .cell:hover {
+            background: #e2e8f0
+        }
+
+        .cell.x {
+            color: var(--primary);
+        }
+
+        .cell.o {
+            color: var(--secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="tool_title">إكس أو (X - O)</h1>
+                <p data-i18n="tool_desc">لعبة التحدي الكلاسيكية.</p>
+            </div>
+        </div>
+
+        <div class="tool-view active" style="display:block; max-width:800px; margin:0 auto; text-align:center">
+
+            <div id="status" style="font-size:1.5rem; font-weight:bold; margin-bottom:20px">الدور: <span
+                    id="turn">X</span></div>
+
+            <div class="board" id="board">
+                <button class="cell" onclick="play(0)"></button>
+                <button class="cell" onclick="play(1)"></button>
+                <button class="cell" onclick="play(2)"></button>
+                <button class="cell" onclick="play(3)"></button>
+                <button class="cell" onclick="play(4)"></button>
+                <button class="cell" onclick="play(5)"></button>
+                <button class="cell" onclick="play(6)"></button>
+                <button class="cell" onclick="play(7)"></button>
+                <button class="cell" onclick="play(8)"></button>
+            </div>
+
+            <button class="run-btn" onclick="resetGame()" style="width:auto; margin-top:20px">🔄 إعادة اللعبة</button>
+
+        </div>
+    </main>
+
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+
+        function play(idx) {
+            if (board[idx] !== '' || !gameActive) return;
+
+            board[idx] = currentPlayer;
+            const btn = document.getElementById('board').children[idx];
+            btn.innerText = currentPlayer;
+            btn.classList.add(currentPlayer.toLowerCase());
+
+            checkWinner();
+        }
+
+        function checkWinner() {
+            const wins = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            let won = false;
+            wins.forEach(c => {
+                if (board[c[0]] && board[c[0]] === board[c[1]] && board[c[0]] === board[c[2]]) {
+                    won = true;
+                    document.getElementById('status').innerText = `🏆 الفائز: ${currentPlayer}`;
+                    gameActive = false;
+                    highlight(c);
+                }
+            });
+
+            if (!won && !board.includes('')) {
+                document.getElementById('status').innerText = "تعادل!";
+                gameActive = false;
+            } else if (!won) {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                document.getElementById('turn').innerText = currentPlayer;
+            }
+        }
+
+        function highlight(indices) {
+            indices.forEach(i => {
+                document.getElementById('board').children[i].style.background = '#dcfce7';
+                document.getElementById('board').children[i].style.borderColor = '#22c55e';
+            });
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = true;
+            document.getElementById('status').innerHTML = 'الدور: <span id="turn">X</span>';
+            Array.from(document.getElementById('board').children).forEach(b => {
+                b.innerText = '';
+                b.className = 'cell';
+                b.style.background = '#f8fafc';
+            });
+        }
+    </script>
+</body>
+
+</html>
