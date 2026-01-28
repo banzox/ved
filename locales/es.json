@@ -1,0 +1,51 @@
+{
+    "dir": "ltr",
+    "ui": {
+        "title": "NextGear - Herramientas PRO",
+        "search_placeholder": "🔍 Buscar herramientas (ej: pdf, youtube...)",
+        "menu_home": "Inicio",
+        "menu_video": "Vídeo",
+        "menu_audio": "Audio",
+        "menu_pdf": "PDF",
+        "menu_conv": "Conversor",
+        "menu_dev": "Dev",
+        "menu_img": "Imagen",
+        "menu_css": "CSS",
+        "menu_misc": "Varios",
+        "run_btn": "Procesar 🚀",
+        "upload_btn": "Elegir Archivo 📂",
+        "close_btn": "Cerrar ❌",
+        "footer": "Desarrollado por NextGear Team © 2026"
+    },
+    "categories": {
+        "video": "Herramientas de Vídeo",
+        "audio": "Herramientas de Audio",
+        "pdf": "Herramientas PDF",
+        "converters": "Convertidores",
+        "tools": "Herramientas Dev",
+        "decor": "Decoración de Texto",
+        "math": "Matemáticas",
+        "games": "Juegos y Diversión",
+        "css": "Generadores CSS",
+        "image": "Edición de Imagen",
+        "misc": "Herramientas Varias"
+    },
+    "tools": {
+        "yt_thumb": {
+            "n": "Miniatura YouTube",
+            "d": "Descargar miniaturas en HD"
+        },
+        "pdf_mrg": {
+            "n": "Unir PDF",
+            "d": "Combinar archivos PDF"
+        },
+        "age": {
+            "n": "Calculadora Edad",
+            "d": "Calcula tu edad exacta"
+        },
+        "rps": {
+            "n": "Piedra Papel Tijera",
+            "d": "Juega contra la IA"
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "dir": "ltr",
+    "ui": {
+        "title": "NextGear - Professional Tools",
+        "search_placeholder": "🔍 Search tools (e.g., pdf, youtube, color...)",
+        "menu_home": "Home",
+        "menu_video": "Video",
+        "menu_audio": "Audio",
+        "menu_pdf": "PDF Tools",
+        "menu_conv": "Converters",
+        "menu_dev": "Developers",
+        "menu_img": "Images",
+        "menu_css": "CSS",
+        "menu_misc": "Misc",
+        "run_btn": "Start Processing 🚀",
+        "upload_btn": "Choose File 📂",
+        "close_btn": "Close ❌",
+        "footer": "Developed by NextGear Team © 2026"
+    },
+    "categories": {
+        "video": "Video Tools",
+        "audio": "Audio Tools",
+        "pdf": "PDF Tools",
+        "converters": "Unit Converters",
+        "tools": "Developer Tools",
+        "decor": "Text Decoration",
+        "math": "Math & Calc",
+        "games": "Games & Fun",
+        "css": "CSS Generators",
+        "image": "Image Tools",
+        "misc": "Misc Tools"
+    },
+    "tools": {
+        "yt_thumb": {
+            "n": "YouTube Thumbnail",
+            "d": "Download high quality video thumbnails"
+        },
+        "pdf_mrg": {
+            "n": "Merge PDF",
+            "d": "Combine two or more files into one"
+        },
+        "age": {
+            "n": "Age Calculator",
+            "d": "Calculate exact age in Y/M/D"
+        },
+        "rps": {
+            "n": "Rock Paper Scissors",
+            "d": "Play against AI with visual effects"
+        }
+    }
+}

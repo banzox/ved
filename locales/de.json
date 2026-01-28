@@ -1,0 +1,51 @@
+{
+    "dir": "ltr",
+    "ui": {
+        "title": "NextGear - Profi-Tools",
+        "search_placeholder": "🔍 Suche (z.B. pdf, youtube...)",
+        "menu_home": "Start",
+        "menu_video": "Video",
+        "menu_audio": "Audio",
+        "menu_pdf": "PDF",
+        "menu_conv": "Konverter",
+        "menu_dev": "Dev",
+        "menu_img": "Bild",
+        "menu_css": "CSS",
+        "menu_misc": "Sonstiges",
+        "run_btn": "Starten 🚀",
+        "upload_btn": "Datei wählen 📂",
+        "close_btn": "Schließen ❌",
+        "footer": "Entwickelt von NextGear Team © 2026"
+    },
+    "categories": {
+        "video": "Video-Tools",
+        "audio": "Audio-Tools",
+        "pdf": "PDF-Tools",
+        "converters": "Einheitenumwandler",
+        "tools": "Entwickler-Tools",
+        "decor": "Text-Deko",
+        "math": "Mathe & Kalk",
+        "games": "Spiele",
+        "css": "CSS-Generatoren",
+        "image": "Bild-Tools",
+        "misc": "Verschiedene Tools"
+    },
+    "tools": {
+        "yt_thumb": {
+            "n": "YouTube Thumbnail",
+            "d": "HD Thumbnails herunterladen"
+        },
+        "pdf_mrg": {
+            "n": "PDF zusammenfügen",
+            "d": "PDF-Dateien kombinieren"
+        },
+        "age": {
+            "n": "Altersrechner",
+            "d": "Berechne dein exaktes Alter"
+        },
+        "rps": {
+            "n": "Schere Stein Papier",
+            "d": "Spiel gegen die KI"
+        }
+    }
+}

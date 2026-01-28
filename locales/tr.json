@@ -1,0 +1,51 @@
+{
+    "dir": "ltr",
+    "ui": {
+        "title": "NextGear - Profesyonel Araçlar",
+        "search_placeholder": "🔍 Araç ara (örn: pdf, youtube...)",
+        "menu_home": "Anasayfa",
+        "menu_video": "Video",
+        "menu_audio": "Ses",
+        "menu_pdf": "PDF",
+        "menu_conv": "Dönüştürücü",
+        "menu_dev": "Geliştirici",
+        "menu_img": "Resim",
+        "menu_css": "CSS",
+        "menu_misc": "Çeşitli",
+        "run_btn": "Başlat 🚀",
+        "upload_btn": "Dosya Seç 📂",
+        "close_btn": "Kapat ❌",
+        "footer": "NextGear Team © 2026 tarafından geliştirildi"
+    },
+    "categories": {
+        "video": "Video Araçları",
+        "audio": "Ses Araçları",
+        "pdf": "PDF Araçları",
+        "converters": "Dönüştürücüler",
+        "tools": "Geliştirici Araçları",
+        "decor": "Metin Dekoru",
+        "math": "Matematik",
+        "games": "Oyunlar",
+        "css": "CSS Oluşturucular",
+        "image": "Resim Araçları",
+        "misc": "Diğer Araçlar"
+    },
+    "tools": {
+        "yt_thumb": {
+            "n": "YouTube Küçük Resim",
+            "d": "HD kalitede indir"
+        },
+        "pdf_mrg": {
+            "n": "PDF Birleştir",
+            "d": "PDF dosyalarını birleştir"
+        },
+        "age": {
+            "n": "Yaş Hesaplayıcı",
+            "d": "Tam yaşınızı hesaplayın"
+        },
+        "rps": {
+            "n": "Taş Kağıt Makas",
+            "d": "Yapay zekaya karşı oyna"
+        }
+    }
+}

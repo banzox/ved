@@ -1,0 +1,51 @@
+{
+    "dir": "ltr",
+    "ui": {
+        "title": "NextGear - Ferramentas PRO",
+        "search_placeholder": "🔍 Pesquisar (ex: pdf, youtube...)",
+        "menu_home": "Início",
+        "menu_video": "Vídeo",
+        "menu_audio": "Áudio",
+        "menu_pdf": "PDF",
+        "menu_conv": "Conversor",
+        "menu_dev": "Dev",
+        "menu_img": "Imagem",
+        "menu_css": "CSS",
+        "menu_misc": "Outros",
+        "run_btn": "Processar 🚀",
+        "upload_btn": "Escolher Arquivo 📂",
+        "close_btn": "Fechar ❌",
+        "footer": "Desenvolvido por NextGear Team © 2026"
+    },
+    "categories": {
+        "video": "Ferramentas de Vídeo",
+        "audio": "Ferramentas de Áudio",
+        "pdf": "Ferramentas de PDF",
+        "converters": "Conversores",
+        "tools": "Ferramentas Dev",
+        "decor": "Decoração de Texto",
+        "math": "Matemática",
+        "games": "Jogos",
+        "css": "Geradores CSS",
+        "image": "Edição de Imagem",
+        "misc": "Ferramentas Diversas"
+    },
+    "tools": {
+        "yt_thumb": {
+            "n": "Miniatura YouTube",
+            "d": "Baixar miniaturas em HD"
+        },
+        "pdf_mrg": {
+            "n": "Mesclar PDF",
+            "d": "Combinar arquivos PDF"
+        },
+        "age": {
+            "n": "Calculadora de Idade",
+            "d": "Calcule sua idade exata"
+        },
+        "rps": {
+            "n": "Pedra Papel Tesoura",
+            "d": "Jogue contra a IA"
+        }
+    }
+}

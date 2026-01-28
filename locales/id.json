@@ -1,0 +1,51 @@
+{
+    "dir": "ltr",
+    "ui": {
+        "title": "NextGear - Alat Profesional",
+        "search_placeholder": "🔍 Cari alat (contoh: pdf, youtube...)",
+        "menu_home": "Beranda",
+        "menu_video": "Video",
+        "menu_audio": "Audio",
+        "menu_pdf": "PDF",
+        "menu_conv": "Konverter",
+        "menu_dev": "Dev",
+        "menu_img": "Gambar",
+        "menu_css": "CSS",
+        "menu_misc": "Lainnya",
+        "run_btn": "Mulai Proses 🚀",
+        "upload_btn": "Pilih File 📂",
+        "close_btn": "Tutup ❌",
+        "footer": "Dikembangkan oleh NextGear Team © 2026"
+    },
+    "categories": {
+        "video": "Alat Video",
+        "audio": "Alat Audio",
+        "pdf": "Alat PDF",
+        "converters": "Konverter Unit",
+        "tools": "Alat Pengembang",
+        "decor": "Dekorasi Teks",
+        "math": "Matematika",
+        "games": "Permainan",
+        "css": "Generator CSS",
+        "image": "Alat Gambar",
+        "misc": "Alat Beragam"
+    },
+    "tools": {
+        "yt_thumb": {
+            "n": "Thumbnail YouTube",
+            "d": "Unduh thumbnail HD"
+        },
+        "pdf_mrg": {
+            "n": "Gabung PDF",
+            "d": "Gabungkan file PDF"
+        },
+        "age": {
+            "n": "Kalkulator Umur",
+            "d": "Hitung umur tepat Anda"
+        },
+        "rps": {
+            "n": "Batu Kertas Gunting",
+            "d": "Main lawan AI"
+        }
+    }
+}
