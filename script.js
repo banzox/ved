@@ -42,15 +42,13 @@ function handleImageWorker(id, bmp) {
         worker.onmessage = function (e) {
             const { result } = e.data;
             if (result instanceof ImageBitmap) {
-                // Draw to canvas
                 const cvs = document.createElement('canvas');
                 cvs.width = result.width;
                 cvs.height = result.height;
                 const ctx = cvs.getContext('2d');
                 ctx.drawImage(result, 0, 0);
-                resolve(cvs); // Return canvas element
+                resolve(cvs);
 
-                // Restore default worker message handler for other tools
                 worker.onmessage = function (ev) {
                     const { result: res } = ev.data;
                     const out = document.getElementById('mOutVal');
@@ -73,15 +71,15 @@ const engine = {
         const i = `https://img.youtube.com/vi/${v}/maxresdefault.jpg`;
         return `<img src="${i}" style="width:100%;border-radius:10px"><br><a href="${i}" target="_blank" class="pro-btn">تحميل</a>`;
     },
-    'vid_aud': (d) => "⚠️ يتطلب هذا الأمر معالجة خادم (FFmpeg Server-side).",
-    'vid_trim': (d) => "⚠️ ميزة القص تتطلب رفع الملف (قريباً).",
-    'vid_mute': (d) => "✅ تم استلام الطلب (محاكاة).",
+    'vid_aud': () => "⚠️ يتطلب هذا الأمر معالجة خادم (FFmpeg Server-side).",
+    'vid_trim': () => "⚠️ ميزة القص تتطلب رفع الملف (قريباً).",
+    'vid_mute': () => "✅ تم استلام الطلب (محاكاة).",
     'vid_info': (d) => `المقاس: ${(d.file.size / 1024 / 1024).toFixed(2)} MB\nالنوع: ${d.file.type}`,
-    'vid_spd': (d) => "⚠️ تغيير السرعة يحتاج معالجة متقدمة.",
-    'vid_gif': (d) => "⚠️ تحويل GIF يتطلب موارد عالية.",
-    'vid_pic': (d) => "⚠️ أخذ اللقطات غير مدعوم في هذا الإصدار.",
-    'vid_rot': (d) => "⚠️ التدوير يتطلب إعادة ترميز.",
-    'vid_mir': (d) => "⚠️ العكس يتطلب إعادة ترميز.",
+    'vid_spd': () => "⚠️ تغيير السرعة يحتاج معالجة متقدمة.",
+    'vid_gif': () => "⚠️ تحويل GIF يتطلب موارد عالية.",
+    'vid_pic': () => "⚠️ أخذ اللقطات غير مدعوم في هذا الإصدار.",
+    'vid_rot': () => "⚠️ التدوير يتطلب إعادة ترميز.",
+    'vid_mir': () => "⚠️ العكس يتطلب إعادة ترميز.",
 
     // --- Audio ---
     'tts': (d) => {
@@ -91,14 +89,12 @@ const engine = {
         speechSynthesis.speak(u);
         return 'جاري القراءة... 🔊';
     },
-    'aud_rec': () => {
-        return `🔴 <button class="pro-btn" onclick="alert('Start Rec')">تسجيل</button>`;
-    },
-    'aud_trim': (d) => "⚠️ قص الصوت غير متوفر حالياً.",
-    'aud_vol': (d) => "⚠️ رفع الصوت غير متوفر حالياً.",
-    'aud_spd': (d) => "⚠️ تسريع الصوت غير متوفر حالياً.",
-    'aud_rev': (d) => "⚠️ عكس الصوت غير متوفر حالياً.",
-    'aud_bpm': (d) => "TAP TAP TAP (BPM Calc UI needed)",
+    'aud_rec': () => `🔴 <button class="pro-btn" onclick="alert('Start Rec')">تسجيل</button>`,
+    'aud_trim': () => "⚠️ قص الصوت غير متوفر حالياً.",
+    'aud_vol': () => "⚠️ رفع الصوت غير متوفر حالياً.",
+    'aud_spd': () => "⚠️ تسريع الصوت غير متوفر حالياً.",
+    'aud_rev': () => "⚠️ عكس الصوت غير متوفر حالياً.",
+    'aud_bpm': () => "TAP TAP TAP (BPM Calc UI needed)",
     'aud_gen': (d) => {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator();
@@ -109,19 +105,19 @@ const engine = {
         return `تشغيل ${d.hz}Hz لمدة ثانية`;
     },
     'aud_info': (d) => `الحجم: ${(d.file.size / 1024).toFixed(2)} KB`,
-    'aud_conv': (d) => "⚠️ التحويل يتطلب خادم.",
+    'aud_conv': () => "⚠️ التحويل يتطلب خادم.",
 
     // --- PDF ---
     'txt2pdf': (d) => "يتم المعالجة عبر pdf-lib...",
     'img2pdf': (d) => "يتم المعالجة عبر pdf-lib...",
-    'pdf_mrg': (d) => "⚠️ دمج الملفات يتطلب مكتبة متقدمة.",
-    'pdf_spl': (d) => "⚠️ التقسيم يتطلب مكتبة متقدمة.",
+    'pdf_mrg': () => "⚠️ دمج الملفات يتطلب مكتبة متقدمة.",
+    'pdf_spl': () => "⚠️ التقسيم يتطلب مكتبة متقدمة.",
     'pdf_inf': (d) => `الملف: ${d.f ? d.f.name : '-'}`,
-    'pdf_wat': (d) => "⚠️ العلامة المائية غير متوفرة.",
-    'pdf_rot': (d) => "⚠️ التدوير غير متوفر.",
-    'pdf_lock': (d) => "⚠️ التشفير غير متوفر.",
-    'pdf_meta': (d) => "⚠️ تعديل الوصف غير متوفر.",
-    'pdf_clr': (d) => "⚠️ الحذف غير متوفر.",
+    'pdf_wat': () => "⚠️ العلامة المائية غير متوفرة.",
+    'pdf_rot': () => "⚠️ التدوير غير متوفر.",
+    'pdf_lock': () => "⚠️ التشفير غير متوفر.",
+    'pdf_meta': () => "⚠️ تعديل الوصف غير متوفر.",
+    'pdf_clr': () => "⚠️ الحذف غير متوفر.",
 
     // --- Converters ---
     'c_len': (d) => `KM: ${d.v / 1000} | CM: ${d.v * 100} | Inch: ${(d.v * 39.37).toFixed(2)}`,
@@ -144,7 +140,7 @@ const engine = {
     'd_uln': (d) => d.txt.split('').join('\u0332'),
     'd_str': (d) => d.txt.split('').join('\u0336'),
     'd_inv': (d) => d.txt.split('').reverse().join(''),
-    'd_mor': (d) => ".... . .-.. .-.. ---",
+    'd_mor': () => ".... . .-.. .-.. ---",
     'd_emo': (d) => d.txt + " 😀",
 
     // --- Math ---
@@ -155,7 +151,7 @@ const engine = {
     'disc': (d) => `الصافي: ${(d.p * (1 - d.d / 100)).toFixed(2)}`,
     'pct': (d) => `${((d.p / d.v) * 100).toFixed(1)}%`,
     'zak': (d) => `الزكاة: ${(d.v / 40).toFixed(2)}`,
-    'gpa': (d) => "4.0 (يحتاج تفصيل)",
+    'gpa': () => "4.0 (يحتاج تفصيل)",
     'sal': (d) => `الساعة: ${(d.s / 240).toFixed(2)}`,
     'rnd': (d) => Math.floor(Math.random() * d.m),
 
@@ -171,23 +167,57 @@ const engine = {
     'pass': (d) => d.p.length > 8 ? 'Strong ✅' : 'Weak ⚠️',
     'react': () => "اضغط بسرعة! (قريباً)",
 
-    // --- Legacy / Shared ---
-    'img2png': (d) => convertImg(d.img, 'image/png', 'png'),
-    'img2jpg': (d) => convertImg(d.img, 'image/jpeg', 'jpg'),
-    'img2webp': (d) => convertImg(d.img, 'image/webp', 'webp'),
-    'imgbw': (d) => processImg(d.img, (ctx, cvs) => {
-        ctx.filter = 'grayscale(100%)';
+    // --- CSS Tools (NEW) ---
+    'css_grad': () => `background: linear-gradient(90deg, #${Math.random().toString(16).substr(2, 6)}, #${Math.random().toString(16).substr(2, 6)});`,
+    'css_box': () => `box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);`,
+    'css_txt': () => `text-shadow: 2px 2px 4px #000000;`,
+    'css_bor': () => `border-radius: 15px;`,
+    'css_flx': () => `display: flex; justify-content: center; align-items: center;`,
+    'css_grid': () => `display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;`,
+    'css_filt': () => `filter: grayscale(100%);`,
+    'css_anim': () => `@keyframes example { from {opacity:0;} to {opacity:1;} }`,
+    'css_clip': () => `clip-path: circle(50% at 50% 50%);`,
+    'css_min': (d) => d.c.replace(/\s+/g, '').replace(/:\s+/g, ':'),
+
+    // --- Image Tools (NEW) ---
+    'img_res': () => "يتم تغيير الحجم (canvas)...",
+    'img_crop': () => "يتم القص (canvas)...",
+    'img_comp': () => "يتم الضغط (canvas)...",
+    'img_conv': () => "يتم التحويل (canvas)...",
+    'img_filt': (d) => processImg(d.img, (ctx, cvs) => {
+        if (d.f == 'gray') ctx.filter = 'grayscale(100%)';
+        else if (d.f == 'sepia') ctx.filter = 'sepia(100%)';
+        else if (d.f == 'inv') ctx.filter = 'invert(100%)';
         ctx.drawImage(document.getElementById('tempImg'), 0, 0);
     }),
-    'flip': (d) => processImg(d.img, (ctx, cvs) => {
-        ctx.translate(cvs.width, 0);
-        ctx.scale(-1, 1);
-        ctx.drawImage(document.getElementById('tempImg'), 0, 0);
+    'img_col': () => "#FF5733 (Mock)",
+    'img_b64': (d) => new Promise((resolve) => {
+        const r = new FileReader();
+        r.onload = (e) => resolve(`<textarea rows="5">${e.target.result}</textarea>`);
+        r.readAsDataURL(d.img);
     }),
-    'blur': (d) => processImg(d.img, (ctx, cvs) => {
-        ctx.filter = 'blur(5px)';
-        ctx.drawImage(document.getElementById('tempImg'), 0, 0);
-    })
+    'img_rot': () => "Rotate logic placeholder",
+    'img_bg': () => "⚠️ حذف الخلفية يتطلب API خارجي.",
+    'img_wat': () => "⚠️ إضافة علامة مائية تتطلب Canvas مخصص.",
+
+    // --- Misc Tools (NEW) ---
+    'misc_pass': (d) => Math.random().toString(36).slice(-d.l) + Math.random().toString(36).slice(-d.l),
+    'misc_uuid': () => crypto.randomUUID(),
+    'misc_qr': (d) => window.open(`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${d.t}`),
+    'misc_ip': () => "192.168.1.1 (Local Mock)",
+    'misc_ua': () => navigator.userAgent,
+    'misc_stop': () => `
+        <div id="stopwatch">00:00:00</div>
+        <button onclick="toggleStopwatch()" class="pro-btn">Start/Stop</button>
+        <button onclick="resetStopwatch()" class="pro-btn">Reset</button>
+    `,
+    'misc_time': () => new Date().toLocaleTimeString('ar-SA'),
+    'misc_date': (d) => {
+        const diff = Math.abs(new Date(d.d2) - new Date(d.d1));
+        return Math.ceil(diff / (1000 * 60 * 60 * 24)) + " يوم";
+    },
+    'misc_count': (d) => `Timer for ${d.m} mins started!`,
+    'misc_lorem': (d) => "Lorem ipsum dolor sit amet...".repeat(d.n || 1)
 };
 
 // Helper for Image Tools
@@ -225,7 +255,7 @@ function processImg(file, drawFn) {
                 cvs.width = img.width;
                 cvs.height = img.height;
                 const ctx = cvs.getContext('2d');
-                drawFn(ctx, cvs);
+                drawFn(ctx, cvs); // Apply custom drawing/filter
                 const resInfo = cvs.toDataURL();
                 resolve(`<img src="${resInfo}" style="max-width:300px"><br><a href="${resInfo}" download="edited.png" class="pro-btn" style="display:inline-block;margin-top:10px">تحميل الصورة</a>`);
             };
@@ -267,15 +297,14 @@ function openTool(tool) {
     Memory.set('last_tool', tool.id);
     document.getElementById('mTitle').innerHTML = `${tool.icon} ${tool.name}`;
 
-    const fields = document.getElementById('mFields'); // Fixed from mInputs to match or I need to check HTML
-    const inputContainer = document.getElementById('mInputs'); // In HTML it is mInputs
-    inputContainer.innerHTML = '';
+    const fields = document.getElementById('mInputs');
+    fields.innerHTML = '';
 
     if (tool.inputs) {
         tool.inputs.forEach(inp => {
             const div = document.createElement('div');
             div.className = 'field';
-            let html = `<label>${inp.l}</label>`;
+            let html = `<label>${inp.l || inp.n}</label>`;
 
             if (inp.t === 'select') {
                 html += `<select id="inp_${inp.n}">${inp.o.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
@@ -289,7 +318,7 @@ function openTool(tool) {
                 html += `<input type="${inp.t}" id="inp_${inp.n}" value="${inp.d || ''}">`;
             }
             div.innerHTML = html;
-            inputContainer.appendChild(div);
+            fields.appendChild(div);
         });
     }
 
@@ -333,7 +362,7 @@ async function runTool() {
             document.getElementById('mOutVal').innerHTML = '⏳ جاري المعالجة...';
             document.getElementById('mOutBox').style.display = 'block';
             worker.postMessage({ id: activeToolId, data: data });
-            return; // Exit, worker will handle output
+            return;
         }
 
         res = engine[activeToolId] ? engine[activeToolId](data) : 'Under Development';
@@ -366,37 +395,22 @@ const Memory = {
     get: (k) => JSON.parse(localStorage.getItem(k) || 'null'),
     set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
 
-    // History
     addHistory: (id) => {
         let h = Memory.get('history') || [];
-        h = h.filter(x => x !== id); // Remove duplicates
-        h.unshift(id); // Add to top
-        if (h.length > 5) h.pop(); // Keep last 5
+        h = h.filter(x => x !== id);
+        h.unshift(id);
+        if (h.length > 5) h.pop();
         Memory.set('history', h);
-    },
-
-    // Fisher-Yates Shuffle
-    shuffle: (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
     }
 };
 
-// Global Init
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modal').onclick = (e) => {
         if (e.target.id === 'modal') closeModal();
     }
-
-    // Check for history
-    const lastTool = Memory.get('last_tool');
-    if (lastTool) console.log('Welcome back! Last tool used:', lastTool);
 });
 
-// Stopwatch Helper
+// Stopwatch
 window.toggleStopwatch = () => {
     if (window.stopwatchRun) {
         clearInterval(window.stopwatchTimer);

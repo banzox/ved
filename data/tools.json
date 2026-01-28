@@ -1021,5 +1021,352 @@
         "icon": "⚡",
         "desc": "قريباً",
         "inputs": []
+    },
+    {
+        "id": "css_grad",
+        "cat": "css",
+        "name": "Gradient Gen",
+        "icon": "🌈",
+        "desc": "مولد تدرج ألوان",
+        "inputs": []
+    },
+    {
+        "id": "css_box",
+        "cat": "css",
+        "name": "Box Shadow",
+        "icon": "📦",
+        "desc": "ظل الصندوق",
+        "inputs": []
+    },
+    {
+        "id": "css_txt",
+        "cat": "css",
+        "name": "Text Shadow",
+        "icon": "🅰️",
+        "desc": "ظل النص",
+        "inputs": []
+    },
+    {
+        "id": "css_bor",
+        "cat": "css",
+        "name": "Border Radius",
+        "icon": "⭕",
+        "desc": "حواف دائرية",
+        "inputs": []
+    },
+    {
+        "id": "css_flx",
+        "cat": "css",
+        "name": "Flexbox",
+        "icon": "📐",
+        "desc": "مساعد فليكس",
+        "inputs": []
+    },
+    {
+        "id": "css_grid",
+        "cat": "css",
+        "name": "Grid Gen",
+        "icon": "▦",
+        "desc": "مولد تخطيط",
+        "inputs": []
+    },
+    {
+        "id": "css_filt",
+        "cat": "css",
+        "name": "CSS Filters",
+        "icon": "🎨",
+        "desc": "فلاتر الصور",
+        "inputs": []
+    },
+    {
+        "id": "css_anim",
+        "cat": "css",
+        "name": "Animations",
+        "icon": "🎬",
+        "desc": "مكتبة أنيميشن",
+        "inputs": []
+    },
+    {
+        "id": "css_clip",
+        "cat": "css",
+        "name": "Clip Path",
+        "icon": "✂️",
+        "desc": "قص الأشكال",
+        "inputs": []
+    },
+    {
+        "id": "css_min",
+        "cat": "css",
+        "name": "Minifier",
+        "icon": "📉",
+        "desc": "ضغط كود CSS",
+        "inputs": [
+            {
+                "n": "c",
+                "l": "Code",
+                "t": "textarea"
+            }
+        ]
+    },
+    // --- 9. Image Tools ---
+    {
+        "id": "img_res",
+        "cat": "image",
+        "name": "تغيير الحجم",
+        "icon": "📏",
+        "desc": "Resize Image",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            },
+            {
+                "n": "w",
+                "l": "Width",
+                "t": "number"
+            }
+        ]
+    },
+    {
+        "id": "img_crop",
+        "cat": "image",
+        "name": "قص الصورة",
+        "icon": "✂️",
+        "desc": "Crop Image",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_comp",
+        "cat": "image",
+        "name": "ضغط الصورة",
+        "icon": "🗜️",
+        "desc": "Compress JPG/PNG",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_conv",
+        "cat": "image",
+        "name": "تحويل الصيغة",
+        "icon": "🔄",
+        "desc": "To PNG/JPG/WEBP",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_filt",
+        "cat": "image",
+        "name": "فلاتر وتأثيرات",
+        "icon": "🎨",
+        "desc": "Grayscale, Blur...",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            },
+            {
+                "n": "f",
+                "l": "فلتر",
+                "t": "select",
+                "o": [
+                    "gray",
+                    "sepia",
+                    "inv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "img_col",
+        "cat": "image",
+        "name": "استخراج ألوان",
+        "icon": "💊",
+        "desc": "Color Picker",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_b64",
+        "cat": "image",
+        "name": "صورة إلى Base64",
+        "icon": "📄",
+        "desc": "تحويل لنص",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_rot",
+        "cat": "image",
+        "name": "تدوير/قلب",
+        "icon": "🔄",
+        "desc": "Rotate & Flip",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_bg",
+        "cat": "image",
+        "name": "حذف الخلفية",
+        "icon": "🎭",
+        "desc": "AI Remove BG",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    {
+        "id": "img_wat",
+        "cat": "image",
+        "name": "علامة مائية",
+        "icon": "©️",
+        "desc": "Watermark",
+        "inputs": [
+            {
+                "n": "img",
+                "t": "file"
+            }
+        ]
+    },
+    // --- 10. Misc Tools ---
+    {
+        "id": "misc_pass",
+        "cat": "misc",
+        "name": "مـولد باسوورد",
+        "icon": "🔐",
+        "desc": "كلمات سر قوية",
+        "inputs": [
+            {
+                "n": "l",
+                "l": "الطول",
+                "t": "number",
+                "d": 16
+            }
+        ]
+    },
+    {
+        "id": "misc_uuid",
+        "cat": "misc",
+        "name": "UUID Generator",
+        "icon": "🆔",
+        "desc": "v4 IDs",
+        "inputs": []
+    },
+    {
+        "id": "misc_qr",
+        "cat": "misc",
+        "name": "QR Code",
+        "icon": "📱",
+        "desc": "إنشاء باركود",
+        "inputs": [
+            {
+                "n": "t",
+                "l": "النص/الرابط",
+                "t": "text"
+            }
+        ]
+    },
+    {
+        "id": "misc_ip",
+        "cat": "misc",
+        "name": "عنوان IP",
+        "icon": "🌐",
+        "desc": "My IP Checker",
+        "inputs": []
+    },
+    {
+        "id": "misc_ua",
+        "cat": "misc",
+        "name": "User Agent",
+        "icon": "🕵️",
+        "desc": "معلومات متصفحك",
+        "inputs": []
+    },
+    {
+        "id": "misc_stop",
+        "cat": "misc",
+        "name": "ساعة إيقاف",
+        "icon": "⏱️",
+        "desc": "Stopwatch",
+        "inputs": []
+    },
+    {
+        "id": "misc_time",
+        "cat": "misc",
+        "name": "الوقت الآن",
+        "icon": "🕰️",
+        "desc": "ساعة عالمية",
+        "inputs": []
+    },
+    {
+        "id": "misc_date",
+        "cat": "misc",
+        "name": "فرق التاريخ",
+        "icon": "📅",
+        "desc": "بين تاريخين",
+        "inputs": [
+            {
+                "n": "d1",
+                "t": "date"
+            },
+            {
+                "n": "d2",
+                "t": "date"
+            }
+        ]
+    },
+    {
+        "id": "misc_count",
+        "cat": "misc",
+        "name": "عد تنازلي",
+        "icon": "⏳",
+        "desc": "Countdown",
+        "inputs": [
+            {
+                "n": "m",
+                "l": "دقيقة",
+                "t": "number"
+            }
+        ]
+    },
+    {
+        "id": "misc_lorem",
+        "cat": "misc",
+        "name": "نص تلقائي",
+        "icon": "📝",
+        "desc": "Lorem Ipsum",
+        "inputs": [
+            {
+                "n": "n",
+                "l": "فقرات",
+                "t": "number"
+            }
+        ]
     }
 ]
