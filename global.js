@@ -19,19 +19,58 @@
     // --- Search Index (The Registry) ---
     // This will be populated with all 100 tools locally
     window.searchIndex = [
-        { id: 'bmi', n: { ar: 'حاسبة الوزن (BMI)', en: 'BMI Calculator' }, url: 'bmi.html', cat: 'math' },
-        { id: 'yt', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/yt-thumb.html', cat: 'video' },
-        { id: 'cnt', n: { ar: 'عداد الكلمات', en: 'Word Counter' }, url: 'tools/text/counter.html', cat: 'text' },
-        { id: 'pdf_txt', n: { ar: 'تحويل نص لـ PDF', en: 'Text to PDF' }, url: 'tools/pdf/txt2pdf.html', cat: 'pdf' },
-        { id: 'rev', n: { ar: 'عكس النصوص', en: 'Text Reverser' }, url: 'tools/text/reverse.html', cat: 'text' },
-        { id: 'bin', n: { ar: 'تحويل ثنائي (Binary)', en: 'Binary Converter' }, url: 'tools/text/binary.html', cat: 'text' },
+        // --- Video ---
+        { id: 'yt_thumb', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/thumb.html', cat: 'video' },
+
+        // --- Math ---
+        { id: 'bmi', n: { ar: 'حاسبة الوزن (BMI)', en: 'BMI Calculator' }, url: 'tools/math/bmi.html', cat: 'math' },
         { id: 'age', n: { ar: 'حاسبة العمر', en: 'Age Calculator' }, url: 'tools/math/age.html', cat: 'math' },
+        { id: 'loan', n: { ar: 'حاسبة القروض', en: 'Loan Calculator' }, url: 'tools/math/loan.html', cat: 'math' },
+        { id: 'disc', n: { ar: 'حاسبة الخصم', en: 'Discount Calculator' }, url: 'tools/math/discount.html', cat: 'math' },
+        { id: 'zak', n: { ar: 'حاسبة الزكاة', en: 'Zakat Calculator' }, url: 'tools/math/zakat.html', cat: 'math' },
+
+        // --- Converters ---
+        { id: 'c_len', n: { ar: 'محول الطول', en: 'Length Converter' }, url: 'tools/conv/length.html', cat: 'conv' },
+        { id: 'c_wgt', n: { ar: 'محول الوزن', en: 'Weight Converter' }, url: 'tools/conv/weight.html', cat: 'conv' },
+        { id: 'c_spd', n: { ar: 'محول السرعة', en: 'Speed Converter' }, url: 'tools/conv/speed.html', cat: 'conv' },
+        { id: 'c_cur', n: { ar: 'محول العملات', en: 'Currency Converter' }, url: 'tools/conv/currency.html', cat: 'conv' },
         { id: 'temp', n: { ar: 'محول الحرارة', en: 'Temperature Converter' }, url: 'tools/conv/temperature.html', cat: 'conv' },
+
+        // --- Text ---
+        { id: 'cnt', n: { ar: 'عداد الكلمات', en: 'Word Counter' }, url: 'tools/text/counter.html', cat: 'text' },
+        { id: 'rev', n: { ar: 'عكس النصوص', en: 'Text Reverser' }, url: 'tools/text/reverse.html', cat: 'text' },
+        { id: 'bin', n: { ar: 'تحويل ثنائي', en: 'Binary Converter' }, url: 'tools/text/binary.html', cat: 'text' },
+        { id: 'decor', n: { ar: 'زخرفة النصوص', en: 'Text Decoration' }, url: 'tools/text/decor.html', cat: 'text' },
+
+        // --- Dev ---
+        { id: 'json', n: { ar: 'منسق JSON', en: 'JSON Formatter' }, url: 'tools/dev/json.html', cat: 'dev' },
+        { id: 'b64', n: { ar: 'محول Base64', en: 'Base64 Converter' }, url: 'tools/dev/base64.html', cat: 'dev' },
+        { id: 'urlenc', n: { ar: 'تشفير الروابط', en: 'URL Encoder' }, url: 'tools/dev/url.html', cat: 'dev' },
+        { id: 'rgb', n: { ar: 'محول الألوان', en: 'Color Converter' }, url: 'tools/dev/color.html', cat: 'dev' },
+
+        // --- Games ---
+        { id: 'xo', n: { ar: 'لعبة X-O', en: 'Tic Tac Toe' }, url: 'tools/game/xo.html', cat: 'game' },
+        { id: 'rps', n: { ar: 'حجرة ورقة مقص', en: 'Rock Paper Scissors' }, url: 'tools/game/rps.html', cat: 'game' },
+        { id: 'dice', n: { ar: 'رمي النرد', en: 'Dice Roller' }, url: 'tools/game/dice.html', cat: 'game' },
+        { id: 'love', n: { ar: 'مقياس الحب', en: 'Love Calculator' }, url: 'tools/game/love.html', cat: 'game' },
+        { id: 'guess', n: { ar: 'تخمين الرقم', en: 'Guess Number' }, url: 'tools/game/guess.html', cat: 'game' },
+
+        // --- Misc ---
+        { id: 'misc_uuid', n: { ar: 'مولد UUID', en: 'UUID Generator' }, url: 'tools/misc/uuid.html', cat: 'misc' },
+        { id: 'misc_qr', n: { ar: 'باركود QR', en: 'QR Code' }, url: 'tools/misc/qr.html', cat: 'misc' },
+        { id: 'misc_stop', n: { ar: 'ساعة إيقاف', en: 'Stopwatch' }, url: 'tools/misc/stopwatch.html', cat: 'misc' },
+        { id: 'misc_ip', n: { ar: 'عنوان IP', en: 'IP Checker' }, url: 'tools/misc/ip.html', cat: 'misc' },
+        { id: 'misc_pass', n: { ar: 'مولد كلمات سر', en: 'Password Generator' }, url: 'tools/misc/pass.html', cat: 'misc' },
+
+        // --- Image ---
         { id: 'img_res', n: { ar: 'تغيير حجم الصورة', en: 'Image Resizer' }, url: 'tools/image/resize.html', cat: 'image' },
         { id: 'img_cmp', n: { ar: 'ضغط الصور', en: 'Image Compressor' }, url: 'tools/image/compress.html', cat: 'image' },
+
+        // --- Audio ---
         { id: 'aud_rec', n: { ar: 'مسجل الصوت', en: 'Audio Recorder' }, url: 'tools/audio/record.html', cat: 'audio' },
-        { id: 'decor', n: { ar: 'زخرفة النصوص', en: 'Text Decoration' }, url: 'tools/text/decor.html', cat: 'text' },
-        { id: 'xo', n: { ar: 'لعبة X-O', en: 'Tic Tac Toe' }, url: 'tools/game/xo.html', cat: 'game' }
+
+        // --- PDF ---
+        { id: 'pdf_txt', n: { ar: 'نص إلى PDF', en: 'Text to PDF' }, url: 'tools/pdf/txt2pdf.html', cat: 'pdf' }
     ];
 
     window.searchTools = (query) => {

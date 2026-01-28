@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | What is my IP?</title>
+</head>
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="ip_title">What is my IP?</h1>
+                <p data-i18n="ip_desc">Check your public IP address.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto; text-align:center">
+            
+            <div class="output-area" style="display:block; padding:40px">
+                <small data-i18n="ur_ip">Your IP Address:</small>
+                <div class="output-val" id="ipVal" style="font-size:2.5rem; margin-top:10px">Thinking...</div>
+            </div>
+
+            <button class="run-btn" onclick="checkIP()" style="width:auto; margin-top:20px">🔄 Refresh</button>
+
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'ip_title': 'ما هو عنواني (IP)؟', 'ip_desc': 'معرفة عنوان بروتوكول الإنترنت', 'ur_ip': 'عنوانك الحالي:' },
+            'en': { 'ip_title': 'What is my IP?', 'ip_desc': 'Check Public IP', 'ur_ip': 'Your IP Address:' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+            checkIP();
+        });
+
+        async function checkIP() {
+            document.getElementById('ipVal').innerText = "...";
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                document.getElementById('ipVal').innerText = data.ip;
+                document.getElementById('ipVal').style.color = '#22c55e';
+            } catch (e) {
+                document.getElementById('ipVal').innerText = "Error";
+                document.getElementById('ipVal').style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -11,6 +11,7 @@ async function loadTools() {
         {
             "id": "yt_thumb",
             "cat": "video",
+            "url": "tools/video/thumb.html",
             "name": "صورة يوتيوب",
             "icon": "🖼️",
             "desc": "تحميل صور الفيديو",
@@ -481,6 +482,7 @@ async function loadTools() {
             "id": "c_len",
             "cat": "conv",
             "name": "محول الطول",
+            "url": "tools/conv/length.html",
             "icon": "📏",
             "desc": "M, KM, CM, MM, Inch, Ft",
             "inputs": [
@@ -495,6 +497,7 @@ async function loadTools() {
             "id": "c_wgt",
             "cat": "conv",
             "name": "محول الوزن",
+            "url": "tools/conv/weight.html",
             "icon": "⚖️",
             "desc": "KG, G, LBS, OZ",
             "inputs": [
@@ -523,6 +526,7 @@ async function loadTools() {
             "id": "c_spd",
             "cat": "conv",
             "name": "محول السرعة",
+            "url": "tools/conv/speed.html",
             "icon": "🚗",
             "desc": "KPH, MPH, M/S",
             "inputs": [
@@ -565,6 +569,7 @@ async function loadTools() {
             "id": "c_cur",
             "cat": "conv",
             "name": "محول العملات",
+            "url": "tools/conv/currency.html",
             "icon": "💵",
             "desc": "USD, EUR, SAR (Static)",
             "inputs": [
@@ -775,6 +780,7 @@ async function loadTools() {
             "id": "bmi",
             "cat": "math",
             "name": "كتلة الجسم",
+            "url": "tools/math/bmi.html",
             "icon": "⚖️",
             "desc": "BMI Calculator",
             "inputs": [
@@ -793,6 +799,8 @@ async function loadTools() {
         {
             "id": "loan",
             "cat": "math",
+            "cat": "math",
+            "url": "tools/math/loan.html",
             "name": "القسط الشهري",
             "icon": "🏦",
             "desc": "حساب القروض",
@@ -826,6 +834,8 @@ async function loadTools() {
         {
             "id": "disc",
             "cat": "math",
+            "cat": "math",
+            "url": "tools/math/discount.html",
             "name": "حاسبة الخصم",
             "icon": "🏷️",
             "desc": "حساب السعر بعد الخصم",
@@ -864,6 +874,8 @@ async function loadTools() {
         {
             "id": "zak",
             "cat": "math",
+            "cat": "math",
+            "url": "tools/math/zakat.html",
             "name": "حاسبة الزكاة",
             "icon": "🕌",
             "desc": "ربع العشر (2.5%)",
@@ -921,6 +933,7 @@ async function loadTools() {
             "id": "rps",
             "cat": "game",
             "name": "حجرة ورقة مقص",
+            "url": "tools/game/rps.html",
             "icon": "✂️",
             "desc": "لعبة كلاسيكية",
             "inputs": []
@@ -929,6 +942,7 @@ async function loadTools() {
             "id": "dice",
             "cat": "game",
             "name": "رمي النرد",
+            "url": "tools/game/dice.html",
             "icon": "🎲",
             "desc": "رقم من 1-6",
             "inputs": []
@@ -945,6 +959,7 @@ async function loadTools() {
             "id": "guess",
             "cat": "game",
             "name": "تخمين الرقم",
+            "url": "tools/game/guess.html",
             "icon": "❓",
             "desc": "من 1 إلى 10",
             "inputs": [
@@ -959,6 +974,7 @@ async function loadTools() {
             "id": "love",
             "cat": "game",
             "name": "مقياس الحب",
+            "url": "tools/game/love.html",
             "icon": "❤️",
             "desc": "للتسلية فقط",
             "inputs": [
@@ -1019,6 +1035,38 @@ async function loadTools() {
             "icon": "⚡",
             "desc": "قريباً",
             "inputs": []
+        },
+        {
+            "id": "json",
+            "cat": "dev",
+            "name": "JSON Formatter",
+            "desc": "Beautify/Minify",
+            "url": "tools/dev/json.html",
+            "icon": "{}"
+        },
+        {
+            "id": "b64",
+            "cat": "dev",
+            "name": "Base64 Text",
+            "desc": "Encode/Decode",
+            "url": "tools/dev/base64.html",
+            "icon": "64"
+        },
+        {
+            "id": "urlenc",
+            "cat": "dev",
+            "name": "URL Encoder",
+            "desc": "Escape Chars",
+            "url": "tools/dev/url.html",
+            "icon": "🔗"
+        },
+        {
+            "id": "rgb",
+            "cat": "dev",
+            "name": "Color Convert",
+            "desc": "HEX <-> RGB",
+            "url": "tools/dev/color.html",
+            "icon": "🎨"
         },
         {
             "id": "css_grad",
@@ -1255,6 +1303,7 @@ async function loadTools() {
             "id": "misc_pass",
             "cat": "misc",
             "name": "مـولد باسوورد",
+            "url": "tools/misc/pass.html",
             "icon": "🔐",
             "desc": "كلمات سر قوية",
             "inputs": [
@@ -1270,6 +1319,7 @@ async function loadTools() {
             "id": "misc_uuid",
             "cat": "misc",
             "name": "UUID Generator",
+            "url": "tools/misc/uuid.html",
             "icon": "🆔",
             "desc": "v4 IDs",
             "inputs": []
@@ -1278,6 +1328,7 @@ async function loadTools() {
             "id": "misc_qr",
             "cat": "misc",
             "name": "QR Code",
+            "url": "tools/misc/qr.html",
             "icon": "📱",
             "desc": "إنشاء باركود",
             "inputs": [
@@ -1292,6 +1343,7 @@ async function loadTools() {
             "id": "misc_ip",
             "cat": "misc",
             "name": "عنوان IP",
+            "url": "tools/misc/ip.html",
             "icon": "🌐",
             "desc": "My IP Checker",
             "inputs": []
@@ -1308,6 +1360,7 @@ async function loadTools() {
             "id": "misc_stop",
             "cat": "misc",
             "name": "ساعة إيقاف",
+            "url": "tools/misc/stopwatch.html",
             "icon": "⏱️",
             "desc": "Stopwatch",
             "inputs": []

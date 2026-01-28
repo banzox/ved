@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Discount Calculator</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="title">Discount Calculator</h1>
+                <p data-i18n="desc">Calculate price after discount.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto">
+            <div class="field">
+                <label data-i18n="price">Original Price</label>
+                <input type="number" id="price" placeholder="1000">
+            </div>
+            <div class="field">
+                <label data-i18n="discount">Discount (%)</label>
+                <input type="number" id="discount" placeholder="20">
+            </div>
+            <button class="run-btn" onclick="calcDisc()" data-i18n="calc">Calculate</button>
+            <div class="output-area" id="output" style="display:none">
+                <label data-i18n="final_price">Final Price:</label>
+                <div class="output-val" id="finalVal" style="color:#2ecc71; font-weight:bold; font-size:1.5rem"></div>
+                <label data-i18n="saved" style="margin-top:10px;display:block">You Save:</label>
+                <div class="output-val" id="savedVal"></div>
+            </div>
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': {
+                'title': 'حاسبة الخصم', 'desc': 'احسب السعر بعد التخفيض',
+                'price': 'السعر الأصلي', 'discount': 'نسبة الخصم (%)',
+                'calc': 'احسب', 'final_price': 'السعر النهائي:', 'saved': 'مبلغ التوفير:'
+            },
+            'en': {
+                'title': 'Discount Calculator', 'desc': 'Calculate Sale Price',
+                'price': 'Original Price', 'discount': 'Discount (%)',
+                'calc': 'Calculate', 'final_price': 'Final Price:', 'saved': 'You Save:'
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+        });
+
+        function calcDisc() {
+            const P = parseFloat(document.getElementById('price').value);
+            const D = parseFloat(document.getElementById('discount').value);
+
+            if (!P) return;
+
+            const saved = P * (D / 100);
+            const final = P - saved;
+
+            document.getElementById('output').style.display = 'block';
+            document.getElementById('finalVal').innerText = final.toFixed(2);
+            document.getElementById('savedVal').innerText = saved.toFixed(2);
+        }
+    </script>
+</body>
+
+</html>

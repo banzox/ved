@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Guess Number</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="guess_title">Guess Number</h1>
+                <p data-i18n="guess_desc">Guess number between 1 and 100.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto; text-align:center">
+
+            <p style="margin-bottom:20px" data-i18n="hint">I am thinking of a number...</p>
+
+            <div class="field">
+                <input type="number" id="guessInp" placeholder="1-100">
+            </div>
+
+            <button class="run-btn" onclick="checkGuess()" data-i18n="check">Check</button>
+
+            <div id="msg" style="margin-top:20px; font-weight:bold; font-size:1.2rem"></div>
+
+            <button onclick="startGame()"
+                style="background:none; border:none; color:#64748b; text-decoration:underline; margin-top:20px; cursor:pointer"
+                data-i18n="reset">Reset Game</button>
+
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'guess_title': 'تخمين الرقم', 'guess_desc': 'حاول معرفة الرقم السري (1-100)', 'hint': 'أفكر في رقم...', 'check': 'تخمين', 'reset': 'إعادة اللعبة', 'high': 'عالٍ جداً! 🔽', 'low': 'منخفض جداً! 🔼', 'win': 'صحيح! 🎉' },
+            'en': { 'guess_title': 'Guess Number', 'guess_desc': 'Guess number (1-100)', 'hint': 'I am thinking of a number...', 'check': 'Check', 'reset': 'Reset Game', 'high': 'Too High! 🔽', 'low': 'Too Low! 🔼', 'win': 'Correct! 🎉' }
+        };
+
+        let target = 0;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+            startGame();
+        });
+
+        function startGame() {
+            target = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('msg').innerText = "";
+            document.getElementById('guessInp').value = "";
+        }
+
+        function checkGuess() {
+            const val = parseInt(document.getElementById('guessInp').value);
+            if (!val) return;
+
+            const msg = document.getElementById('msg');
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+
+            if (val === target) {
+                msg.innerText = dict['win'];
+                msg.style.color = 'green';
+            } else if (val > target) {
+                msg.innerText = dict['high'];
+                msg.style.color = 'orange';
+            } else {
+                msg.innerText = dict['low'];
+                msg.style.color = 'orange';
+            }
+        }
+    </script>
+</body>
+
+</html>

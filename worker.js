@@ -60,6 +60,33 @@ self.onmessage = async function (e) {
                 }
                 break;
 
+            case 'pdf_mrg': // Merge 2 PDFs
+                if (typeof PDFLib === 'undefined') {
+                    result = "Error: PDFLib not loaded.";
+                } else {
+                    try {
+                        const pdfDoc = await PDFLib.PDFDocument.create();
+                        const f1 = await data.files[0].arrayBuffer();
+                        const f2 = await data.files[1].arrayBuffer();
+
+                        const pdf1 = await PDFLib.PDFDocument.load(f1);
+                        const pdf2 = await PDFLib.PDFDocument.load(f2);
+
+                        const p1 = await pdfDoc.copyPages(pdf1, pdf1.getPageIndices());
+                        p1.forEach(p => pdfDoc.addPage(p));
+
+                        const p2 = await pdfDoc.copyPages(pdf2, pdf2.getPageIndices());
+                        p2.forEach(p => pdfDoc.addPage(p));
+
+                        const pdfBytes = await pdfDoc.save();
+                        self.postMessage({ result: pdfBytes, type: 'pdf' });
+                        return;
+                    } catch (e) {
+                        result = "Merge Error: " + e.message;
+                    }
+                }
+                break;
+
             case 'pdf_delete':
                 if (typeof PDFLib === 'undefined') {
                     result = "Error: PDFLib library not loaded.";

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Stopwatch</title>
+    <style>
+        .timer { font-size: 4rem; font-family: monospace; font-weight: bold; margin: 20px 0; color: var(--primary); }
+        .controls { display: flex; gap: 10px; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="sw_title">Stopwatch</h1>
+                <p data-i18n="sw_desc">Precise timer with laps.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto; text-align:center">
+            
+            <div class="timer" id="display">00:00:00</div>
+            
+            <div class="controls">
+                <button class="run-btn" onclick="startStop()" id="btnStart" style="background:#22c55e">Start</button>
+                <button class="run-btn" onclick="reset()" style="background:#ef4444">Reset</button>
+            </div>
+
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'sw_title': 'ساعة إيقاف', 'sw_desc': 'مؤقت دقيق', 'start': 'بدء', 'stop': 'توقف', 'reset': 'تصفير' },
+            'en': { 'sw_title': 'Stopwatch', 'sw_desc': 'Precise Timer', 'start': 'Start', 'stop': 'Stop', 'reset': 'Reset' }
+        };
+
+        let timer;
+        let isRunning = false;
+        let seconds = 0;
+
+        window.addEventListener('DOMContentLoaded', () => {
+             const lang = window.NextGear.lang || 'en';
+             const btnStart = document.getElementById('btnStart');
+             if (lang === 'ar') { 
+                 btnStart.innerText = 'بدء';
+                 document.querySelector('[onclick="reset()"]').innerText = 'تصفير';
+             }
+        });
+
+        function updateDisplay() {
+            const hrs = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            document.getElementById('display').innerText = 
+                `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startStop() {
+            const btn = document.getElementById('btnStart');
+            const lang = window.NextGear.lang || 'en';
+            
+            if (isRunning) {
+                clearInterval(timer);
+                btn.innerText = lang === 'ar' ? 'استئناف' : 'Start';
+                btn.style.background = '#22c55e';
+            } else {
+                timer = setInterval(() => { seconds++; updateDisplay(); }, 1000);
+                btn.innerText = lang === 'ar' ? 'توقف' : 'Stop';
+                btn.style.background = '#f59e0b';
+            }
+            isRunning = !isRunning;
+        }
+
+        function reset() {
+            clearInterval(timer);
+            isRunning = false;
+            seconds = 0;
+            updateDisplay();
+            const lang = window.NextGear.lang || 'en';
+            document.getElementById('btnStart').innerText = lang === 'ar' ? 'بدء' : 'Start';
+            document.getElementById('btnStart').style.background = '#22c55e';
+        }
+    </script>
+</body>
+</html>

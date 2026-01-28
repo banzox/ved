@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Base64 Converter</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="b64_title">Base64 Converter</h1>
+                <p data-i18n="b64_desc">Encode and Decode strings.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:800px; margin:0 auto">
+            <div class="field">
+                <label data-i18n="input">Input Text</label>
+                <textarea id="inp" placeholder="Type here..." style="height:120px"></textarea>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-bottom:20px">
+                <button class="run-btn" onclick="conv(true)" data-i18n="encode">Encode</button>
+                <button class="run-btn" onclick="conv(false)" style="background:#e67e22"
+                    data-i18n="decode">Decode</button>
+            </div>
+
+            <div class="output-area" id="output" style="display:none">
+                <label data-i18n="result">Result:</label>
+                <textarea id="out" readonly style="height:120px; font-family:monospace"></textarea>
+            </div>
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'b64_title': 'محول Base64', 'b64_desc': 'تشفير وفك تشفير النصوص', 'input': 'النص', 'encode': 'تشفير (Encode)', 'decode': 'فك (Decode)', 'result': 'النتيجة:' },
+            'en': { 'b64_title': 'Base64 Converter', 'b64_desc': 'Encode/Decode Strings', 'input': 'Input Text', 'encode': 'Encode', 'decode': 'Decode', 'result': 'Result:' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+        });
+
+        function conv(isEncode) {
+            const val = document.getElementById('inp').value;
+            if (!val) return;
+            try {
+                // Support UTF-8
+                const res = isEncode
+                    ? btoa(unescape(encodeURIComponent(val)))
+                    : decodeURIComponent(escape(atob(val)));
+
+                document.getElementById('output').style.display = 'block';
+                document.getElementById('out').value = res;
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+    </script>
+</body>
+
+</html>

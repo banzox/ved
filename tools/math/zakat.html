@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Zakat Calculator</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="title">Zakat Calculator</h1>
+                <p data-i18n="desc">Calculate Zakat Al-Mal (2.5%).</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto">
+            <div class="field">
+                <label data-i18n="amount">Total Amount (Savings)</label>
+                <input type="number" id="amount" placeholder="100000">
+            </div>
+            <button class="run-btn" onclick="calcZakat()" data-i18n="calc">Calculate Zakat</button>
+            <div class="output-area" id="output" style="display:none">
+                <label data-i18n="zakat_amount">Zakat Due:</label>
+                <div class="output-val" id="zakatVal" style="color:#f1c40f; font-weight:bold; font-size:1.5rem"></div>
+            </div>
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': {
+                'title': 'حاسبة الزكاة', 'desc': 'حساب زكاة المال (ربع العشر 2.5%)',
+                'amount': 'المبلغ الإجمالي (المدخرات)',
+                'calc': 'احسب الزكاة', 'zakat_amount': 'مبلغ الزكاة الواجب:'
+            },
+            'en': {
+                'title': 'Zakat Calculator', 'desc': 'Calculate Zakat (2.5%)',
+                'amount': 'Total Savings Amount',
+                'calc': 'Calculate', 'zakat_amount': 'Zakat Due:'
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+        });
+
+        function calcZakat() {
+            const P = parseFloat(document.getElementById('amount').value);
+            if (!P) return;
+
+            const zakat = P / 40; // 2.5%
+
+            document.getElementById('output').style.display = 'block';
+            document.getElementById('zakatVal').innerText = zakat.toLocaleString() + ' (2.5%)';
+        }
+    </script>
+</body>
+
+</html>

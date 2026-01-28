@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Love Scale</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="lov_title">Love Calculator</h1>
+                <p data-i18n="lov_desc">Calculate compatibility percentage.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto; text-align:center">
+
+            <div class="field">
+                <label data-i18n="name1">Your Name</label>
+                <input type="text" id="n1" placeholder="Name 1">
+            </div>
+            <div class="field">
+                <label data-i18n="name2">Partner Name</label>
+                <input type="text" id="n2" placeholder="Name 2">
+            </div>
+
+            <button class="run-btn" onclick="calcLove()" data-i18n="calc">Calculate Love</button>
+
+            <div class="output-area" id="output" style="display:none; margin-top:30px">
+                <div style="font-size:4rem">❤️</div>
+                <div id="percent" style="font-size:3rem; font-weight:bold; color:#e11d48"></div>
+                <div id="msg" style="color:#64748b; margin-top:10px"></div>
+            </div>
+
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'lov_title': 'مقياس الحب', 'lov_desc': 'نسبة التوافق بين إسمين', 'name1': 'إسمك', 'name2': 'إسم الشريك', 'calc': 'احسب النسبة' },
+            'en': { 'lov_title': 'Love Calculator', 'lov_desc': 'Name Compatibility', 'name1': 'Name 1', 'name2': 'Name 2', 'calc': 'Calculate' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+        });
+
+        function calcLove() {
+            const n1 = document.getElementById('n1').value.trim().toLowerCase();
+            const n2 = document.getElementById('n2').value.trim().toLowerCase();
+
+            if (!n1 || !n2) return;
+
+            // Simple fake algorithm based on char codes sum
+            let sum = 0;
+            for (let i = 0; i < n1.length; i++) sum += n1.charCodeAt(i);
+            for (let i = 0; i < n2.length; i++) sum += n2.charCodeAt(i);
+
+            let percent = sum % 101;
+            // Bias slightly higher for fun
+            if (percent < 40) percent += 30;
+
+            document.getElementById('output').style.display = 'block';
+
+            // Counter animation
+            let current = 0;
+            const timer = setInterval(() => {
+                current += 2;
+                if (current >= percent) {
+                    current = percent;
+                    clearInterval(timer);
+                    showMsg(percent);
+                }
+                document.getElementById('percent').innerText = current + '%';
+            }, 20);
+        }
+
+        function showMsg(p) {
+            let m = "";
+            if (p > 85) m = "Perfect Match! 🔥";
+            else if (p > 60) m = "Good Chance! 😉";
+            else m = "Just Friends? 😅";
+            document.getElementById('msg').innerText = m;
+        }
+    </script>
+</body>
+
+</html>

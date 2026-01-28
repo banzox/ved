@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | QR Code</title>
+</head>
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="qr_title">QR Code Generator</h1>
+                <p data-i18n="qr_desc">Create QR codes for links and text.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto; text-align:center">
+            
+            <div class="field">
+                <input type="text" id="qrText" placeholder="https://example.com" oninput="genQR()">
+            </div>
+
+            <div id="qrImage" style="margin:20px auto; padding:20px; background:#fff; display:inline-block; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1)">
+                <img id="qrImg" src="" alt="QR Code" style="display:none; width:200px; height:200px">
+            </div>
+
+            <button class="run-btn" onclick="printQR()" style="width:auto; margin-top:20px">🖨️ Print / Save</button>
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'qr_title': 'صانع الباركود (QR)', 'qr_desc': 'إنشاء رمز استجابة سريع', 'qr_ph': 'ضع الرابط هنا...' },
+            'en': { 'qr_title': 'QR Code Generator', 'qr_desc': 'Create QR Codes', 'qr_ph': 'Enter link...' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+            document.getElementById('qrText').placeholder = dict['qr_ph'] || 'Enter link...';
+        });
+
+        function genQR() {
+            const txt = document.getElementById('qrText').value;
+            const img = document.getElementById('qrImg');
+            if (txt.length > 0) {
+                // Using goqr.me API for simplicity and reliability without local libs
+                img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(txt)}`;
+                img.style.display = 'block';
+            } else {
+                img.style.display = 'none';
+            }
+        }
+
+        function printQR() {
+            const txt = document.getElementById('qrText').value;
+            if(!txt) return;
+            const win = window.open('', '', 'height=400,width=400');
+            win.document.write(`<img src="${document.getElementById('qrImg').src}" style="width:100%">`);
+            win.print();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Loan Calculator</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="loan_title">Loan Calculator</h1>
+                <p data-i18n="loan_desc">Calculate your monthly payments.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto">
+            <div class="field">
+                <label data-i18n="amount">Loan Amount</label>
+                <input type="number" id="amount" placeholder="100000">
+            </div>
+            <div class="field">
+                <label data-i18n="rate">Interest Rate (%)</label>
+                <input type="number" id="rate" placeholder="5">
+            </div>
+            <div class="field">
+                <label data-i18n="months">Duration (Months)</label>
+                <input type="number" id="months" placeholder="60">
+            </div>
+            <button class="run-btn" onclick="calcLoan()" data-i18n="calc">Calculate</button>
+            <div class="output-area" id="output" style="display:none">
+                <label data-i18n="monthly_payment">Monthly Payment:</label>
+                <div class="output-val" id="monthlyVal"></div>
+                <label data-i18n="total_payment" style="margin-top:10px;display:block">Total Payment:</label>
+                <div class="output-val" id="totalVal"></div>
+            </div>
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': {
+                'loan_title': 'حاسبة القروض', 'loan_desc': 'احسب القسط الشهري للقرض',
+                'amount': 'قيمة القرض', 'rate': 'النسبة السنوية (%)', 'months': 'المدة (شهور)',
+                'calc': 'احسب القسط', 'monthly_payment': 'القسط الشهري:', 'total_payment': 'إجمالي المبلغ المستحق:'
+            },
+            'en': {
+                'loan_title': 'Loan Calculator', 'loan_desc': 'Calculate Monthly Instalments',
+                'amount': 'Loan Amount', 'rate': 'Annual Rate (%)', 'months': 'Months',
+                'calc': 'Calculate', 'monthly_payment': 'Monthly Payment:', 'total_payment': 'Total Payment:'
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+        });
+
+        function calcLoan() {
+            const P = parseFloat(document.getElementById('amount').value);
+            const r = parseFloat(document.getElementById('rate').value) / 100 / 12;
+            const n = parseFloat(document.getElementById('months').value);
+
+            if (!P || !n) return;
+
+            let x = Math.pow(1 + r, n);
+            let monthly = (P * x * r) / (x - 1);
+
+            if (!r) monthly = P / n; // 0% interest
+
+            document.getElementById('output').style.display = 'block';
+            document.getElementById('monthlyVal').innerText = monthly.toFixed(2);
+            document.getElementById('totalVal').innerText = (monthly * n).toFixed(2);
+        }
+    </script>
+</body>
+
+</html>

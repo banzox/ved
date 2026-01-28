@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | Password Generator</title>
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="pass_title">Password Generator</h1>
+                <p data-i18n="pass_desc">Create strong, secure passwords.</p>
+            </div>
+        </div>
+        <div class="tool-view active" style="max-width:600px; margin:0 auto; text-align:center">
+
+            <div class="field">
+                <label data-i18n="len">Length</label>
+                <input type="range" id="lenRange" min="4" max="64" value="16" oninput="updateLen(this.value)">
+                <span id="lenVal" style="font-weight:bold">16</span>
+            </div>
+
+            <div class="output-area" style="display:block; margin:20px 0">
+                <div class="output-val" id="passVal"
+                    style="font-family:monospace; font-size:1.5rem; word-break:break-all"></div>
+            </div>
+
+            <div style="display:flex; justify-content:center; gap:10px">
+                <button class="run-btn" onclick="gen()" data-i18n="gen" style="width:auto">Generate</button>
+                <button class="pro-btn" onclick="copyResult()" style="width:auto">📋 Copy</button>
+            </div>
+
+        </div>
+    </main>
+    <div id="app-footer"></div>
+    <script src="../../global.js"></script>
+    <script>
+        const pageDict = {
+            'ar': { 'pass_title': 'مولد كلمات مرور', 'pass_desc': 'إنشاء كلمات سر قوية', 'len': 'الطول', 'gen': 'توليد' },
+            'en': { 'pass_title': 'Password Generator', 'pass_desc': 'Create Strong Passwords', 'len': 'Length', 'gen': 'Generate' }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang || 'en';
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = dict[el.getAttribute('data-i18n')] || el.innerText);
+            gen();
+        });
+
+        function updateLen(v) {
+            document.getElementById('lenVal').innerText = v;
+            gen();
+        }
+
+        function gen() {
+            const len = document.getElementById('lenRange').value;
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+            let res = "";
+            for (let i = 0; i < len; i++) {
+                res += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('passVal').innerText = res;
+        }
+
+        function copyResult() {
+            const val = document.getElementById('passVal').innerText;
+            navigator.clipboard.writeText(val).then(() => alert('Copied!'));
+        }
+    </script>
+</body>
+
+</html>
