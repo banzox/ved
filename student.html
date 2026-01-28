@@ -9,34 +9,15 @@
 </head>
 
 <body>
-
-    <nav class="sidebar">
-        <a href="index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
-        <div class="nav-menu">
-            <a href="index.html" class="nav-item"><i>🏠</i> <span>الرئيسية</span></a>
-            <a href="student.html" class="nav-item active"><i>📝</i> <span>نصوص وطلاب</span></a>
-            <a href="math.html" class="nav-item"><i>🔢</i> <span>حساب ومال</span></a>
-            <a href="conv.html" class="nav-item"><i>🔄</i> <span>تحويلات</span></a>
-            <a href="dev.html" class="nav-item"><i>💻</i> <span>مطورين</span></a>
-            <a href="social.html" class="nav-item"><i>📱</i> <span>اجتماعي</span></a>
-            <a href="files.html" class="nav-item"><i>📂</i> <span>ملفات</span></a>
-            <a href="game.html" class="nav-item"><i>🎮</i> <span>ألعاب</span></a>
-        </div>
-        <div class="pro-card">
-            <h4>NextGear Pro</h4>
-            <button class="pro-btn" onclick="window.open('http://nextgear.space')">ترقية الآن</button>
-        </div>
-    </nav>
-
+    <div id="app-header"></div>
     <main class="main">
         <div class="header-area">
             <div class="page-info">
-                <h1>أدوات الطلاب والنصوص</h1>
+                <h1>أدوات الطلاب والنصوص 📝</h1>
                 <p>أدوات لتحرير النصوص والبحث العلمي والدراسة.</p>
             </div>
-            <div class="search">
-                <input type="text" id="search" placeholder="بحث سريع..." oninput="search(this.value)"> 🔍
-            </div>
+            <!-- Search is now global, but page-specific filters could stay -->
+            <!-- <div class="search">...</div> -->
         </div>
         <div class="grid" id="grid"></div>
     </main>
@@ -56,6 +37,8 @@
         </div>
     </div>
 
+    <div id="app-footer"></div>
+    <script src="global.js"></script>
     <script src="script.js"></script>
     <script>initPage('student');</script>
 </body>
