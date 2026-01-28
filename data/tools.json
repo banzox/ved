@@ -1108,7 +1108,6 @@
             }
         ]
     },
-    // --- 9. Image Tools ---
     {
         "id": "img_res",
         "cat": "image",
@@ -1254,7 +1253,6 @@
             }
         ]
     },
-    // --- 10. Misc Tools ---
     {
         "id": "misc_pass",
         "cat": "misc",

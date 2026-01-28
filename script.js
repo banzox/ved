@@ -16,7 +16,7 @@ async function loadTools() {
         window.contentDB = cRes.ok ? await cRes.json() : { jokes: [], facts: [], quotes: [] };
     } catch (error) {
         console.error('Error loading data:', error);
-        alert('فشل تحميل البيانات، يرجى تحديث الصفحة');
+        alert('فشل تحميل البيانات:\n' + error.message + '\n\nيرجى التأكد من مسار الملفات (data/tools.json).');
     }
 }
 
