@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title will be auto-translated if you use a key, or you can hardcode -->
+    <title>NextGear Tool</title>
+    <!-- Style is auto-injected by global.js, but good to have fallback -->
+    <!-- <link rel="stylesheet" href="../../style.css"> -->
+</head>
+
+<body>
+
+    <!-- 1. Header & Sidebar Placeholder -->
+    <div id="app-header"></div>
+
+    <!-- 2. Main Content -->
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <!-- Data-i18n keys should be defined in your page script below -->
+                <h1 data-i18n="tool_title">Tool Name</h1>
+                <p data-i18n="tool_desc">Tool Description goes here.</p>
+            </div>
+            <!-- Language Switcher auto-injected here -->
+        </div>
+
+        <!-- Tool Interface -->
+        <div class="tool-view active" style="display:block; max-width:800px; margin:0 auto">
+
+            <!-- Example Input -->
+            <div class="field">
+                <label data-i18n="input_label">Input Label</label>
+                <input type="text" id="myInput" placeholder="...">
+            </div>
+
+            <!-- Action Button -->
+            <button class="run-btn" onclick="runMyTool()" data-i18n="action_btn">Execute</button>
+
+            <!-- Result Area -->
+            <div class="output-area" id="output" style="display:none">
+                <div class="output-val" id="outputVal"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 3. Footer Placeholder -->
+    <div id="app-footer"></div>
+
+    <!-- 4. Global Logic -->
+    <!-- Adjust path if your file is in a different Folder Depth! -->
+    <!-- Root: ./global.js | /tools/cat/: ../../global.js -->
+    <script src="../../global.js"></script>
+
+    <!-- 5. Page Specific Logic -->
+    <script>
+        // A. Translations
+        const pageDict = {
+            'ar': {
+                'tool_title': 'اسم الأداة',
+                'tool_desc': 'وصف الأداة هنا',
+                'input_label': 'ادخل النص',
+                'action_btn': 'تشغيل'
+            },
+            'en': {
+                'tool_title': 'Tool Name',
+                'tool_desc': 'Tool Description',
+                'input_label': 'Enter Text',
+                'action_btn': 'Run'
+            }
+        };
+
+        // B. Apply Translations on Load
+        window.addEventListener('scroll', () => { /* Hook if needed */ });
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang;
+            const dict = pageDict[lang] || pageDict['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerText = dict[key];
+            });
+        });
+
+        // C. Logic
+        function runMyTool() {
+            const val = document.getElementById('myInput').value;
+            if (!val) return alert('Input required');
+
+            document.getElementById('output').style.display = 'block';
+            document.getElementById('outputVal').innerText = "Result: " + val.toUpperCase();
+        }
+    </script>
+</body>
+
+</html>

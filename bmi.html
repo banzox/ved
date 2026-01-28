@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Shared Sidebar -->
+    <nav class="sidebar">
+        <a href="index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item"><i>🏠</i> <span data-i18n="home">الرئيسية</span></a>
+            <a href="student.html" class="nav-item"><i>📝</i> <span data-i18n="student">نصوص وطلاب</span></a>
+            <a href="math.html" class="nav-item active"><i>🔢</i> <span data-i18n="math">حساب ومال</span></a>
+            <a href="conv.html" class="nav-item"><i>🔄</i> <span data-i18n="conv">تحويلات</span></a>
+            <a href="dev.html" class="nav-item"><i>💻</i> <span data-i18n="dev">مطورين</span></a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="header-area">
+            <div class="page-info">
+                <h1 data-i18n="bmi_title">حاسبة كتلة الجسم (BMI)</h1>
+                <p data-i18n="bmi_desc">احسب وزنك المثالي وتعرف على حالتك الصحية.</p>
+            </div>
+            <!-- Language Switcher will be injected here by global.js -->
+        </div>
+
+        <!-- Tool Container -->
+        <div class="tool-view active" style="display:block; max-width:600px; margin:0 auto;">
+            <div class="field">
+                <label data-i18n="weight">الوزن (كجم)</label>
+                <input type="number" id="weight" placeholder="مثال: 70">
+            </div>
+            <div class="field">
+                <label data-i18n="height">الطول (سم)</label>
+                <input type="number" id="height" placeholder="مثال: 170">
+            </div>
+
+            <button class="run-btn" onclick="calculateBMI()" data-i18n="calc">احسب</button>
+
+            <div class="output-area" id="resultBox" style="display:none; margin-top:20px;">
+                <label data-i18n="result">النتيجة:</label>
+                <div class="output-val" id="bmiValue"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load Global Logic First -->
+    <script src="global.js"></script>
+
+    <!-- Tool Specific Logic -->
+    <script>
+        // Page Specific Dictionary
+        const pageDict = {
+            'ar': { 'bmi_title': 'حاسبة كتلة الجسم', 'bmi_desc': 'اعرف وزنك المثالي', 'weight': 'الوزن (كجم)', 'height': 'الطول (سم)', 'underweight': 'نحافة', 'normal': 'وزن طبيعي', 'overweight': 'وزن زائد' },
+            'en': { 'bmi_title': 'BMI Calculator', 'bmi_desc': 'Find your ideal weight', 'weight': 'Weight (kg)', 'height': 'Height (cm)', 'underweight': 'Underweight', 'normal': 'Normal', 'overweight': 'Overweight' }
+        };
+
+        // Hook into Global Load to apply page specifics
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = window.NextGear.lang; // From global.js
+            const dict = pageDict[lang] || pageDict['en'];
+
+            // Apply specific translations
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerText = dict[key];
+            });
+        });
+
+        function calculateBMI() {
+            const w = parseFloat(document.getElementById('weight').value);
+            const h = parseFloat(document.getElementById('height').value) / 100; // Convert to meters
+
+            if (!w || !h) return alert('الرجاء إدخال البيانات');
+
+            const bmi = (w / (h * h)).toFixed(1);
+            let status = '';
+
+            const lang = window.NextGear.lang;
+            const dict = pageDict[lang] || pageDict['en'];
+
+            if (bmi < 18.5) status = dict['underweight'];
+            else if (bmi < 25) status = dict['normal'];
+            else status = dict['overweight'];
+
+            const resultDiv = document.getElementById('resultBox');
+            const valDiv = document.getElementById('bmiValue');
+
+            resultDiv.style.display = 'block';
+            valDiv.innerHTML = `<span style="font-size:2rem;color:${bmi < 25 && bmi > 18.5 ? 'green' : 'red'}">${bmi}</span> <br> ${status}`;
+        }
+    </script>
+</body>
+
+</html>
