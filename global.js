@@ -86,7 +86,7 @@
 
     // --- 2. i18n Setup ---
     const supportedLangs = ['ar', 'en', 'es', 'fr', 'pt', 'ru', 'tr', 'id', 'de', 'hi'];
-    const currentLang = localStorage.getItem('ng_lang') || 'ar';
+    const currentLang = (localStorage.getItem('ng_lang') || 'ar').toLowerCase();
     const isRTL = ['ar', 'he', 'fa', 'ur'].includes(currentLang);
 
     document.documentElement.lang = currentLang;

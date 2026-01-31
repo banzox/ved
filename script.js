@@ -2162,12 +2162,13 @@ function showToast(msg) {
 }
 
 // --- i18n Engine ---
-let currentLang = localStorage.getItem('ng_lang') || 'ar';
+let currentLang = (localStorage.getItem('ng_lang') || 'ar').toLowerCase();
 let translations = {};
 
 async function loadLanguage(lang) {
     try {
-        const res = await fetch(`locales/${lang}.json`);
+        const root = window.NextGear && window.NextGear.root ? window.NextGear.root : './';
+        const res = await fetch(`${root || './'}locales/${lang.toLowerCase()}.json`);
         if (!res.ok) throw new Error('Lang file not found');
         translations = await res.json();
         currentLang = lang;
