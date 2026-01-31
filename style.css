@@ -45,6 +45,13 @@ body {
     transition: width 0.3s;
 }
 
+[dir="ltr"] .sidebar {
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 1px solid #e2e8f0;
+}
+
 .brand {
     font-size: 24px;
     font-weight: 800;
@@ -125,6 +132,11 @@ body {
     transition: margin-right 0.3s, width 0.3s;
 }
 
+[dir="ltr"] .main {
+    margin-right: 0;
+    margin-left: var(--sidebar-w);
+}
+
 .header-area {
     display: flex;
     justify-content: space-between;
@@ -178,9 +190,11 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    height: 180px;
+    min-height: 180px;
+    height: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .tool-card:hover {
@@ -423,7 +437,8 @@ body {
 
 /* --- Active Tool View (Replaces Modal) --- */
 .tool-view {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     background: white;
     border-radius: var(--card-radius);
     padding: 32px;
@@ -472,6 +487,13 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

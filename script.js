@@ -2187,10 +2187,25 @@ function applyLanguage() {
     // 2. Static UI Elements
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
-        if (translations.ui && translations.ui[key]) {
-            el.innerText = translations.ui[key];
+        // Check UI, Categories, or Tools for translation
+        let txt = (translations.ui && translations.ui[key]) ||
+            (translations.categories && translations.categories[key]) ||
+            (translations.tools && translations.tools[key] && translations.tools[key].n);
+
+        // Handle mapped category keys if named differently (e.g. cat_vid -> categories.video)
+        if (!txt && key.startsWith('cat_')) {
+            const shortKey = key.replace('cat_', '');
+            txt = translations.categories && translations.categories[shortKey];
+        }
+        if (!txt && key.startsWith('desc_')) {
+            const shortKey = key.replace('desc_', '');
+            // descriptions aren't clearly mapped in categories object, but we can try
+        }
+
+        if (txt) {
+            el.innerText = txt;
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = translations.ui[key];
+                el.placeholder = txt;
             }
         }
     });
@@ -2219,18 +2234,19 @@ function applyLanguage() {
 // Initialize i18n
 window.addEventListener('load', () => {
     // Inject Language Selector if not present
-    if (!document.querySelector('.lang-select')) {
-        const header = document.querySelector('.header-content');
+    if (!document.querySelector('.lang-select') && !document.getElementById('global-lang-select')) {
+        const header = document.querySelector('.header-content') || document.querySelector('.header-area');
         if (header) {
             const sel = document.createElement('select');
             sel.className = 'lang-select';
+            sel.id = 'script-lang-select';
             sel.style.cssText = "margin: 0 15px; padding: 5px; border-radius: 5px; border: 1px solid #ccc; background: white; color: #333;";
             sel.innerHTML = `
                 <option value="ar">🇸🇦 العربية</option>
                 <option value="en">🇺🇸 English</option>
                 <option value="es">🇪🇸 Español</option>
                 <option value="fr">🇫🇷 Français</option>
-                <option value="pt">🇵🇹 Português</option>
+                <option value="pt">🇵تالبرتغالية</option>
                 <option value="ru">🇷🇺 Русский</option>
                 <option value="tr">🇹🇷 Türkçe</option>
                 <option value="id">🇮🇩 Indonesia</option>
@@ -2240,7 +2256,7 @@ window.addEventListener('load', () => {
             sel.value = currentLang;
             sel.onchange = (e) => loadLanguage(e.target.value);
 
-            const search = document.querySelector('.search-box');
+            const search = document.querySelector('.search-box') || document.querySelector('.search');
             if (search) {
                 header.insertBefore(sel, search);
             } else {

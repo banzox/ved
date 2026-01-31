@@ -106,13 +106,24 @@
             'conv': 'Converters', 'dev': 'Developers', 'social': 'Social Media',
             'files': 'Files API', 'games': 'Games', 'pro': 'Upgrade Pro',
             'search': 'Search...', 'footer_copy': 'All rights reserved © NextGear 2026',
-            'privacy': 'Privacy Policy', 'contact': 'Contact Us'
+            'privacy': 'Privacy Policy', 'contact': 'Contact Us',
+            'home_title': 'Welcome 👋', 'home_desc': 'The largest collection of free Arabic tools (100+ tools).',
+            'cat_vid': 'Video', 'cat_aud': 'Audio', 'cat_pdf': 'PDF Tools',
+            'cat_conv': 'Converters', 'cat_decor': 'Decoration', 'cat_math': 'Math',
+            'cat_student': 'Student', 'cat_game': 'Games'
+        },
+        'ar': {
+            'home_title': 'مرحباً بك 👋', 'home_desc': 'أكبر مكتبة أدوات عربية مجانية (100+ أداة).',
+            'cat_vid': 'فيديو', 'cat_aud': 'صوتيات', 'cat_pdf': 'أدوات PDF',
+            'cat_conv': 'محولات', 'cat_decor': 'زخرفة', 'cat_math': 'حساب',
+            'cat_student': 'نصوص وطلاب', 'cat_game': 'ألعاب'
         }
     };
 
     function t(key) {
         const langDict = commonDict[currentLang] || commonDict['en'];
-        return langDict[key] || commonDict['en'][key] || key;
+        const val = langDict[key] || commonDict['en'][key];
+        return val; // Returns undefined if not found
     }
 
     // --- 4. Layout Injection ---
@@ -178,8 +189,11 @@
     function translateAll() {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            el.innerText = t(key);
-            if (el.tagName === 'INPUT') el.placeholder = t(key);
+            const translation = t(key);
+            if (translation) {
+                el.innerText = translation;
+                if (el.tagName === 'INPUT') el.placeholder = translation;
+            }
         });
     }
 
@@ -195,7 +209,8 @@
 
         const flags = {
             'ar': '🇸🇦 العربية', 'en': '🇺🇸 English', 'es': '🇪🇸 Español',
-            'fr': '🇫🇷 Français', 'pt': '🇵🇹 Português', 'ru': '🇷🇺 Русский'
+            'fr': '🇫🇷 Français', 'pt': '🇵🇹 Português', 'ru': '🇷🇺 Русский',
+            'tr': '🇹🇷 Türkçe', 'id': '🇮🇩 Indonesia', 'de': '🇩🇪 Deutsch', 'hi': '🇮🇳 हिन्दी'
         };
 
         Object.keys(flags).forEach(code => {
@@ -206,6 +221,7 @@
             sel.appendChild(opt);
         });
 
+        sel.className = 'lang-select';
         sel.addEventListener('change', (e) => {
             localStorage.setItem('ng_lang', e.target.value);
             window.location.reload();
