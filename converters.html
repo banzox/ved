@@ -2,15 +2,11 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <!DOCTYPE html>
-    <html lang="ar" dir="rtl">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>NextGear | المحولات</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGear | المحولات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
     <div id="app-header"></div>
@@ -24,30 +20,10 @@
         <div class="grid" id="grid"></div>
     </main>
 
-    <!-- Modal -->
-    <div class="modal-wrap" id="modal">
-        <div class="modal">
-            <div class="modal-head">
-                <div class="modal-title" id="mTitle"></div>
-                <button class="pro-btn" style="width:auto;background:#cbd5e1;color:#333"
-                    onclick="closeModal()">✕</button>
-            </div>
-            <div id="mInputs"></div>
-            <button class="run-btn" onclick="runTool()">تحويل 🚀</button>
-            <div class="output-area" id="mOutBox">
-                <div class="output-val" id="mOutVal"></div>
-            </div>
-        </div>
-    </div>
-
     <div id="app-footer"></div>
     <script src="global.js"></script>
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            initPage('conv');
-        });
-    </script>
+    <script>initPage('conv');</script>
 </body>
 
 </html>

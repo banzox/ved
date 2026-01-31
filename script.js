@@ -10,7 +10,7 @@ async function loadTools() {
     tools = [
         {
             "id": "yt_thumb",
-            "cat": "video",
+            "cat": "social",
             "url": "tools/video/thumb.html",
             "name": "صورة يوتيوب",
             "icon": "🖼️",
@@ -479,6 +479,194 @@ async function loadTools() {
             ]
         },
         {
+            "id": "cnt",
+            "cat": "student",
+            "name": "عداد الكلمات",
+            "icon": "📝",
+            "desc": "Word & Char Counter",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "rev",
+            "cat": "student",
+            "name": "عكس النص",
+            "icon": "🔄",
+            "desc": "Text Reverser",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "bin",
+            "cat": "student",
+            "name": "تحويل ثنائي",
+            "icon": "🔢",
+            "desc": "Binary Encoder",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "rep",
+            "cat": "student",
+            "name": "مكرر النصوص",
+            "icon": "🔁",
+            "desc": "Text Repeater",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                },
+                {
+                    "n": "cnt",
+                    "l": "عدد المرات",
+                    "t": "number",
+                    "d": 10
+                }
+            ]
+        },
+        {
+            "id": "slug",
+            "cat": "student",
+            "name": "مولد الروابط",
+            "icon": "🔗",
+            "desc": "Slug Generator",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "العنوان",
+                    "t": "text"
+                }
+            ]
+        },
+        {
+            "id": "cln",
+            "cat": "student",
+            "name": "منظف النصوص",
+            "icon": "🧹",
+            "desc": "Remove extra spaces",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "eml",
+            "cat": "student",
+            "name": "استخراج الإيميلات",
+            "icon": "📧",
+            "desc": "Extract emails from text",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "url",
+            "cat": "student",
+            "name": "استخراج الروابط",
+            "icon": "🔗",
+            "desc": "Extract URLs from text",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "num",
+            "cat": "student",
+            "name": "استخراج الأرقام",
+            "icon": "🔢",
+            "desc": "Extract numbers from text",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "wpm",
+            "cat": "student",
+            "name": "وقت القراءة",
+            "icon": "⏱️",
+            "desc": "Estimated reading time",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "remdup",
+            "cat": "student",
+            "name": "حذف التكرار",
+            "icon": "🚫",
+            "desc": "Remove duplicate lines",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "txt_sort",
+            "cat": "student",
+            "name": "ترتيب الأسطر",
+            "icon": "📉",
+            "desc": "Sort lines alphabetically",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
+            "id": "txt_shuf",
+            "cat": "student",
+            "name": "بعثرة الأسطر",
+            "icon": "🎲",
+            "desc": "Shuffle lines",
+            "inputs": [
+                {
+                    "n": "txt",
+                    "l": "النص",
+                    "t": "textarea"
+                }
+            ]
+        },
+        {
             "id": "c_len",
             "cat": "conv",
             "name": "محول الطول",
@@ -799,7 +987,6 @@ async function loadTools() {
         {
             "id": "loan",
             "cat": "math",
-            "cat": "math",
             "url": "tools/math/loan.html",
             "name": "القسط الشهري",
             "icon": "🏦",
@@ -833,7 +1020,6 @@ async function loadTools() {
         },
         {
             "id": "disc",
-            "cat": "math",
             "cat": "math",
             "url": "tools/math/discount.html",
             "name": "حاسبة الخصم",
@@ -873,7 +1059,6 @@ async function loadTools() {
         },
         {
             "id": "zak",
-            "cat": "math",
             "cat": "math",
             "url": "tools/math/zakat.html",
             "name": "حاسبة الزكاة",
@@ -997,6 +1182,28 @@ async function loadTools() {
             "icon": "😂",
             "desc": "اضحك من قلبك",
             "inputs": []
+        },
+        {
+            "id": "xo",
+            "cat": "game",
+            "name": "لعبة X-O",
+            "icon": "❌",
+            "desc": "Tic Tac Toe",
+            "inputs": []
+        },
+        {
+            "id": "ig_prof",
+            "cat": "social",
+            "name": "بروفايل انستقرام",
+            "icon": "📸",
+            "desc": "تحميل صورة البروفايل",
+            "inputs": [
+                {
+                    "n": "user",
+                    "l": "اسم المستخدم",
+                    "t": "text"
+                }
+            ]
         },
         {
             "id": "fact",
@@ -1477,100 +1684,165 @@ async function loadTools() {
     };
 }
 
-// --- Worker Handler ---
-function handlePDF(id, data) {
-    return new Promise((resolve) => {
-        worker.onmessage = function (e) {
-            const { result, type } = e.data;
-            if (type === 'pdf') {
-                const blob = new Blob([result], { type: 'application/pdf' });
-                const url = URL.createObjectURL(blob);
-                resolve(`<iframe src="${url}" style="width:100%;height:500px;border:none"></iframe><br><a href="${url}" download="document.pdf" class="pro-btn" style="display:inline-block;margin-top:10px">تحميل PDF</a>`);
-            } else {
-                resolve(result);
-            }
-        };
-        worker.postMessage({ id, data });
-    });
-}
+// --- Global Worker Response Handler ---
+worker.onmessage = function (e) {
+    const { id, result, type } = e.data;
+    const out = document.getElementById('mOutVal');
+    const box = document.getElementById('mOutBox');
 
-function handleImageWorker(id, bmp) {
-    return new Promise((resolve) => {
-        worker.onmessage = function (e) {
-            const { result } = e.data;
-            if (result instanceof ImageBitmap) {
-                const cvs = document.createElement('canvas');
-                cvs.width = result.width;
-                cvs.height = result.height;
-                const ctx = cvs.getContext('2d');
-                ctx.drawImage(result, 0, 0);
-                resolve(cvs);
+    if (!out || !box) return;
 
-                worker.onmessage = function (ev) {
-                    const { result: res } = ev.data;
-                    const out = document.getElementById('mOutVal');
-                    out.innerText = res;
-                    document.getElementById('mOutBox').style.display = 'block';
-                };
-            } else {
-                resolve(result);
-            }
-        };
-        worker.postMessage({ id, data: { bitmap: bmp } }, [bmp]);
-    });
-}
+    if (type === 'pdf') {
+        const blob = new Blob([result], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        out.innerHTML = `<iframe src="${url}" style="width:100%;height:500px;border:none;border-radius:12px;box-shadow:var(--shadow-lg);"></iframe><br><a href="${url}" download="document.pdf" class="run-btn" style="display:inline-block;margin-top:20px;width:auto;padding:12px 24px;">📥 تحميل PDF</a>`;
+    } else if (result instanceof ImageBitmap) {
+        const cvs = document.createElement('canvas');
+        cvs.width = result.width;
+        cvs.height = result.height;
+        const ctx = cvs.getContext('2d');
+        ctx.drawImage(result, 0, 0);
+        out.innerHTML = '';
+        out.appendChild(cvs);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = cvs.toDataURL('image/png');
+        downloadLink.download = 'processed_image.png';
+        downloadLink.className = 'run-btn';
+        downloadLink.style.cssText = 'display:inline-block;margin-top:20px;width:auto;padding:12px 24px;';
+        downloadLink.innerText = '📥 تحميل الصورة';
+        out.appendChild(document.createElement('br'));
+        out.appendChild(downloadLink);
+    } else {
+        out.innerText = result;
+    }
+    box.style.display = 'block';
+};
 
 const engine = {
     // --- Video ---
     'yt_thumb': async (d) => {
-        // Smart Regex for all YouTube URL types (Shorts, Embed, Mobile, Console)
         const idMatch = d.url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-        if (!idMatch || !idMatch[1]) return '<div style="color:red;font-weight:bold">❌ عذراً، الرابط غير صحيح. تأكد من نسخ رابط فيديو يوتيوب صالح.</div>';
-
+        if (!idMatch || !idMatch[1]) return '<div style="color:red;font-weight:bold">❌ Invalid Link</div>';
         const vid = idMatch[1];
         const qualities = [
-            { name: 'Max HD (1080p)', key: 'maxresdefault.jpg' },
-            { name: 'High (720p)', key: 'sddefault.jpg' }, // sd is often best alternative
-            { name: 'Medium (480p)', key: 'hqdefault.jpg' },
-            { name: 'Standard (360p)', key: 'mqdefault.jpg' }
+            { name: 'Max HD', key: 'maxresdefault.jpg' },
+            { name: 'High', key: 'sddefault.jpg' },
+            { name: 'Medium', key: 'hqdefault.jpg' }
         ];
-
-        let html = `<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:15px;margin-top:15px;">`;
-
+        let html = `<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:15px;margin-top:15px;">`;
         for (const q of qualities) {
             const imgUrl = `https://img.youtube.com/vi/${vid}/${q.key}`;
-            html += `
-            <div style="background:#f8fafc;padding:10px;border-radius:10px;border:1px solid #e2e8f0;text-align:center">
-                <img src="${imgUrl}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-bottom:8px" onload="this.style.opacity=1" onerror="this.src='https://via.placeholder.com/320x180?text=Not+Available';this.style.opacity=0.5">
-                <div style="font-weight:bold;margin-bottom:5px;font-size:0.9rem">${q.name}</div>
-                <button onclick="downloadYTImage('${imgUrl}', '${vid}_${q.name.split(' ')[0]}')" class="pro-btn" style="width:100%;padding:5px 0;font-size:0.85rem">📥 تحميل مباشر</button>
+            html += `<div style="background:var(--bg-card);padding:10px;border-radius:12px;border:1px solid var(--glass-border);text-align:center">
+                <img src="${imgUrl}" style="width:100%;border-radius:8px;margin-bottom:8px">
+                <div style="font-weight:bold;margin-bottom:5px;">${q.name}</div>
+                <a href="${imgUrl}" target="_blank" download="thumb.jpg" class="pro-btn" style="padding:5px 10px;font-size:0.8rem">📥 Download</a>
             </div>`;
         }
-        html += `</div>`;
-        return html;
+        return html + `</div>`;
     },
-    'vid_aud': () => "⚠️ يتطلب هذا الأمر معالجة خادم (FFmpeg Server-side).",
-    'vid_aud': () => "🎵 استخراج الصوت يتطلب إعادة ترميز (FFmpeg). جرب تسجيل الصوت أثناء التشغيل!",
-    'vid_trim': () => "✂️ يتطلب القص إعادة بناء الملف. (هذه الميزة تحتاج سيرفر)",
-    'vid_mute': () => "🔇 كتم الصوت يتطلب معالجة الفيديو بالكامل.",
-    'vid_info': (d) => `المقاس: ${(d.file.size / 1024 / 1024).toFixed(2)} MB\nالنوع: ${d.file.type}\nالاسم: ${d.file.name}`,
-    'vid_spd': () => "⏩ لتغيير السرعة، استخدم مشغل الفيديو المتقدم.",
-    'vid_gif': () => "🎞️ تحويل GIF يتطلب موارد معالجة عالية.",
-    'vid_pic': (d) => window.captureVideoFrame(d.file, d.t).then(res => res ? `<img src="${res}" style="max-width:100%"><br><a href="${res}" download="frame.jpg" class="pro-btn">تحميل الصورة</a>` : 'فشل التقاط الصورة'),
-    'vid_rot': () => "💫 التدوير متاح في قسم تعديل الصور بعد الالتقاط.",
-    'vid_mir': () => "↔️ العكس متاح في قسم الصور.",
+    'vid_info': (d) => {
+        return new Promise(resolve => {
+            const v = document.createElement('video');
+            v.src = URL.createObjectURL(d.file);
+            v.onloadedmetadata = () => {
+                resolve(`
+                    <div style="text-align:left; font-family:monospace; padding:15px; background:rgba(0,0,0,0.2); border-radius:12px;">
+                        <b>File:</b> ${d.file.name}<br>
+                        <b>Size:</b> ${(d.file.size / 1024 / 1024).toFixed(2)} MB<br>
+                        <b>Type:</b> ${d.file.type}<br>
+                        <b>Resolution:</b> ${v.videoWidth}x${v.videoHeight}<br>
+                        <b>Duration:</b> ${v.duration.toFixed(2)}s
+                    </div>
+                `);
+            };
+        });
+    },
+    'aud_info': (d) => {
+        return new Promise(resolve => {
+            const a = new Audio();
+            a.src = URL.createObjectURL(d.file);
+            a.onloadedmetadata = () => {
+                resolve(`
+                    <div style="text-align:left; font-family:monospace; padding:15px; background:rgba(0,0,0,0.2); border-radius:12px;">
+                        <b>File:</b> ${d.file.name}<br>
+                        <b>Size:</b> ${(d.file.size / 1024 / 1024).toFixed(2)} MB<br>
+                        <b>Type:</b> ${d.file.type}<br>
+                        <b>Duration:</b> ${a.duration.toFixed(2)}s
+                    </div>
+                `);
+            };
+        });
+    },
+    'vid_pic': (d) => {
+        return new Promise((resolve) => {
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(d.file);
+            video.onloadedmetadata = () => {
+                video.currentTime = Math.min(d.t || 1, video.duration);
+                video.onseeked = () => {
+                    const cvs = document.createElement('canvas');
+                    cvs.width = video.videoWidth; cvs.height = video.videoHeight;
+                    cvs.getContext('2d').drawImage(video, 0, 0);
+                    const res = cvs.toDataURL('image/jpeg');
+                    resolve(`<img src="${res}" style="max-width:100%"><br><a href="${res}" download="frame.jpg" class="pro-btn">📥 Download Frame</a>`);
+                };
+            };
+        });
+    },
+    'vid_aud': () => "⚠️ Audio extraction requires server-side processing (FFmpeg).",
+    'vid_trim': () => "✂️ Video trimming requires server-side processing.",
+    'vid_mute': () => "🔇 Muting video requires server-side processing.",
+    'vid_spd': () => "⏩ Speed change requires advanced video player.",
+    'vid_gif': () => "🎞️ GIF conversion requires high processing resources.",
+    'vid_rot': () => "💫 Rotation available in image editing after capture.",
+    'vid_mir': () => "↔️ Mirroring available in image editing.",
 
     // --- Audio ---
     'tts': (d) => {
-        if (!window.speechSynthesis) return 'غير مدعوم';
+        if (!window.speechSynthesis) return 'Not Supported';
         const u = new SpeechSynthesisUtterance(d.txt);
         u.lang = d.lang || 'ar-SA';
         speechSynthesis.speak(u);
-        return 'جاري القراءة... 🔊';
+        return '🔊 Playing...';
     },
-    'aud_rec': () => window.startRecording() ? '🔴 جاري التسجيل... اضغط "إيقاف" عند الانتهاء.' : 'فشل بدء التسجيل',
-    'aud_rev': () => "🔙 عكس الصوت يتطلب معالجة ثقيلة.",
-    'aud_gen': (d) => { window.playTone(d.hz, 3); return `🔊 تشغيل تردد ${d.hz}Hz لمدة 3 ثواني`; },
+    'aud_rec': () => {
+        if (window.isRecording) {
+            window.stopRecording();
+            window.isRecording = false;
+            return "Stopped.";
+        } else {
+            window.startRecording();
+            window.isRecording = true;
+            return "🔴 Recording...";
+        }
+    },
+    'aud_bpm': () => {
+        window.bpmTaps = window.bpmTaps || [];
+        const now = Date.now();
+        window.bpmTaps.push(now);
+        if (window.bpmTaps.length > 8) window.bpmTaps.shift();
+
+        let bpm = 0;
+        if (window.bpmTaps.length > 1) {
+            const diffs = [];
+            for (let i = 1; i < window.bpmTaps.length; i++) {
+                diffs.push(window.bpmTaps[i] - window.bpmTaps[i - 1]);
+            }
+            const avg = diffs.reduce((a, b) => a + b) / diffs.length;
+            bpm = Math.round(60000 / avg);
+        }
+
+        return `
+            <div style="text-align:center; padding:30px;">
+                <div style="font-size:64px; font-weight:800; color:var(--primary); margin-bottom:20px;">${bpm || '--'}</div>
+                <div style="font-size:18px; margin-bottom:30px; opacity:0.7;">BPM (Beats Per Minute)</div>
+                <button class="run-btn" style="width:200px; height:200px; border-radius:50%; font-size:24px;" 
+                    onclick="event.stopPropagation(); document.getElementById('mOutVal').innerHTML = engine.aud_bpm()">TAP</button>
+            </div>
+        `;
+    },
+    'aud_gen': (d) => { window.playTone(d.hz, 3); return `🔊 Tone ${d.hz}Hz (3s)`; },
+    'aud_rev': () => "🔙 Reversing audio requires heavy processing.",
 
     // --- Image Tools (Client Side Canvas) ---
     'img_res': (d) => processImage(d.img, (ctx, cvs, img) => {
@@ -1581,7 +1853,6 @@ const engine = {
         return cvs.toDataURL('image/jpeg', 0.9);
     }),
     'img_crop': (d) => processImage(d.img, (ctx, cvs, img) => {
-        // Simple Center Crop (Square)
         const size = Math.min(img.width, img.height);
         cvs.width = size;
         cvs.height = size;
@@ -1592,7 +1863,7 @@ const engine = {
         cvs.width = img.width;
         cvs.height = img.height;
         ctx.drawImage(img, 0, 0);
-        return cvs.toDataURL('image/jpeg', 0.5); // High Compression
+        return cvs.toDataURL('image/jpeg', 0.5);
     }),
     'img_conv': (d) => processImage(d.img, (ctx, cvs, img) => {
         cvs.width = img.width;
@@ -1624,7 +1895,7 @@ const engine = {
         ctx.drawImage(img, -img.width / 2, -img.height / 2);
         return cvs.toDataURL('image/jpeg');
     }),
-    'img_bg': () => "🎭 حذف الخلفية يحتاج AI Server (Remove.bg API).",
+    'img_bg': () => "🎭 Background removal needs AI Server (Remove.bg API).",
     'img_wat': (d) => processImage(d.img, (ctx, cvs, img) => {
         cvs.width = img.width;
         cvs.height = img.height;
@@ -1635,6 +1906,13 @@ const engine = {
         ctx.fillText('NextGear', cvs.width / 2, cvs.height / 2);
         return cvs.toDataURL('image/jpeg');
     }),
+    'img_b64': (d) => {
+        return new Promise((resolve) => {
+            const r = new FileReader();
+            r.onload = (e) => resolve(`<textarea rows="8" style="width:100%;background:#000;color:#0f0;">${e.target.result}</textarea>`);
+            r.readAsDataURL(d.img);
+        });
+    },
 
     // --- Misc ---
     'misc_pass': (d) => {
@@ -1643,73 +1921,49 @@ const engine = {
         for (let i = 0; i < (d.l || 16); i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
         return pass;
     },
-    'misc_uuid': () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    }),
-    'misc_qr': (d) => `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(d.t)}" style="border:5px solid white;box-shadow:0 5px 15px rgba(0,0,0,0.1)">`,
-    'misc_ip': () => { fetch('https://api.ipify.org?format=json').then(r => r.json()).then(j => alert('IP: ' + j.ip)); return 'جاري جلب IP...'; },
-    'misc_ua': () => navigator.userAgent,
-    'misc_stop': () => { window.toggleStopwatch(); return `<div id="stopwatch" style="font-size:3rem;font-weight:bold;font-variant-numeric:tabular-nums">00:00:00</div><button onclick="window.resetStopwatch()" class="pro-btn" style="background:#ef4444">تصفير</button>`; },
-    'misc_time': () => new Date().toLocaleTimeString(),
-    'misc_date': (d) => {
-        const diff = Math.abs(new Date(d.d2) - new Date(d.d1));
-        return Math.ceil(diff / (1000 * 60 * 60 * 24)) + ' يوم';
+    'misc_uuid': () => crypto.randomUUID(),
+    'misc_qr': (d) => `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(d.t)}" style="border:10px solid white;border-radius:12px;">`,
+    'misc_ip': async () => {
+        try {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            return `📍 Your Public IP: <span style="color:var(--primary); font-family:monospace; font-size:1.5rem;">${data.ip}</span>`;
+        } catch (e) { return "❌ Could not fetch IP"; }
     },
-    'misc_count': (d) => {
-        // Simple countdown logic simulation
-        return `⏰ تم ضبط المؤقت لمدة ${d.m} دقيقة (محاكاة)`;
+    'misc_ua': () => `<div style="padding:20px; background:rgba(0,0,0,0.2); border-radius:12px; font-family:monospace; font-size:13px; line-height:1.6;">${navigator.userAgent}</div>`,
+    'misc_stop': () => {
+        setTimeout(() => window.toggleStopwatch(), 10);
+        return `<div id="stopwatch" style="font-size:4rem; font-weight:800; color:var(--primary); margin:20px 0;">00:00.00</div>
+                <div style="display:flex; justify-content:center; gap:10px;">
+                    <button onclick="window.resetStopwatch()" class="back-btn">Reset</button>
+                </div>`;
     },
-    'misc_lorem': (d) => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.".repeat(d.n || 1),
-    'tts': (d) => { speakText(d.txt, 'ar-SA'); return "جاري النطق..."; },
-    'aud_rec': () => {
-        if (window.isRecording) {
-            stopRecording();
-            window.isRecording = false;
-            return "تم إيقاف التسجيل. جاري المعالجة...";
-        } else {
-            startRecording().then(ok => {
-                if (ok) {
-                    window.isRecording = true;
-                    document.querySelector('#mOutVal').innerText = "🔴 جاري التسجيل... اضغط تشغيل مرة أخرى للإيقاف";
-                }
-            });
-            return "جاري بدء التسجيل...";
+    'c_cur': (d) => {
+        const rates = { SAR: 3.75, EUR: 0.92, EGP: 48.5, KWD: 0.31 };
+        let html = `<div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px;">`;
+        for (const [code, rate] of Object.entries(rates)) {
+            html += `<div style="padding:15px; background:var(--bg-card); border:1px solid var(--glass-border); border-radius:12px; text-align:center;">
+                        <div style="color:var(--text-muted); font-size:12px;">${code}</div>
+                        <div style="font-size:20px; font-weight:700;">${(d.v * rate).toFixed(2)}</div>
+                    </div>`;
         }
+        return html + `</div>`;
     },
-    'aud_gen': (d) => { playTone(d.f, d.d); return `تشغيل ${d.hz}Hz لمدة ${d.s} ثانية`; },
-
-    // --- PDF ---
-    'txt2pdf': (d) => ({ id: 'txt2pdf', txt: d.txt }),
-    'img2pdf': (d) => "Image to PDF handling in worker...", // Simplified for now
-    'pdf_mrg': (d) => {
-        const f1 = document.getElementById('inp_f1').files[0];
-        const f2 = document.getElementById('inp_f2').files[0];
-        if (!f1 || !f2) return "يرجى اختيار ملفين";
-        worker.postMessage({ id: 'pdf_mrg', data: { files: [f1, f2] } });
-        return "جاري دمج الملفات...";
+    'c_spd': (d) => {
+        const mph = (d.v * 0.621).toFixed(1);
+        const ms = (d.v / 3.6).toFixed(1);
+        const knot = (d.v / 1.852).toFixed(1);
+        return `<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="stat-box"><b>MPH</b><br>${mph}</div>
+                    <div class="stat-box"><b>M/S</b><br>${ms}</div>
+                    <div class="stat-box"><b>Knot</b><br>${knot}</div>
+                </div>`;
     },
-    'pdf_spl': () => "Use Preview to Delete Pages (Split Logic Pending)",
-    'pdf_inf': (d) => `الملف: ${d.f ? d.f.name : '-'}`,
-    'pdf_wat': () => "Wait for Canvas Implementation",
-    'pdf_rot': () => "Wait for PDF-Lib Rotation",
-    'pdf_lock': () => "Wait for Encryption Implementation",
-    'pdf_meta': () => "Wait for Metadata Implementation",
-    'pdf_clr': (d) => {
-        const file = document.getElementById('inp_f').files[0];
-        if (!file) return "الرجاء اختيار ملف PDF أولاً";
-        openPdfSelector(file, 'delete');
-        return "جاري تحليل الملف...";
-    },
-
-    // --- Converters ---
-    'c_len': (d) => `KM: ${d.v / 1000} | CM: ${d.v * 100} | Inch: ${(d.v * 39.37).toFixed(2)}`,
-    'c_wgt': (d) => `Gram: ${d.v * 1000} | Lbs: ${(d.v * 2.204).toFixed(2)}`,
-    'c_tmp': (d) => `F: ${(d.v * 1.8 + 32).toFixed(1)} | K: ${(Number(d.v) + 273.15).toFixed(1)}`,
-    'c_spd': (d) => `MPH: ${(d.v * 0.621).toFixed(1)} | M/S: ${(d.v / 3.6).toFixed(1)}`,
+    // PDF worker-handled tools should return nothing or a message that triggers the UI
+    'pdf_wat': (d) => { worker.postMessage({ id: 'pdf_wat', data: d }); return '⏳ Adding Watermark...'; },
+    'pdf_rot': (d) => { worker.postMessage({ id: 'pdf_rot', data: d }); return '⏳ Rotating Pages...'; },
     'c_tim': (d) => `Sec: ${d.v * 60} | Hr: ${(d.v / 60).toFixed(2)}`,
     'c_dig': (d) => `KB: ${d.v * 1024} | GB: ${(d.v / 1024).toFixed(3)}`,
-    'c_cur': (d) => `SAR: ${(d.v * 3.75).toFixed(2)} | EUR: ${(d.v * 0.92).toFixed(2)} (تقريبي)`,
     'c_are': (d) => `KM²: ${d.v / 1000000} | Hectare: ${d.v / 10000}`,
     'c_prs': (d) => `PSI: ${(d.v * 14.5).toFixed(2)} | Pascal: ${d.v * 100000}`,
     'c_pow': (d) => `KW: ${d.v / 1000} | HP: ${(d.v / 745.7).toFixed(2)}`,
@@ -1727,104 +1981,68 @@ const engine = {
     'd_emo': (d) => d.txt + " 😀",
 
     // --- Math ---
-    'age': (d) => calculateAge(d.bd),
+    'age': (d) => window.calculateAge ? window.calculateAge(d.bd) : 'Error',
     'bmi': (d) => { const h = d.h / 100; const b = (d.w / (h * h)).toFixed(1); return `BMI: ${b} (${b < 18.5 ? 'نحيف' : b < 25 ? 'طبيعي' : b < 30 ? 'وزن زائد' : 'سمنة'})`; },
-    'loan': (d) => `القسط: ${(d.a / d.m).toFixed(2)}`,
-    'vat': (d) => `الإجمالي: ${(d.v * 1.15).toFixed(2)}`,
-    'disc': (d) => `الصافي: ${(d.p * (1 - d.d / 100)).toFixed(2)}`,
-    'pct': (d) => `${((d.p / d.v) * 100).toFixed(1)}%`,
-    'zak': (d) => `الزكاة: ${(d.v / 40).toFixed(2)}`,
-    'gpa': () => "4.0 (يحتاج تفصيل)",
-    'sal': (d) => `الساعة: ${(d.s / 240).toFixed(2)}`,
-    'rnd': (d) => Math.floor(Math.random() * d.m),
+    'loan': (d) => `Monthly: ${(d.a / d.m).toFixed(2)}`,
+    'vat': (d) => `Total (inc 15%): ${(d.v * 1.15).toFixed(2)}`,
+    'disc': (d) => `Net Price: ${(d.p * (1 - d.d / 100)).toFixed(2)}`,
+    'pct': (d) => `Percentage: ${((d.p / d.v) * 100).toFixed(1)}%`,
+    'zak': (d) => `Zakat: ${(d.v / 40).toFixed(2)}`,
+    'gpa': (d) => {
+        const grades = d.g.split(',').map(Number);
+        if (grades.some(isNaN)) return "يرجى إدخال الدرجات مفصولة بفاصلة";
+        const avg = grades.reduce((a, b) => a + b, 0) / grades.length;
+        const gpa = (avg / 25).toFixed(2); // Mock 4.0 scale
+        return `Average: ${avg.toFixed(1)}% | GPA: ${gpa}/4.0`;
+    },
+    'sal': (d) => `Hourly: ${(d.s / 240).toFixed(2)}`,
+    'rnd': (d) => `Generated: ${Math.floor(Math.random() * d.m)}`,
+
+    // --- Social ---
+    'ig_prof': (d) => `<div style="text-align:center"><img src="https://images.weserv.nl/?url=https://www.instagram.com/${d.user}/?__a=1" style="width:150px;border-radius:50%;border:4px solid var(--primary);"><br><a href="https://www.instagram.com/${d.user}/" target="_blank" class="pro-btn" style="margin-top:10px">Open Profile</a></div>`,
 
     // --- Games ---
+    'xo': () => {
+        return `<div id="xo-game" style="display:grid;grid-template-columns:repeat(3, 80px);gap:10px;justify-content:center;margin:20px 0;">
+            ${Array(9).fill(0).map((_, i) => `<div onclick="window.playXO(this, ${i})" style="width:80px;height:80px;background:var(--bg-card);border:1px solid var(--glass-border);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;"></div>`).join('')}
+        </div><div id="xo-status" style="text-align:center;font-weight:bold;color:var(--primary);">Player X Turn</div>`;
+    },
     'rps': () => "", // Logic handled by custom UI
-    'dice': () => Math.floor(Math.random() * 6) + 1,
-    'coin': () => Math.random() > 0.5 ? 'وجه' : 'قفا',
-    'guess': (d) => { const r = Math.floor(Math.random() * 10) + 1; return d.v == r ? '🎉' : `❌ (${r})`; },
-    'love': (d) => `${Math.floor(Math.random() * 100)}% ❤️`,
-    'joke': () => window.contentDB?.jokes[Math.floor(Math.random() * window.contentDB.jokes.length)] || "...",
-    'fact': () => window.contentDB?.facts[Math.floor(Math.random() * window.contentDB.facts.length)] || "...",
-    'quote': () => window.contentDB?.quotes[Math.floor(Math.random() * window.contentDB.quotes.length)] || "...",
-    'pass': (d) => d.p.length > 8 ? 'Strong ✅' : 'Weak ⚠️',
+    'dice': () => `🎲 Result: ${Math.floor(Math.random() * 6) + 1}`,
+    'coin': () => `🪙 Result: ${Math.random() > 0.5 ? 'Heads' : 'Tails'}`,
+    'guess': (d) => { const r = Math.floor(Math.random() * 10) + 1; return d.v == r ? '🎉 Correct!' : `❌ Wrong, it was ${r}`; },
+    'love': (d) => `${Math.floor(Math.random() * 101)}% ❤️`,
+    'joke': () => window.contentDB?.jokes[Math.floor(Math.random() * window.contentDB.jokes.length)] || "Loading...",
+    'fact': () => window.contentDB?.facts[Math.floor(Math.random() * window.contentDB.facts.length)] || "Loading...",
+    'quote': () => window.contentDB?.quotes[Math.floor(Math.random() * window.contentDB.quotes.length)] || "Loading...",
+    'pass': (d) => d.p && d.p.length > 8 ? 'Strong ✅' : 'Weak ⚠️',
     'react': () => "اضغط بسرعة! (قريباً)",
 
-    // --- CSS Tools (NEW) ---
-    'css_grad': () => `background: linear-gradient(90deg, #${Math.random().toString(16).substr(2, 6)}, #${Math.random().toString(16).substr(2, 6)});`,
-    'css_box': () => `box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);`,
-    'css_txt': () => `text-shadow: 2px 2px 4px #000000;`,
-    'css_bor': () => `border-radius: 15px;`,
+    // --- CSS Tools ---
+    'css_grad': () => `background: linear-gradient(90deg, #00f2ff, #ff007a);`,
+    'css_box': () => `box-shadow: 0 10px 30px rgba(0,0,0,0.5);`,
+    'css_txt': () => `text-shadow: 2px 2px 10px rgba(0,242,255,0.5);`,
+    'css_bor': () => `border-radius: 20px;`,
     'css_flx': () => `display: flex; justify-content: center; align-items: center;`,
     'css_grid': () => `display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;`,
     'css_filt': () => `filter: grayscale(100%);`,
     'css_anim': () => `@keyframes example { from {opacity:0;} to {opacity:1;} }`,
     'css_clip': () => `clip-path: circle(50% at 50% 50%);`,
-    'css_min': (d) => d.c.replace(/\s+/g, '').replace(/:\s+/g, ':'),
-
-    // --- Image Tools (NEW) ---
-    'img_res': () => "يتم تغيير الحجم (canvas)...",
-    'img_crop': () => "يتم القص (canvas)...",
-    'img_comp': () => "يتم الضغط (canvas)...",
-    'img_conv': () => "يتم التحويل (canvas)...",
-    'img_filt': (d) => processImg(d.img, (ctx, cvs) => {
-        if (d.f == 'gray') ctx.filter = 'grayscale(100%)';
-        else if (d.f == 'sepia') ctx.filter = 'sepia(100%)';
-        else if (d.f == 'inv') ctx.filter = 'invert(100%)';
-        ctx.drawImage(document.getElementById('tempImg'), 0, 0);
-    }),
-    'img_col': () => "#FF5733 (Mock)",
-    'img_b64': (d) => new Promise((resolve) => {
-        const r = new FileReader();
-        r.onload = (e) => resolve(`<textarea rows="5">${e.target.result}</textarea>`);
-        r.readAsDataURL(d.img);
-    }),
-    'img_rot': () => "Rotate logic placeholder",
-    'img_bg': () => "⚠️ حذف الخلفية يتطلب API خارجي.",
-    'img_wat': () => "⚠️ إضافة علامة مائية تتطلب Canvas مخصص.",
-
-    // --- Misc Tools (NEW) ---
-    'misc_pass': (d) => Math.random().toString(36).slice(-d.l) + Math.random().toString(36).slice(-d.l),
-    'misc_uuid': () => crypto.randomUUID(),
-    'misc_qr': (d) => window.open(`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${d.t}`),
-    'misc_ip': () => "192.168.1.1 (Local Mock)",
-    'misc_ua': () => navigator.userAgent,
-    'misc_stop': () => `
-        <div id="stopwatch">00:00:00</div>
-        <button onclick="toggleStopwatch()" class="pro-btn">Start/Stop</button>
-        <button onclick="resetStopwatch()" class="pro-btn">Reset</button>
-    `,
-    'misc_time': () => new Date().toLocaleTimeString('ar-SA'),
-    'misc_date': (d) => {
-        const diff = Math.abs(new Date(d.d2) - new Date(d.d1));
-        return Math.ceil(diff / (1000 * 60 * 60 * 24)) + " يوم";
+    'css_min': (d) => `<textarea class="code-out">${d.c.replace(/\s+/g, '').replace(/:\s+/g, ':')}</textarea>`,
+    'img_b64': (d) => {
+        return new Promise((resolve) => {
+            const r = new FileReader();
+            r.onload = (e) => resolve(`<textarea class="code-out">${e.target.result}</textarea>`);
+            r.readAsDataURL(d.img);
+        });
     },
-    'misc_count': (d) => `Timer for ${d.m} mins started!`,
-    'misc_lorem': (d) => "Lorem ipsum dolor sit amet...".repeat(d.n || 1)
 };
 
-// Helper for Image Tools
-function convertImg(file, mime, ext) {
-    return new Promise((resolve) => {
-        if (!file) return resolve('اختر صورة أولاً');
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image();
-            img.id = 'tempImg';
-            img.onload = () => {
-                const cvs = document.createElement('canvas');
-                cvs.width = img.width;
-                cvs.height = img.height;
-                const ctx = cvs.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-                const resInfo = cvs.toDataURL(mime);
-                resolve(`<img src="${resInfo}" style="max-width:300px"><br><a href="${resInfo}" download="image.${ext}" class="pro-btn" style="display:inline-block;margin-top:10px">تحميل الصورة</a>`);
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-}
+// --- Utilities & Media Helpers ---
+window.copyToClipboard = (txt) => {
+    navigator.clipboard.writeText(txt);
+    alert('Copied to Clipboard!');
+};
 
 function processImg(file, drawFn) {
     return new Promise((resolve) => {
@@ -1885,18 +2103,13 @@ async function initPage(category) {
             ${t.isBanner ? '' : `<div class="icon-box">${t.icon}</div>`}
             <div class="tool-name">${t.name}</div>
             <div class="tool-desc">${t.desc}</div>
+            <div class="card-glow"></div>
         `;
         if (t.isBanner) {
             card.onclick = () => window.open(t.link);
-            // Check Global Registry for Migration
-            const migratedTool = window.searchIndex ? window.searchIndex.find(x => x.id === t.id) : null;
-            if (migratedTool) {
-                // Determine root path from global helper or simple heuristic
-                const root = window.NextGear && window.NextGear.root ? window.NextGear.root : '';
-                card.onclick = () => window.location.href = root + migratedTool.url;
-            } else {
-                card.onclick = () => openTool(t);
-            }
+        } else {
+            // ALWAYS use internal openTool for SPA consistency and VIP UI
+            card.onclick = () => openTool(t);
         }
         grid.appendChild(card);
     });
@@ -1906,41 +2119,65 @@ function openTool(tool) {
     activeToolId = tool.id;
     Memory.addHistory(tool.id);
     Memory.set('last_tool', tool.id);
-    document.getElementById('mTitle').innerHTML = `${tool.icon} ${tool.name}`;
+
+    // 1. Setup Tool View UI
+    const toolView = document.getElementById('tool-view');
+    const grid = document.getElementById('grid');
+    const hdr = document.querySelector('.header-area');
+
+    if (grid) grid.style.display = 'none';
+    if (hdr) hdr.style.display = 'none';
+    if (toolView) {
+        toolView.style.display = 'block';
+        toolView.classList.add('active');
+        toolView.innerHTML = `
+            <div class="tool-head">
+                <div class="tool-info-box">
+                    <div class="icon-box">${tool.icon}</div>
+                    <div>
+                        <h2 style="font-size:28px; font-weight:800;">${tool.name}</h2>
+                        <p style="color:var(--text-muted);">${tool.desc || ''}</p>
+                    </div>
+                </div>
+                <button class="back-btn" onclick="closeToolView()"><i>←</i> <span>${currentLang === 'ar' ? 'عودة' : 'Back'}</span></button>
+            </div>
+            <div id="mInputs"></div>
+            <button class="run-btn" onclick="runTool()">${translations.ui.run_btn || 'Run'}</button>
+            
+            <!-- Ad Slot 4: Native Ad -->
+            <div id="native-ad-slot" class="ad-container ad-native">
+                ${window.AdsConfig.native || '<div style="opacity:0.3">SPONSORED TOOL AD (ADSTERRA)</div>'}
+            </div>
+
+            <div class="output-area" id="mOutBox">
+                <div style="font-weight:bold; margin-bottom:10px; color:var(--primary);">${currentLang === 'ar' ? 'النتيجة:' : 'Result:'}</div>
+                <div class="output-val" id="mOutVal"></div>
+            </div>
+        `;
+    }
 
     const fields = document.getElementById('mInputs');
-    fields.innerHTML = '';
+    if (!fields) return;
 
     // Special Live Decoration Mode
     if (tool.cat === 'decor') {
         document.getElementById('mOutBox').style.display = 'none';
-        document.getElementById('modal').classList.add('open');
-
         fields.innerHTML = `
             <div class="field">
-                <label>اكتب النص الإنجليزي هنا:</label>
-                <textarea id="liveDecorInput" rows="3" placeholder="Type here..." style="font-family:sans-serif"></textarea>
+                <label style="display:block; margin-bottom:10px; font-weight:600; color:var(--gray-600);">${currentLang === 'ar' ? 'اكتب النص هنا:' : 'Type text here:'}</label>
+                <textarea id="liveDecorInput" rows="3" placeholder="Type here..." style="background:var(--white); border:1px solid var(--gray-200); color:var(--gray-900); padding:15px; border-radius:12px; width:100%; box-shadow:var(--shadow-sm);"></textarea>
             </div>
-            <div id="decorResults" style="max-height:400px;overflow-y:auto;margin-top:15px;padding-right:5px"></div>
+            <div id="decorResults" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; max-height:500px; overflow-y:auto; margin-top:20px; padding:10px;"></div>
         `;
 
         const inp = document.getElementById('liveDecorInput');
-        inp.focus();
-        updateLiveDecorations(''); // Show placeholder
-
-        inp.addEventListener('input', (e) => {
-            updateLiveDecorations(e.target.value);
-        });
-
-        // Hide run button for decor since it's live
-        document.querySelector('.run-btn').style.display = 'none';
-
-        return; // Stop standard generation
-    }
-
-    // --- Phase 14: Special Games UI (RPS) ---
-    if (tool.id === 'rps') {
-        document.getElementById('mOutBox').style.display = 'none';
+        if (inp) {
+            inp.focus();
+            updateLiveDecorations('');
+            inp.addEventListener('input', (e) => updateLiveDecorations(e.target.value));
+        }
+        const runBtn = document.querySelector('.run-btn');
+        if (runBtn) runBtn.style.display = 'none';
         return;
     }
 
@@ -1949,32 +2186,25 @@ function openTool(tool) {
         tool.inputs.forEach(inp => {
             const div = document.createElement('div');
             div.className = 'field';
-            let html = `<label>${inp.l || inp.n}</label>`;
+            div.style.marginBottom = '20px';
+            let html = `<label style="display:block; margin-bottom:10px; font-weight:600; color:var(--gray-600);">${inp.l || inp.n}</label>`;
+
+            const inputStyle = 'background:var(--white); border:1px solid var(--gray-200); color:var(--gray-900); padding:12px 18px; border-radius:12px; width:100%; font-size:16px; transition:0.3s; box-shadow:var(--shadow-sm);';
 
             if (inp.t === 'select') {
-                html += `<select id="inp_${inp.n}">${inp.o.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
+                html += `<select id="inp_${inp.n}" style="${inputStyle} cursor:pointer;">${inp.o.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
             } else if (inp.t === 'textarea') {
-                html += `<textarea id="inp_${inp.n}" rows="6"></textarea>`;
+                html += `<textarea id="inp_${inp.n}" rows="5" style="${inputStyle}"></textarea>`;
             } else if (inp.t === 'file') {
-                html += `<input type="file" id="inp_${inp.n}" class="file-inp">`;
-            } else if (inp.t === 'date') {
-                html += `<input type="date" id="inp_${inp.n}">`;
+                html += `<input type="file" id="inp_${inp.n}" style="${inputStyle}">`;
             } else {
-                html += `<input type="${inp.t}" id="inp_${inp.n}" value="${inp.d || ''}">`;
+                html += `<input type="${inp.t}" id="inp_${inp.n}" value="${inp.d || ''}" style="${inputStyle}">`;
             }
             div.innerHTML = html;
             fields.appendChild(div);
         });
-
-        // Attach Listeners
-        if (isReactive) {
-            const inputs = fields.querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                input.addEventListener('input', debounce(() => runTool(), 50));
-            });
-        }
     } else {
-        fields.innerHTML = '<div style="padding:20px;text-align:center;color:#666">اضغط زر التشغيل للمتابعة</div>';
+        fields.innerHTML = `<div style="padding:40px; text-align:center; color:var(--gray-600); background:var(--gray-100); border-radius:15px;">${currentLang === 'ar' ? 'جاهز للبدء' : 'Ready to start'}</div>`;
     }
 }
 
@@ -2005,20 +2235,25 @@ async function runTool() {
         let res;
 
         // List of tools processed by worker
-        const workerTools = ['cnt', 'rev', 'cln', 'bin', 'bde', 'rep', 'eml', 'url', 'num', 'slug', 'wpm', 'remdup', 'bmi', 'avg', 'jsn', 'gen'];
+        const workerTools = ['cnt', 'rev', 'cln', 'bin', 'bde', 'rep', 'eml', 'url', 'num', 'slug', 'wpm', 'remdup', 'bmi', 'avg', 'jsn', 'gen', 'json', 'txt2pdf', 'c_len', 'c_wgt', 'c_tmp', 'txt_sort', 'txt_shuf', 'pdf_mrg', 'pdf_spl', 'pdf_clr', 'pdf_rot', 'pdf_wat'];
 
-        if (activeToolId === 'txt2pdf') {
-            document.getElementById('mOutVal').innerHTML = '⏳ جاري إنشاء ملف PDF...';
+        if (activeToolId === 'txt2pdf' || ['imgbw', 'flip', 'blur', 'img_res', 'img_crop', 'img_comp', 'img_conv', 'img_filt', 'img_rot'].includes(activeToolId) || workerTools.includes(activeToolId)) {
+            document.getElementById('mOutVal').innerHTML = '⏳ Processing...';
             document.getElementById('mOutBox').style.display = 'block';
-            res = await handlePDF(activeToolId, data);
-        } else if (['imgbw', 'flip', 'blur'].includes(activeToolId)) {
-            document.getElementById('mOutVal').innerHTML = '⏳ جاري معالجة الصورة...';
-            document.getElementById('mOutBox').style.display = 'block';
-            res = await handleImageWorker(activeToolId, data.img);
-        } else if (workerTools.includes(activeToolId)) {
-            document.getElementById('mOutVal').innerHTML = '⏳ جاري المعالجة...';
-            document.getElementById('mOutBox').style.display = 'block';
-            worker.postMessage({ id: activeToolId, data: data });
+
+            if (['imgbw', 'flip', 'blur', 'img_res', 'img_crop', 'img_comp', 'img_conv', 'img_filt', 'img_rot'].includes(activeToolId)) {
+                // For image tools, we need to get the bitmap first
+                const file = data.img;
+                if (!file) {
+                    document.getElementById('mOutVal').innerHTML = 'Please select a file';
+                    return;
+                }
+                createImageBitmap(file).then(bmp => {
+                    worker.postMessage({ id: activeToolId, data: { ...data, bitmap: bmp } }, [bmp]);
+                });
+            } else {
+                worker.postMessage({ id: activeToolId, data: data });
+            }
             return;
         }
 
@@ -2037,7 +2272,10 @@ async function runTool() {
         } else if (typeof res === 'string' && res.trim().startsWith('<')) {
             out.innerHTML = res;
         } else {
-            out.innerText = res;
+            out.innerHTML = `
+                <div style="font-size:1.2rem;margin-bottom:15px;">${res}</div>
+                <button onclick="copyToClipboard('${String(res).replace(/'/g, "\\'")}')" class="pro-btn" style="width:auto;padding:8px 20px;">📋 Copy Result</button>
+            `;
         }
         document.getElementById('mOutBox').style.display = 'block';
 
@@ -2390,6 +2628,21 @@ window.downloadYTImage = async (url, name) => {
     }
 }
 
+// Global Search Logic for Category Pages
+window.search = (query) => {
+    const q = query.toLowerCase();
+    const cards = document.querySelectorAll('.tool-card');
+    cards.forEach(card => {
+        const name = card.querySelector('.tool-name').innerText.toLowerCase();
+        const desc = card.querySelector('.tool-desc').innerText.toLowerCase();
+        if (name.includes(q) || desc.includes(q)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+};
+
 // Debounce Helper
 function debounce(func, wait) {
     let timeout;
@@ -2611,3 +2864,60 @@ function processImage(file, callback) {
         reader.readAsDataURL(file);
     });
 }
+
+// --- Additional Logic ---
+window.calculateAge = (birthDate) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const m = today.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+    return age + " سنة";
+};
+
+let stopwatchInterval;
+let stopwatchTime = 0;
+window.toggleStopwatch = () => {
+    if (stopwatchInterval) {
+        clearInterval(stopwatchInterval);
+        stopwatchInterval = null;
+    } else {
+        stopwatchInterval = setInterval(() => {
+            stopwatchTime++;
+            const h = Math.floor(stopwatchTime / 3600);
+            const m = Math.floor((stopwatchTime % 3600) / 60);
+            const s = stopwatchTime % 60;
+            const el = document.getElementById('stopwatch');
+            if (el) el.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }, 1000);
+    }
+};
+window.resetStopwatch = () => {
+    stopwatchTime = 0;
+    const el = document.getElementById('stopwatch');
+    if (el) el.innerText = "00:00:00";
+};
+
+let xoBoard = Array(9).fill(null);
+let xoTurn = 'X';
+window.playXO = (el, i) => {
+    if (xoBoard[i] || !el) return;
+    xoBoard[i] = xoTurn;
+    el.innerText = xoTurn;
+    el.style.color = xoTurn === 'X' ? '#00efcc' : '#ff007a';
+
+    // Win Logic
+    const wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    for (let w of wins) {
+        if (xoBoard[w[0]] && xoBoard[w[0]] === xoBoard[w[1]] && xoBoard[w[0]] === xoBoard[w[2]]) {
+            document.getElementById('xo-status').innerText = `Winner: ${xoTurn}! 🎉`;
+            xoBoard.fill('DONE');
+            return;
+        }
+    }
+
+    if (xoBoard.every(b => b)) return document.getElementById('xo-status').innerText = "Draw! 🤝";
+
+    xoTurn = xoTurn === 'X' ? 'O' : 'X';
+    document.getElementById('xo-status').innerText = `Player ${xoTurn} Turn`;
+};

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGear | الصوتيات</title>
+    <title>NextGear | أدوات الصوت</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,37 +13,17 @@
     <main class="main">
         <div class="header-area">
             <div class="page-info">
-                <h1>أدوات الصوتيات 🎵</h1>
-                <p>تحويل، تسجيل، وقص الصوتيات.</p>
+                <h1>أدوات الصوت 🎵</h1>
+                <p>تحويل، تسجيل، وقص الملفات الصوتية.</p>
             </div>
         </div>
         <div class="grid" id="grid"></div>
     </main>
 
-    <!-- Modal -->
-    <div class="modal-wrap" id="modal">
-        <div class="modal">
-            <div class="modal-head">
-                <div class="modal-title" id="mTitle"></div>
-                <button class="pro-btn" style="width:auto;background:#cbd5e1;color:#333"
-                    onclick="closeModal()">✕</button>
-            </div>
-            <div id="mInputs"></div>
-            <button class="run-btn" onclick="runTool()">بدء المعالجة 🚀</button>
-            <div class="output-area" id="mOutBox">
-                <div class="output-val" id="mOutVal"></div>
-            </div>
-        </div>
-    </div>
-
     <div id="app-footer"></div>
     <script src="global.js"></script>
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            initPage('audio');
-        });
-    </script>
+    <script>initPage('audio');</script>
 </body>
 
 </html>

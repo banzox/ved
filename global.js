@@ -10,20 +10,27 @@
     // We can just extract the path to the folder containing global.js from the src attribute
     const rootPath = scriptPath.substring(0, scriptPath.lastIndexOf('/') + 1); // e.g., "file:///C:/.../ved/" or "../"
 
-    // For relative HTML links, we need a relative prefix (e.g. "../../")
-    // Simple heuristic: Count how many levels deep we are relative to where index.html likely is.
-    // Better approach: User passes depth or we let the relative links in the injected HTML use the calculated relative path.
-    // Let's rely on the relative path of the script tag itself if it's relative.
     const relativeRoot = myScript.getAttribute('src').replace('global.js', '');
+
+    // --- 1.5 Adsterra Config ---
+    window.AdsConfig = {
+        enabled: true,
+        header: '',     // Place your Adsterra 728x90 script here
+        sidebar: '',    // Place your Adsterra 160x600 script here
+        footer: '',     // Place your Adsterra 300x250/728x90 script here
+        native: ''      // Place your Adsterra Native script here
+    };
 
     // --- Search Index (The Registry) ---
     // This will be populated with all 100 tools locally
     window.searchIndex = [
         // --- Video ---
-        { id: 'yt_thumb', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/yt-thumb.html', cat: 'video' },
+        // --- Social ---
+        { id: 'yt_thumb', n: { ar: 'صورة يوتيوب', en: 'YouTube Thumbnail' }, url: 'tools/video/yt-thumb.html', cat: 'social' },
+        { id: 'ig_prof', n: { ar: 'بروفايل انستقرام', en: 'Instagram Profile' }, url: 'tools/social/ig.html', cat: 'social' },
 
-        // --- Math ---
-        { id: 'bmi', n: { ar: 'حاسبة الوزن (BMI)', en: 'BMI Calculator' }, url: 'tools/math/bmi.html', cat: 'math' },
+        // --- Video ---
+        { id: 'vid_info', n: { ar: 'معلومات الفيديو', en: 'Video Info' }, url: 'tools/video/info.html', cat: 'video' },
         { id: 'age', n: { ar: 'حاسبة العمر', en: 'Age Calculator' }, url: 'tools/math/age.html', cat: 'math' },
         { id: 'loan', n: { ar: 'حاسبة القروض', en: 'Loan Calculator' }, url: 'tools/math/loan.html', cat: 'math' },
         { id: 'disc', n: { ar: 'حاسبة الخصم', en: 'Discount Calculator' }, url: 'tools/math/discount.html', cat: 'math' },
@@ -34,13 +41,23 @@
         { id: 'c_wgt', n: { ar: 'محول الوزن', en: 'Weight Converter' }, url: 'tools/conv/weight.html', cat: 'conv' },
         { id: 'c_spd', n: { ar: 'محول السرعة', en: 'Speed Converter' }, url: 'tools/conv/speed.html', cat: 'conv' },
         { id: 'c_cur', n: { ar: 'محول العملات', en: 'Currency Converter' }, url: 'tools/conv/currency.html', cat: 'conv' },
-        { id: 'temp', n: { ar: 'محول الحرارة', en: 'Temperature Converter' }, url: 'tools/conv/temperature.html', cat: 'conv' },
+        { id: 'c_tmp', n: { ar: 'محول الحرارة', en: 'Temperature Converter' }, url: 'tools/conv/temperature.html', cat: 'conv' },
 
-        // --- Text ---
-        { id: 'cnt', n: { ar: 'عداد الكلمات', en: 'Word Counter' }, url: 'tools/text/counter.html', cat: 'text' },
-        { id: 'rev', n: { ar: 'عكس النصوص', en: 'Text Reverser' }, url: 'tools/text/reverse.html', cat: 'text' },
-        { id: 'bin', n: { ar: 'تحويل ثنائي', en: 'Binary Converter' }, url: 'tools/text/binary.html', cat: 'text' },
-        { id: 'decor', n: { ar: 'زخرفة النصوص', en: 'Text Decoration' }, url: 'tools/text/decor.html', cat: 'text' },
+        // --- Student ---
+        { id: 'cnt', n: { ar: 'عداد الكلمات', en: 'Word Counter' }, url: 'tools/text/counter.html', cat: 'student' },
+        { id: 'rev', n: { ar: 'عكس النصوص', en: 'Text Reverser' }, url: 'tools/text/reverse.html', cat: 'student' },
+        { id: 'bin', n: { ar: 'تحويل ثنائي', en: 'Binary Converter' }, url: 'tools/text/binary.html', cat: 'student' },
+        { id: 'decor', n: { ar: 'زخرفة النصوص', en: 'Text Decoration' }, url: 'tools/text/decor.html', cat: 'student' },
+        { id: 'rep', n: { ar: 'مكرر النصوص', en: 'Text Repeater' }, url: 'tools/text/repeater.html', cat: 'student' },
+        { id: 'slug', n: { ar: 'مولد الروابط', en: 'Slug Generator' }, url: 'tools/text/slug.html', cat: 'student' },
+        { id: 'cln', n: { ar: 'منظف النصوص', en: 'Text Cleaner' }, url: 'tools/text/clean.html', cat: 'student' },
+        { id: 'eml', n: { ar: 'استخراج الإيميلات', en: 'Email Extractor' }, url: 'tools/text/email.html', cat: 'student' },
+        { id: 'url', n: { ar: 'استخراج الروابط', en: 'URL Extractor' }, url: 'tools/text/url.html', cat: 'student' },
+        { id: 'num', n: { ar: 'استخراج الأرقام', en: 'Number Extractor' }, url: 'tools/text/number.html', cat: 'student' },
+        { id: 'wpm', n: { ar: 'وقت القراءة', en: 'Reading Time' }, url: 'tools/text/wpm.html', cat: 'student' },
+        { id: 'remdup', n: { ar: 'حذف التكرار', en: 'Remove Duplicates' }, url: 'tools/text/duplicates.html', cat: 'student' },
+        { id: 'txt_sort', n: { ar: 'ترتيب الأسطر', en: 'Sort Lines' }, url: 'tools/text/sort.html', cat: 'student' },
+        { id: 'txt_shuf', n: { ar: 'بعثرة الأسطر', en: 'Shuffle Lines' }, url: 'tools/text/shuffle.html', cat: 'student' },
 
         // --- Dev ---
         { id: 'json', n: { ar: 'منسق JSON', en: 'JSON Formatter' }, url: 'tools/dev/json.html', cat: 'dev' },
@@ -70,7 +87,7 @@
         { id: 'aud_rec', n: { ar: 'مسجل الصوت', en: 'Audio Recorder' }, url: 'tools/audio/record.html', cat: 'audio' },
 
         // --- PDF ---
-        { id: 'pdf_txt', n: { ar: 'نص إلى PDF', en: 'Text to PDF' }, url: 'tools/pdf/txt2pdf.html', cat: 'pdf' }
+        { id: 'txt2pdf', n: { ar: 'نص إلى PDF', en: 'Text to PDF' }, url: 'tools/pdf/txt2pdf.html', cat: 'pdf' }
     ];
 
     window.searchTools = (query) => {
@@ -126,57 +143,126 @@
         return val; // Returns undefined if not found
     }
 
-    // --- 4. Layout Injection ---
     function injectLayout() {
-        // A. Header / Sidebar
+        // A. Sidebar
         const headerEl = document.getElementById('app-header');
         if (headerEl) {
             headerEl.innerHTML = `
                 <nav class="sidebar">
-                    <a href="${relativeRoot}index.html" class="brand"><i>⚡</i> <span>NextGear</span></a>
+                    <a href="${relativeRoot}index.html" class="brand"><i>⚡</i> <span class="brand-text">NextGear VIP</span></a>
                     <div class="nav-menu">
-                        <a href="${relativeRoot}index.html" class="nav-item"><i>🏠</i> <span data-i18n="home">Home</span></a>
-                        <a href="${relativeRoot}student.html" class="nav-item"><i>📝</i> <span data-i18n="student">Student</span></a>
-                        <a href="${relativeRoot}math.html" class="nav-item"><i>🔢</i> <span data-i18n="math">Math</span></a>
-                        <a href="${relativeRoot}conv.html" class="nav-item"><i>🔄</i> <span data-i18n="conv">Converters</span></a>
-                        <a href="${relativeRoot}dev.html" class="nav-item"><i>💻</i> <span data-i18n="dev">Developers</span></a>
-                        <a href="${relativeRoot}social.html" class="nav-item"><i>📱</i> <span data-i18n="social">Social</span></a>
-                        <a href="${relativeRoot}files.html" class="nav-item"><i>📂</i> <span data-i18n="files">Files</span></a>
-                        <a href="${relativeRoot}game.html" class="nav-item"><i>🎮</i> <span data-i18n="games">Games</span></a>
+                        <a href="${relativeRoot}index.html" class="nav-item ${window.location.pathname.endsWith('index.html') || window.location.pathname === '/' ? 'active' : ''}"><i>🏠</i> <span>Home</span></a>
+                        <a href="${relativeRoot}student.html" class="nav-item ${window.location.pathname.endsWith('student.html') ? 'active' : ''}"><i>📚</i> <span>Student</span></a>
+                        <a href="${relativeRoot}math.html" class="nav-item ${window.location.pathname.endsWith('math.html') ? 'active' : ''}"><i>🧮</i> <span>Math</span></a>
+                        <a href="${relativeRoot}converters.html" class="nav-item ${window.location.pathname.endsWith('converters.html') ? 'active' : ''}"><i>🔄</i> <span>Converters</span></a>
+                        <a href="${relativeRoot}dev.html" class="nav-item ${window.location.pathname.endsWith('dev.html') ? 'active' : ''}"><i>🛠️</i> <span>Dev</span></a>
+                        <a href="${relativeRoot}social.html" class="nav-item ${window.location.pathname.endsWith('social.html') ? 'active' : ''}"><i>📱</i> <span>Social</span></a>
+                        <a href="${relativeRoot}files.html" class="nav-item ${window.location.pathname.endsWith('files.html') || window.location.pathname.endsWith('pdf.html') ? 'active' : ''}"><i>📂</i> <span>Files</span></a>
+                        <a href="${relativeRoot}games.html" class="nav-item ${window.location.pathname.endsWith('games.html') ? 'active' : ''}"><i>🎮</i> <span>Games</span></a>
                     </div>
-                    <div class="pro-card">
-                        <h4 data-i18n="pro">NextGear Pro</h4>
-                        <button class="pro-btn" onclick="window.open('http://nextgear.space')">UPGRADE</button>
+                    
+                    <div id="side-ad-slot" class="ad-container ad-sidebar">
+                        ${window.AdsConfig.sidebar || '<div style="opacity:0.2; font-size:9px">VIP SPACE</div>'}
+                    </div>
+
+                    <div class="pro-card" style="margin-top:auto">
+                        <button class="run-btn" style="padding:12px; font-size:12px; border-radius:12px;" onclick="window.open('http://nextgear.space')">PRO ACCESS</button>
                     </div>
                 </nav>
             `;
         }
 
-        // B. Top Bar (Search + Lang)
-        // Typically normally in .header-area inside main, but we can inject a standard top bar if needed.
-        // For this user request, we assume .header-area exists in the Page Content, OR we inject a standard Container.
-        // Let's create a standard top-bar helper if #app-topbar exists, otherwise expect page to have it.
+        const main = document.querySelector('.main');
+        if (main) {
+            if (!document.getElementById('top-ad-zone')) {
+                const adZone = document.createElement('div');
+                adZone.id = 'top-ad-zone';
+                adZone.className = 'ad-container ad-header';
+                adZone.innerHTML = window.AdsConfig.header || '<div>ADSTERRA AD ZONE</div>';
+                main.insertBefore(adZone, main.firstChild);
+            }
 
-        // C. Footer
+            if (!document.querySelector('.header-content')) {
+                const headContent = document.createElement('div');
+                headContent.className = 'header-content';
+                headContent.innerHTML = `
+                    <div class="search-box" style="background:var(--bg-card); border:1px solid var(--glass-border); flex:1">
+                        <i style="color:var(--primary)">🔍</i>
+                        <input type="text" id="main-search" placeholder="${t('search') || 'Search tools...'}" oninput="handleGlobalSearch(this.value)" style="background:transparent; border:none; color:white">
+                    </div>
+                    <div id="lang-hook"></div>
+                 `;
+                const ad = document.getElementById('top-ad-zone');
+                main.insertBefore(headContent, ad ? ad.nextSibling : main.firstChild);
+            }
+        }
+
         const footerEl = document.getElementById('app-footer');
         if (footerEl) {
             footerEl.innerHTML = `
-                <div style="text-align:center; padding:20px; color:#64748b; font-size:0.9rem; border-top:1px solid #e2e8f0; margin-top:40px;">
-                    <span data-i18n="footer_copy">© 2026 NextGear</span> | 
-                    <a href="${relativeRoot}privacy.html" style="color:inherit" data-i18n="privacy">Privacy</a> | 
-                    <a href="${relativeRoot}contact.html" style="color:inherit" data-i18n="contact">Contact</a>
+                <div class="ad-container ad-footer">
+                    ${window.AdsConfig.footer || '<div>GLOBAL FOOTER AD</div>'}
+                </div>
+                <div style="text-align:center; padding:50px 0; opacity:0.6; font-size:12px">
+                    © 2026 NEXTGEAR ELITE | <a href="${relativeRoot}privacy.html" style="color:var(--primary)">Privacy</a>
                 </div>
             `;
         }
+    }
 
-        // D. Inject CSS automatically if not present?
-        // User didn't strictly ask, but it's helpful.
-        if (!document.querySelector('link[href*="style.css"]')) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = relativeRoot + 'style.css';
-            document.head.appendChild(link);
+    // Search Helper
+    window.handleGlobalSearch = function (q) {
+        // 1. Local Filtering (if on a category page with a #grid)
+        if (typeof window.search === 'function') {
+            window.search(q);
         }
+
+        // 2. Global Results (Navigation Dropdown)
+        if (typeof searchTools === 'function') {
+            const results = searchTools(q);
+            showSearchResults(results);
+        }
+    };
+
+    function showSearchResults(results) {
+        let list = document.getElementById('search-results');
+        if (!list) {
+            list = document.createElement('div');
+            list.id = 'search-results';
+            list.className = 'search-results-dropdown';
+            const searchBox = document.querySelector('.search-box');
+            if (searchBox) searchBox.appendChild(list);
+        }
+
+        if (results.length === 0) {
+            list.style.display = 'none';
+            return;
+        }
+
+        list.style.display = 'block';
+        list.innerHTML = results.map(r => `
+            <div class="search-res-item" onclick="window.location.href='${r.url}'">
+                <span>${r.name}</span>
+                <small>Open Tool</small>
+            </div>
+        `).join('');
+    }
+
+    // Close search dropdown on click away
+    document.addEventListener('click', (e) => {
+        const list = document.getElementById('search-results');
+        if (list && !e.target.closest('.search-box')) {
+            list.style.display = 'none';
+        }
+    });
+
+    // D. Inject CSS automatically if not present?
+    // User didn't strictly ask, but it's helpful.
+    if (!document.querySelector('link[href*="style.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = relativeRoot + 'style.css';
+        document.head.appendChild(link);
     }
 
     // --- 5. Initialization ---
@@ -201,7 +287,7 @@
         if (document.getElementById('global-lang-select')) return;
 
         // Find best place: .header-area or append to body or specific #lang-container
-        const container = document.querySelector('.header-area') || document.querySelector('.page-info') || document.body;
+        const container = document.getElementById('lang-hook') || document.querySelector('.header-content') || document.body;
 
         const sel = document.createElement('select');
         sel.id = 'global-lang-select';

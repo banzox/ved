@@ -1,14 +1,14 @@
 {
     "dir": "ltr",
     "ui": {
-        "title": "NextGear - Professional Tools",
-        "search_placeholder": "🔍 Search tools (e.g., pdf, youtube, color...)",
+        "title": "NextGear - Pro Tools",
+        "search_placeholder": "🔍 Search for a tool (ex: pdf, youtube, color...)",
         "menu_home": "Home",
         "menu_video": "Video",
         "menu_audio": "Audio",
         "menu_pdf": "PDF Tools",
         "menu_conv": "Converters",
-        "menu_dev": "Developers",
+        "menu_dev": "Developer",
         "menu_img": "Images",
         "menu_css": "CSS",
         "menu_misc": "Misc",
@@ -17,53 +17,157 @@
         "close_btn": "Close ❌",
         "footer": "Developed by NextGear Team © 2026",
         "home_title": "Welcome 👋",
-        "home_desc": "The largest collection of free Arabic tools (100+ tools).",
+        "home_desc": "Largest Arabic & English free tools library.",
         "cat_vid": "Video",
-        "desc_vid": "Download, cut, and mute videos.",
+        "desc_vid": "Download, Cut, and Mute Video.",
         "cat_aud": "Audio",
-        "desc_aud": "Convert, record, and cut audio.",
+        "desc_aud": "Convert, Record, and Cut Audio.",
         "cat_pdf": "PDF Tools",
-        "desc_pdf": "Merge, split, and convert PDF.",
+        "desc_pdf": "Merge, Split, and Convert PDF.",
         "cat_conv": "Converters",
-        "desc_conv": "Units, currencies, and energy.",
+        "desc_conv": "Units, Currency, and Energy.",
         "cat_decor": "Decoration",
-        "desc_decor": "Beautify texts and names.",
+        "desc_decor": "Beautify text and names.",
         "cat_math": "Math",
-        "desc_math": "Age, loans, and Zakat.",
-        "cat_student": "Student",
-        "desc_student": "Search and editing tools.",
+        "desc_math": "Age, Loan, and Zakat.",
+        "cat_student": "Text & Student",
+        "desc_student": "Search and Edit tools.",
         "cat_game": "Games",
-        "desc_game": "Entertainment and contests."
+        "desc_game": "Fun and Competitions."
     },
     "categories": {
         "video": "Video Tools",
         "audio": "Audio Tools",
         "pdf": "PDF Tools",
         "converters": "Unit Converters",
-        "tools": "Developer Tools",
+        "tools": "Dev Tools",
         "decor": "Text Decoration",
-        "math": "Math & Calc",
-        "games": "Games & Fun",
+        "math": "Math & Calculations",
+        "games": "Entertainment",
         "css": "CSS Generators",
         "image": "Image Tools",
         "misc": "Misc Tools"
     },
     "tools": {
         "yt_thumb": {
-            "n": "YouTube Thumbnail",
-            "d": "Download high quality video thumbnails"
+            "n": "YT Thumbnail",
+            "d": "Download HD video covers"
+        },
+        "vid_aud": {
+            "n": "Video to Audio",
+            "d": "Extract MP3 from video"
+        },
+        "vid_trim": {
+            "n": "Trim Video",
+            "d": "Cut specific parts of video"
+        },
+        "vid_mute": {
+            "n": "Mute Video",
+            "d": "Remove audio from video"
+        },
+        "vid_info": {
+            "n": "Video Info",
+            "d": "Detect size, res, type"
+        },
+        "vid_pic": {
+            "n": "Frame Capture",
+            "d": "Save image from any frame"
+        },
+        "tts": {
+            "n": "Text to Speech",
+            "d": "AI voice generator"
+        },
+        "aud_rec": {
+            "n": "Voice Recorder",
+            "d": "Record live audio"
+        },
+        "aud_trim": {
+            "n": "Cut Audio",
+            "d": "Trim audio files"
+        },
+        "aud_bpm": {
+            "n": "BPM Tapper",
+            "d": "Calculate beat speed"
         },
         "pdf_mrg": {
             "n": "Merge PDF",
-            "d": "Combine two or more files into one"
+            "d": "Combine multiple files"
+        },
+        "pdf_spl": {
+            "n": "Split PDF",
+            "d": "Extract specific pages"
+        },
+        "pdf_wat": {
+            "n": "Watermark",
+            "d": "Protect your PDF pages"
+        },
+        "pdf_lock": {
+            "n": "Lock PDF",
+            "d": "Add password protection"
+        },
+        "cnt": {
+            "n": "Word Counter",
+            "d": "Count words and characters"
+        },
+        "rev": {
+            "n": "Reverse Text",
+            "d": "Flip text order"
+        },
+        "bin": {
+            "n": "Binary Convert",
+            "d": "Text to binary code"
+        },
+        "slug": {
+            "n": "Slug Generator",
+            "d": "SEO friendly URLs"
+        },
+        "c_len": {
+            "n": "Length Conv",
+            "d": "Standard length units"
+        },
+        "c_cur": {
+            "n": "Currency Conv",
+            "d": "Real daily exchange rates"
         },
         "age": {
             "n": "Age Calculator",
-            "d": "Calculate exact age in Y/M/D"
+            "d": "Calculate precise age"
+        },
+        "bmi": {
+            "n": "BMI Calculator",
+            "d": "Check body mass index"
+        },
+        "zak": {
+            "n": "Zakat Calc",
+            "d": "Calculate Islamic Zakat"
+        },
+        "gpa": {
+            "n": "GPA Calc",
+            "d": "University grade average"
         },
         "rps": {
             "n": "Rock Paper Scissors",
-            "d": "Play against AI with visual effects"
+            "d": "Play vs computer"
+        },
+        "xo": {
+            "n": "Tic Tac Toe",
+            "d": "The classic X-O game"
+        },
+        "ig_prof": {
+            "n": "IG Profile",
+            "d": "View/Download profile pic"
+        },
+        "misc_pass": {
+            "n": "Pass Generator",
+            "d": "Create secure passwords"
+        },
+        "misc_qr": {
+            "n": "QR Generator",
+            "d": "Convert text to QR code"
+        },
+        "misc_ip": {
+            "n": "My IP",
+            "d": "Detect your public IP"
         }
     }
 }

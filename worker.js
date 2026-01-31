@@ -39,10 +39,16 @@ self.onmessage = async function (e) {
                 result = data.txt.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
                 break;
             case 'wpm':
-                result = `الوقت المقدر: ${(data.txt.trim().split(/\s+/).length / 200).toFixed(1)} دقيقة`;
+                result = `Estimated Time: ${(data.txt.trim().split(/\s+/).length / 200).toFixed(1)} mins`;
                 break;
             case 'remdup':
                 result = [...new Set(data.txt.split('\n'))].join('\n');
+                break;
+            case 'txt_sort':
+                result = data.txt.split('\n').sort().join('\n');
+                break;
+            case 'txt_shuf':
+                result = data.txt.split('\n').sort(() => Math.random() - 0.5).join('\n');
                 break;
 
             // --- PDF (Async) ---
@@ -66,8 +72,8 @@ self.onmessage = async function (e) {
                 } else {
                     try {
                         const pdfDoc = await PDFLib.PDFDocument.create();
-                        const f1 = await data.files[0].arrayBuffer();
-                        const f2 = await data.files[1].arrayBuffer();
+                        const f1 = await data.f1.arrayBuffer();
+                        const f2 = await data.f2.arrayBuffer();
 
                         const pdf1 = await PDFLib.PDFDocument.load(f1);
                         const pdf2 = await PDFLib.PDFDocument.load(f2);
@@ -87,22 +93,73 @@ self.onmessage = async function (e) {
                 }
                 break;
 
-            case 'pdf_delete':
+
+            case 'pdf_spl':
                 if (typeof PDFLib === 'undefined') {
                     result = "Error: PDFLib library not loaded.";
                 } else {
                     try {
-                        const existingPdfBytes = await data.file.arrayBuffer();
+                        const existingPdfBytes = await data.f.arrayBuffer();
                         const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
-
-                        // data.pages is array of 0-based indices to DELETE
-                        // We must delete from last to first to keep indices valid
-                        const pagesToDelete = data.pages.sort((a, b) => b - a);
-
-                        for (const pIndex of pagesToDelete) {
-                            pdfDoc.removePage(pIndex);
-                        }
-
+                        const newPdf = await PDFLib.PDFDocument.create();
+                        const [page] = await newPdf.copyPages(pdfDoc, [Number(data.p) - 1]);
+                        newPdf.addPage(page);
+                        const pdfBytes = await newPdf.save();
+                        self.postMessage({ result: pdfBytes, type: 'pdf' });
+                        return;
+                    } catch (e) {
+                        result = "Error extracting page: " + e.message;
+                    }
+                }
+                break;
+            case 'pdf_rot':
+                if (typeof PDFLib === 'undefined') {
+                    result = "Error: PDFLib not loaded.";
+                } else {
+                    try {
+                        const existingPdfBytes = await data.f.arrayBuffer();
+                        const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                        const pages = pdfDoc.getPages();
+                        pages.forEach(p => p.setRotation(PDFLib.degrees(90)));
+                        const pdfBytes = await pdfDoc.save();
+                        self.postMessage({ result: pdfBytes, type: 'pdf' });
+                        return;
+                    } catch (e) {
+                        result = "Rotation Error: " + e.message;
+                    }
+                }
+                break;
+            case 'pdf_wat':
+                if (typeof PDFLib === 'undefined') {
+                    result = "Error: PDFLib not loaded.";
+                } else {
+                    try {
+                        const existingPdfBytes = await data.f.arrayBuffer();
+                        const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                        const pages = pdfDoc.getPages();
+                        pages.forEach(p => {
+                            p.drawText(data.txt || 'NextGear', {
+                                x: 50, y: 50, size: 30,
+                                opacity: 0.3,
+                                color: PDFLib.rgb(0.5, 0.5, 0.5)
+                            });
+                        });
+                        const pdfBytes = await pdfDoc.save();
+                        self.postMessage({ result: pdfBytes, type: 'pdf' });
+                        return;
+                    } catch (e) {
+                        result = "Watermark Error: " + e.message;
+                    }
+                }
+                break;
+            case 'pdf_clr':
+                if (typeof PDFLib === 'undefined') {
+                    result = "Error: PDFLib library not loaded.";
+                } else {
+                    try {
+                        const existingPdfBytes = await data.f.arrayBuffer();
+                        const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                        pdfDoc.removePage(Number(data.p) - 1);
                         const pdfBytes = await pdfDoc.save();
                         self.postMessage({ result: pdfBytes, type: 'pdf' });
                         return;
@@ -116,10 +173,23 @@ self.onmessage = async function (e) {
             case 'imgbw':
             case 'flip':
             case 'blur':
-            case 'img_filt': // Added for new Image Tools
+            case 'img_filt':
+            case 'img_res':
+            case 'img_crop':
+            case 'img_comp':
+            case 'img_conv':
+            case 'img_rot':
                 if (data.bitmap) {
                     const bmp = data.bitmap;
-                    const cvs = new OffscreenCanvas(bmp.width, bmp.height);
+                    let targetW = bmp.width;
+                    let targetH = bmp.height;
+
+                    if (id === 'img_res' && data.w) {
+                        targetW = Number(data.w);
+                        targetH = bmp.height * (targetW / bmp.width);
+                    }
+
+                    const cvs = new OffscreenCanvas(targetW, targetH);
                     const ctx = cvs.getContext('2d');
 
                     if (id === 'imgbw') {
@@ -137,8 +207,26 @@ self.onmessage = async function (e) {
                         else if (data.filter === 'inv') ctx.filter = 'invert(100%)';
                         else ctx.filter = 'none';
                         ctx.drawImage(bmp, 0, 0);
+                    } else if (id === 'img_crop') {
+                        const size = Math.min(bmp.width, bmp.height);
+                        const canvas = new OffscreenCanvas(size, size);
+                        const context = canvas.getContext('2d');
+                        context.drawImage(bmp, (bmp.width - size) / 2, (bmp.height - size) / 2, size, size, 0, 0, size, size);
+                        const croppedBmp = canvas.transferToImageBitmap();
+                        self.postMessage({ id, result: croppedBmp }, [croppedBmp]);
+                        return;
+                    } else if (id === 'img_rot') {
+                        const canvas = new OffscreenCanvas(bmp.height, bmp.width);
+                        const context = canvas.getContext('2d');
+                        context.translate(canvas.width / 2, canvas.height / 2);
+                        context.rotate(90 * Math.PI / 180);
+                        context.drawImage(bmp, -bmp.width / 2, -bmp.height / 2);
+                        const rotBmp = canvas.transferToImageBitmap();
+                        self.postMessage({ id, result: rotBmp }, [rotBmp]);
+                        return;
                     } else {
-                        ctx.drawImage(bmp, 0, 0);
+                        // Resize (handled by OffscreenCanvas constructor above) or Comp/Conv (defaults)
+                        ctx.drawImage(bmp, 0, 0, targetW, targetH);
                     }
 
                     const newBmp = cvs.transferToImageBitmap();
@@ -154,16 +242,30 @@ self.onmessage = async function (e) {
                 result = `BMI: ${b} (${b < 18.5 ? 'نحيف' : b < 25 ? 'طبيعي' : 'سمنة'})`;
                 break;
             case 'avg':
-                const n = data.nums.split(' ').map(Number);
-                result = (n.reduce((a, b) => a + b, 0) / n.length).toFixed(2);
+                const nArr = data.nums ? data.nums.split(' ').map(Number) : [];
+                result = nArr.length > 0 ? (nArr.reduce((a, b) => a + b, 0) / nArr.length).toFixed(2) : '0';
+                break;
+
+            // --- Converters ---
+            case 'c_len':
+                result = `${data.v} m = ${(data.v / 1000).toFixed(3)} km | ${(data.v * 100).toFixed(0)} cm | ${(data.v * 39.37).toFixed(2)} inch`;
+                break;
+            case 'c_wgt':
+                result = `${data.v} kg = ${(data.v * 1000).toFixed(0)} g | ${(data.v * 2.2046).toFixed(2)} lbs`;
+                break;
+            case 'c_tmp':
+                result = `${data.v}°C = ${(data.v * 9 / 5 + 32).toFixed(1)}°F | ${(Number(data.v) + 273.15).toFixed(2)}K`;
                 break;
 
             // --- Dev ---
             case 'jsn':
-                result = JSON.stringify(JSON.parse(data.txt), null, 2);
+            case 'json':
+                try {
+                    result = JSON.stringify(JSON.parse(data.txt || data.p || '{}'), null, 2);
+                } catch (e) { result = "Invalid JSON"; }
                 break;
             case 'gen':
-                result = Math.random().toString(36).slice(-data.len);
+                result = Math.random().toString(36).slice(-(data.len || 10)) + Math.random().toString(36).slice(-(data.len || 10));
                 break;
 
             default:

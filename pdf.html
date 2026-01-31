@@ -13,106 +13,17 @@
     <main class="main">
         <div class="header-area">
             <div class="page-info">
-                <h1>أدوات PDF 📄</h1>
-                <p>دمج، تقسيم، وتحويل ملفات PDF.</p>
+                <h1>أدوات PDF الاحترافية 📑</h1>
+                <p>دمج، تقسيم، وقفل ملفات PDF بسهولة.</p>
             </div>
         </div>
         <div class="grid" id="grid"></div>
     </main>
 
-    <!-- Modal -->
-    <div class="modal-wrap" id="modal">
-        <div class="modal">
-            <div class="modal-head">
-                <div class="modal-title" id="mTitle"></div>
-                <button class="pro-btn" style="width:auto;background:#cbd5e1;color:#333"
-                    onclick="closeModal()">✕</button>
-            </div>
-            <div id="mInputs"></div>
-            <button class="run-btn" onclick="runTool()">بدء المعالجة 🚀</button>
-            <div class="output-area" id="mOutBox">
-                <div class="output-val" id="mOutVal"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PDF.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
-
-    <style>
-        /* PDF Selector Grid */
-        .pdf-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .pdf-page-card {
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            position: relative;
-            transition: 0.2s;
-            overflow: hidden;
-        }
-
-        .pdf-page-card:hover {
-            border-color: #3b82f6;
-        }
-
-        .pdf-page-card.selected {
-            border-color: #ef4444;
-            background: #fee2e2;
-        }
-
-        /* Red for delete */
-        .pdf-page-card.selected::after {
-            content: '❌';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-        }
-
-        .pdf-page-card img {
-            width: 100%;
-            display: block;
-        }
-
-        .pdf-page-num {
-            text-align: center;
-            font-size: 0.8rem;
-            padding: 4px;
-            background: #f8fafc;
-            border-top: 1px solid #ddd;
-        }
-    </style>
-
-    <!-- Page Selector Modal -->
-    <div class="modal-wrap" id="pdfModal" style="z-index: 1000;">
-        <div class="modal" style="max-width: 800px;">
-            <div class="modal-head">
-                <div class="modal-title">حدد الصفحات للحذف/الاستخراج</div>
-                <button class="pro-btn" style="width:auto;background:#cbd5e1" onclick="closePdfModal()">✕</button>
-            </div>
-            <div id="pdfGrid" class="pdf-grid"></div>
-            <div style="margin-top:20px;display:flex;gap:10px;justify-content:flex-end">
-                <button class="pro-btn" id="pdfActionBtn" style="width:auto;background:#ef4444">تطبيق الحذف</button>
-            </div>
-        </div>
-    </div>
-
+    <div id="app-footer"></div>
+    <script src="global.js"></script>
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            initPage('pdf');
-        });
-    </script>
+    <script>initPage('pdf');</script>
 </body>
 
 </html>
