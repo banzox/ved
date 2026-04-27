@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2">
               <PlaySquare className="w-8 h-8 text-blue-500" />
-              <span className="font-bold text-xl tracking-tight text-white">نت<span className="text-blue-500">فليكس</span> العرب</span>
+              <span className="font-bold text-xl tracking-tight text-white">سينما <span className="text-blue-500">ماكس</span></span>
             </Link>
           </div>
           

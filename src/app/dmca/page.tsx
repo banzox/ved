@@ -8,7 +8,7 @@ export default function DMCAPage() {
         <h1 className="text-4xl font-bold text-white mb-8">حقوق الملكية (DMCA)</h1>
         
         <p className="mb-6 text-lg">
-          موقع "نتفليكس العرب" يحترم حقوق الملكية الفكرية للآخرين ويسعى للالتزام بقانون حقوق المؤلف للألفية الرقمية (DMCA).
+          موقع "سينما ماكس" يحترم حقوق الملكية الفكرية للآخرين ويسعى للالتزام بقانون حقوق المؤلف للألفية الرقمية (DMCA).
         </p>
 
         <section className="mb-10">

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "نتفليكس العرب - أفلام ومسلسلات مترجمة",
+  title: "سينما ماكس - أفلام ومسلسلات مترجمة",
   description: "شاهد أحدث الأفلام والمسلسلات العربية والأجنبية مترجمة بجودة عالية HD",
 };
 

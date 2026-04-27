@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <PlaySquare className="w-8 h-8 text-blue-500" />
-              <span className="font-bold text-xl tracking-tight text-white">نت<span className="text-blue-500">فليكس</span> العرب</span>
+              <span className="font-bold text-xl tracking-tight text-white">سينما <span className="text-blue-500">ماكس</span></span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               منصتك الأولى لمشاهدة أحدث الأفلام والمسلسلات العربية والأجنبية بجودة عالية. استمتع بتجربة مشاهدة لا مثيل لها.
@@ -74,7 +74,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-xs">
-            © {new Date().getFullYear()} نتفليكس العرب. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} سينما ماكس. جميع الحقوق محفوظة.
           </p>
           <div className="flex gap-6 text-xs text-gray-500">
             <span>صُنع بكل ❤️ لعشاق السينما العربية</span>
