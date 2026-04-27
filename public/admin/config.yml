@@ -29,6 +29,7 @@ collections:
               - {label: "سنة الإصدار", name: "year", widget: "number"}
               - {label: "المدة", name: "duration", widget: "string"}
               - {label: "التصنيفات (افصل بينها بـ Enter)", name: "genre", widget: "list"}
-              - {label: "الصورة المصغرة", name: "image", widget: "string"}
-              - {label: "صورة الخلفية", name: "coverImage", widget: "string", required: false}
+              - {label: "الصورة المصغرة (للرئيسية)", name: "image", widget: "image"}
+              - {label: "صورة الخلفية (عريضة للمشاهدة)", name: "coverImage", widget: "image", required: false}
+              - {label: "رابط مشغل الفيديو الخارجي (Embed URL)", name: "videoUrl", widget: "string", required: false}
 

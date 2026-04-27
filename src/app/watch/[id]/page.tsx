@@ -19,19 +19,42 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
   }
 
   return (
-    <main className="min-h-screen bg-background pb-20" dir="rtl">
-      <Navbar />
-      
-      {/* Player Section */}
-      <div className="pt-16 bg-black w-full">
-        <div className="max-w-5xl mx-auto aspect-video relative group">
-          {/* Mock Video Player */}
-          <div className="w-full h-full bg-zinc-900 border-x border-b border-zinc-800 flex flex-col items-center justify-center text-zinc-500">
-            <PlayCircle className="w-20 h-20 mb-4 opacity-50 group-hover:opacity-100 group-hover:text-blue-500 transition-all cursor-pointer transform group-hover:scale-110" />
-            <p className="text-xl">انقر لتشغيل العرض</p>
+    <main className="min-h-screen bg-background pb-20 relative" dir="rtl">
+      {/* Background Cover Image Backdrop */}
+      {movieData.coverImage && (
+        <div 
+          className="absolute top-0 left-0 w-full h-[60vh] z-0 opacity-20 pointer-events-none"
+          style={{
+            backgroundImage: `url(${movieData.coverImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            maskImage: 'linear-gradient(to bottom, black, transparent)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)'
+          }}
+        />
+      )}
+
+      <div className="relative z-10">
+        <Navbar />
+        
+        {/* Player Section */}
+        <div className="pt-16 bg-black/50 w-full">
+          <div className="max-w-5xl mx-auto aspect-video relative group">
+            {movieData.videoUrl ? (
+              <iframe 
+                src={movieData.videoUrl} 
+                className="w-full h-full border-x border-b border-zinc-800"
+                allowFullScreen 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            ) : (
+              <div className="w-full h-full bg-zinc-900 border-x border-b border-zinc-800 flex flex-col items-center justify-center text-zinc-500">
+                <PlayCircle className="w-20 h-20 mb-4 opacity-50 group-hover:opacity-100 group-hover:text-blue-500 transition-all cursor-pointer transform group-hover:scale-110" />
+                <p className="text-xl">لا يوجد رابط مشغل متاح حالياً</p>
+              </div>
+            )}
           </div>
         </div>
-      </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="flex flex-col lg:flex-row gap-8">
@@ -108,6 +131,7 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
             </div>
           </div>
         </div>
+      </div>
       </div>
     </main>
   );
