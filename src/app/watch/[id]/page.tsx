@@ -1,11 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
-import { Star, Clock, Calendar, Download, PlayCircle, Share2, Heart } from "lucide-react";
+import { Star, Clock, Calendar, PlayCircle } from "lucide-react";
 import { allContent } from "@/data";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import WatchSection from "@/components/WatchSection";
 import WatchlistButton from "@/components/WatchlistButton";
+import ShareButton from "@/components/ShareButton";
+import MovieCard from "@/components/MovieCard";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -105,40 +107,70 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
             
             <div className="flex flex-wrap gap-4 mb-8">
               <WatchlistButton id={movieData.id} />
-              <button className="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
-                <Share2 className="w-5 h-5" />
-                مشاركة
-              </button>
+              <ShareButton title={movieData.title} />
             </div>
           </div>
 
-          {/* Download Section */}
+          {/* Info Card */}
           <div className="lg:w-80 shrink-0">
             <div className="bg-zinc-900 border border-white/5 rounded-xl p-6 sticky top-24 shadow-xl">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <Download className="w-5 h-5 text-blue-500" />
-                روابط التحميل
+                <Star className="w-5 h-5 text-yellow-500" />
+                معلومات العمل
               </h3>
-              
-              <div className="space-y-3">
-                <button className="w-full group relative flex items-center justify-between p-4 rounded-lg bg-zinc-800 hover:bg-blue-600 transition-all border border-white/5 overflow-hidden">
-                  <span className="font-bold text-white relative z-10">جودة 1080p</span>
-                  <span className="text-xs text-gray-400 group-hover:text-white/80 relative z-10">2.4 GB</span>
-                </button>
-                
-                <button className="w-full group relative flex items-center justify-between p-4 rounded-lg bg-zinc-800 hover:bg-blue-600 transition-all border border-white/5 overflow-hidden">
-                  <span className="font-bold text-white relative z-10">جودة 720p</span>
-                  <span className="text-xs text-gray-400 group-hover:text-white/80 relative z-10">1.2 GB</span>
-                </button>
-                
-                <button className="w-full group relative flex items-center justify-between p-4 rounded-lg bg-zinc-800 hover:bg-blue-600 transition-all border border-white/5 overflow-hidden">
-                  <span className="font-bold text-white relative z-10">جودة 480p</span>
-                  <span className="text-xs text-gray-400 group-hover:text-white/80 relative z-10">600 MB</span>
-                </button>
+              <div className="space-y-4 text-sm">
+                <div className="flex justify-between text-gray-400">
+                  <span>النوع</span>
+                  <span className="text-white font-bold">{movieData.type === 'movie' ? 'فيلم' : 'مسلسل'}</span>
+                </div>
+                <div className="border-t border-white/5"></div>
+                <div className="flex justify-between text-gray-400">
+                  <span>السنة</span>
+                  <span className="text-white font-bold">{movieData.year}</span>
+                </div>
+                <div className="border-t border-white/5"></div>
+                <div className="flex justify-between text-gray-400">
+                  <span>التقييم</span>
+                  <span className="text-yellow-500 font-bold">{movieData.rating} / 10</span>
+                </div>
+                <div className="border-t border-white/5"></div>
+                <div className="flex justify-between text-gray-400">
+                  <span>المدة</span>
+                  <span className="text-white font-bold">{movieData.duration}</span>
+                </div>
+                {movieData.episodes && (
+                  <>
+                    <div className="border-t border-white/5"></div>
+                    <div className="flex justify-between text-gray-400">
+                      <span>عدد الحلقات</span>
+                      <span className="text-white font-bold">{movieData.episodes.length}</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
         </div>
+
+        {/* Related Content */}
+        {(() => {
+          const related = allContent
+            .filter((c: any) => c.id !== movieData.id && c.genre?.some((g: string) => movieData.genre?.includes(g)))
+            .slice(0, 5);
+          if (related.length === 0) return null;
+          return (
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold text-white mb-6 border-r-4 border-blue-500 pr-3">أعمال مشابهة</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {related.map((item: any) => (
+                  <div key={item.id} className="w-full">
+                    <MovieCard movie={item} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
       </div>
     </main>
