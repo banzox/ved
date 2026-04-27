@@ -1,24 +1,22 @@
 import Navbar from "@/components/Navbar";
 import { Star, Clock, Calendar, Download, PlayCircle, Share2, Heart } from "lucide-react";
+import { allContent, getContentById } from "@/data/movies";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
-  return [
-    { id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }, { id: '6' },
-    { id: '10' }, { id: '11' }, { id: '12' }, { id: '13' }, { id: '14' }
-  ];
+  return allContent.map((item) => ({
+    id: item.id,
+  }));
 }
 
 export default async function WatchPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const movieData = {
-    title: "فيلم الاختبار " + id,
-    description: "قصة ملحمية تدور أحداثها في عالم مليء بالمغامرات، حيث يضطر البطل لمواجهة مخاوفه من أجل إنقاذ البشرية. هل سينجح في مهمته أم أن قوى الشر ستكون أقوى؟",
-    rating: 8.5,
-    year: 2023,
-    duration: "120 دقيقة",
-    genre: ["أكشن", "مغامرة", "خيال علمي"],
-  };
+  const movieData = getContentById(id);
+
+  if (!movieData) {
+    return notFound();
+  }
 
   return (
     <main className="min-h-screen bg-background pb-20" dir="rtl">
