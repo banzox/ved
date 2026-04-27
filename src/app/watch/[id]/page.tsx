@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export default async function WatchPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const movieData = moviesData.content.find((c: any) => c.id === id);
+  const movieData: any = moviesData.content.find((c: any) => c.id === id);
 
   if (!movieData) {
     return notFound();
@@ -81,7 +81,7 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
             </div>
 
             <div className="flex gap-2 mb-6">
-              {movieData.genre.map((g, i) => (
+              {movieData.genre?.map((g: string, i: number) => (
                 <span key={i} className="px-3 py-1 bg-zinc-800 border border-white/5 rounded-full text-xs text-gray-300">
                   {g}
                 </span>
