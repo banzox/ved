@@ -31,5 +31,14 @@ collections:
               - {label: "التصنيفات (افصل بينها بـ Enter)", name: "genre", widget: "list"}
               - {label: "الصورة المصغرة (للرئيسية)", name: "image", widget: "image"}
               - {label: "صورة الخلفية (عريضة للمشاهدة)", name: "coverImage", widget: "image", required: false}
-              - {label: "رابط مشغل الفيديو الخارجي (Embed URL)", name: "videoUrl", widget: "string", required: false}
+              - {label: "رابط مشغل الفيديو (للفيلم أو الحلقة الأولى)", name: "videoUrl", widget: "string", required: false}
+              - label: "الحلقات (للمسلسلات فقط)"
+                name: "episodes"
+                widget: "list"
+                required: false
+                fields:
+                  - {label: "رقم الموسم", name: "season", widget: "number", default: 1}
+                  - {label: "رقم الحلقة", name: "episode", widget: "number"}
+                  - {label: "عنوان الحلقة (اختياري)", name: "title", widget: "string", required: false}
+                  - {label: "رابط المشغل للحلقة", name: "videoUrl", widget: "string"}
 

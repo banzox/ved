@@ -1,7 +1,28 @@
 import Navbar from "@/components/Navbar";
+import Link from "next/link";
 import { Star, Clock, Calendar, Download, PlayCircle, Share2, Heart } from "lucide-react";
 import moviesData from "@/data/movies.json";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import WatchSection from "@/components/WatchSection";
+import WatchlistButton from "@/components/WatchlistButton";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const movieData: any = moviesData.content.find((c: any) => c.id === id);
+  
+  if (!movieData) return { title: "غير موجود" };
+
+  return {
+    title: `${movieData.title} - مشاهدة مباشرة`,
+    description: movieData.description,
+    openGraph: {
+      title: movieData.title,
+      description: movieData.description,
+      images: [movieData.image],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return moviesData.content.map((item) => ({
@@ -37,24 +58,10 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
       <div className="relative z-10">
         <Navbar />
         
-        {/* Player Section */}
-        <div className="pt-16 bg-black/50 w-full">
-          <div className="max-w-5xl mx-auto aspect-video relative group">
-            {movieData.videoUrl ? (
-              <iframe 
-                src={movieData.videoUrl} 
-                className="w-full h-full border-x border-b border-zinc-800"
-                allowFullScreen 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              />
-            ) : (
-              <div className="w-full h-full bg-zinc-900 border-x border-b border-zinc-800 flex flex-col items-center justify-center text-zinc-500">
-                <PlayCircle className="w-20 h-20 mb-4 opacity-50 group-hover:opacity-100 group-hover:text-blue-500 transition-all cursor-pointer transform group-hover:scale-110" />
-                <p className="text-xl">لا يوجد رابط مشغل متاح حالياً</p>
-              </div>
-            )}
-          </div>
-        </div>
+        <WatchSection 
+          initialVideoUrl={movieData.videoUrl} 
+          episodes={movieData.episodes} 
+        />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="flex flex-col lg:flex-row gap-8">
@@ -82,9 +89,13 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
 
             <div className="flex gap-2 mb-6">
               {movieData.genre?.map((g: string, i: number) => (
-                <span key={i} className="px-3 py-1 bg-zinc-800 border border-white/5 rounded-full text-xs text-gray-300">
+                <Link 
+                  key={i} 
+                  href={`/genre/${encodeURIComponent(g)}`}
+                  className="px-3 py-1 bg-zinc-800 border border-white/5 rounded-full text-xs text-gray-300 hover:bg-blue-600 hover:text-white transition-colors"
+                >
                   {g}
-                </span>
+                </Link>
               ))}
             </div>
 
@@ -93,10 +104,7 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
             </p>
             
             <div className="flex flex-wrap gap-4 mb-8">
-              <button className="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
-                <Heart className="w-5 h-5" />
-                أضف للقائمة
-              </button>
+              <WatchlistButton id={movieData.id} />
               <button className="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
                 <Share2 className="w-5 h-5" />
                 مشاركة
