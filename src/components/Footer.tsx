@@ -36,6 +36,7 @@ export default function Footer() {
               <li><Link href="/movies" className="hover:text-blue-500 transition-colors">الأفلام</Link></li>
               <li><Link href="/series" className="hover:text-blue-500 transition-colors">المسلسلات</Link></li>
               <li><Link href="/watchlist" className="hover:text-blue-500 transition-colors">قائمتي</Link></li>
+              <li><Link href="/contact" className="hover:text-blue-500 transition-colors">اتصل بنا</Link></li>
             </ul>
           </div>
 
