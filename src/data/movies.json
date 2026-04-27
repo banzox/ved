@@ -2,7 +2,7 @@
   "content": [
     {
       "id": "1",
-      "type": "movie",
+      "type": "series",
       "title": "from",
       "description": "مسلسل from",
       "rating": 9.2,
@@ -14,7 +14,15 @@
       ],
       "image": "/images/Ha1Jo.png",
       "coverImage": "/images/Ha1Jo.png",
-      "videoUrl": "https://hgcloud.to/e/e8hcpdj0ug0w"
+      "videoUrl": "https://hgcloud.to/e/e8hcpdj0ug0w",
+      "episodes": [
+        {
+          "season": 4,
+          "episode": 2,
+          "title": "From",
+          "videoUrl": "https://hgcloud.to/e/e8hcpdj0ug0w"
+        }
+      ]
     }
   ]
 }
