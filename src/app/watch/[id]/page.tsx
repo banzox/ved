@@ -1,10 +1,10 @@
 import Navbar from "@/components/Navbar";
 import { Star, Clock, Calendar, Download, PlayCircle, Share2, Heart } from "lucide-react";
-import { allContent, getContentById } from "@/data/movies";
+import moviesData from "@/data/movies.json";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
-  return allContent.map((item) => ({
+  return moviesData.content.map((item) => ({
     id: item.id,
   }));
 }
@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export default async function WatchPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const movieData = getContentById(id);
+  const movieData = moviesData.content.find((c: any) => c.id === id);
 
   if (!movieData) {
     return notFound();

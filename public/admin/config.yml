@@ -1,0 +1,34 @@
+backend:
+  name: github
+  repo: banzox/ved
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+locale: "ar"
+
+collections:
+  - name: "database"
+    label: "قاعدة البيانات"
+    files:
+      - label: "قائمة الأفلام والمسلسلات"
+        name: "movies_list"
+        file: "src/data/movies.json"
+        extension: "json"
+        format: "json"
+        fields:
+          - name: "content"
+            label: "الأعمال"
+            widget: "list"
+            fields:
+              - {label: "رقم المعرف (ID)", name: "id", widget: "string"}
+              - {label: "النوع", name: "type", widget: "select", options: [{label: "فيلم", value: "movie"}, {label: "مسلسل", value: "series"}]}
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "الوصف", name: "description", widget: "text"}
+              - {label: "التقييم", name: "rating", widget: "number", value_type: "float"}
+              - {label: "سنة الإصدار", name: "year", widget: "number"}
+              - {label: "المدة", name: "duration", widget: "string"}
+              - {label: "التصنيفات (افصل بينها بـ Enter)", name: "genre", widget: "list"}
+              - {label: "الصورة المصغرة", name: "image", widget: "string"}
+              - {label: "صورة الخلفية", name: "coverImage", widget: "string", required: false}
+

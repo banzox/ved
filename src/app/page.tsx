@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";
 import MovieCarousel from "@/components/MovieCarousel";
-import { getLatestMovies, getExclusiveSeries } from "@/data/movies";
+import moviesData from "@/data/movies.json";
 
 export default function Home() {
-  const latestMovies = getLatestMovies();
-  const exclusiveSeries = getExclusiveSeries();
+  const latestMovies = moviesData.content.filter((c: any) => c.type === 'movie');
+  const exclusiveSeries = moviesData.content.filter((c: any) => c.type === 'series');
 
   return (
     <main className="min-h-screen bg-background pb-20">
