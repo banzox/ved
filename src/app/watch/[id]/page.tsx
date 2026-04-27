@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import { Star, Clock, Calendar, Download, PlayCircle, Share2, Heart } from "lucide-react";
-import moviesData from "@/data/movies.json";
+import { allContent } from "@/data";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import WatchSection from "@/components/WatchSection";
@@ -9,7 +9,7 @@ import WatchlistButton from "@/components/WatchlistButton";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const movieData: any = moviesData.content.find((c: any) => c.id === id);
+  const movieData: any = allContent.find((c: any) => c.id === id);
   
   if (!movieData) return { title: "غير موجود" };
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 export function generateStaticParams() {
-  return moviesData.content.map((item) => ({
+  return allContent.map((item) => ({
     id: item.id,
   }));
 }
@@ -33,7 +33,7 @@ export function generateStaticParams() {
 export default async function WatchPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const movieData: any = moviesData.content.find((c: any) => c.id === id);
+  const movieData: any = allContent.find((c: any) => c.id === id);
 
   if (!movieData) {
     return notFound();

@@ -2,16 +2,13 @@
 import { Play, Info } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import moviesData from "@/data/movies.json";
+import { getFeaturedContent } from "@/data";
 
 export default function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   
   // Get latest 3 movies or series that have a coverImage
-  const featured = moviesData.content
-    .filter((item: any) => item.coverImage || item.image)
-    .slice(-3)
-    .reverse();
+  const featured = getFeaturedContent(3);
 
   useEffect(() => {
     if (featured.length <= 1) return;

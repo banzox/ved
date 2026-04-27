@@ -3,13 +3,13 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import MovieCard from "@/components/MovieCard";
-import moviesData from "@/data/movies.json";
+import { allContent } from "@/data";
 
 function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
 
-  const results = moviesData.content.filter((movie: any) => 
+  const results = allContent.filter((movie: any) => 
     movie.title.toLowerCase().includes(query.toLowerCase()) ||
     movie.description.toLowerCase().includes(query.toLowerCase()) ||
     movie.genre.some((g: string) => g.toLowerCase().includes(query.toLowerCase()))

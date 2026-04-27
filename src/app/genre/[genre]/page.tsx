@@ -1,10 +1,10 @@
 import Navbar from "@/components/Navbar";
 import MovieCard from "@/components/MovieCard";
-import moviesData from "@/data/movies.json";
+import { allContent } from "@/data";
 
 export function generateStaticParams() {
   const genres = new Set<string>();
-  moviesData.content.forEach((movie: any) => {
+  allContent.forEach((movie: any) => {
     movie.genre.forEach((g: string) => genres.add(g));
   });
   
@@ -17,7 +17,7 @@ export default async function GenrePage({ params }: { params: Promise<{ genre: s
   const { genre: encodedGenre } = await params;
   const genre = decodeURIComponent(encodedGenre);
 
-  const results = moviesData.content.filter((movie: any) => 
+  const results = allContent.filter((movie: any) => 
     movie.genre.some((g: string) => g.toLowerCase() === genre.toLowerCase())
   );
 

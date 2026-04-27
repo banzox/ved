@@ -1,9 +1,9 @@
 import Navbar from "@/components/Navbar";
 import MovieCard from "@/components/MovieCard";
-import moviesData from "@/data/movies.json";
+import { allSeries } from "@/data";
 
 export default function SeriesPage() {
-  const series = moviesData.content.filter((c: any) => c.type === 'series');
+  const series = allSeries;
 
   return (
     <main className="min-h-screen bg-background pb-20" dir="rtl">

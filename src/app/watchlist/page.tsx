@@ -1,13 +1,13 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import MovieCard from "@/components/MovieCard";
-import moviesData from "@/data/movies.json";
+import { allContent } from "@/data";
 import { useWatchlist } from "@/hooks/useWatchlist";
 
 export default function WatchlistPage() {
   const { watchlist } = useWatchlist();
 
-  const savedMovies = moviesData.content.filter((movie: any) => 
+  const savedMovies = allContent.filter((movie: any) => 
     watchlist.includes(movie.id)
   );
 

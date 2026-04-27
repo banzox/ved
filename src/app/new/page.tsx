@@ -1,10 +1,10 @@
 import Navbar from "@/components/Navbar";
 import MovieCard from "@/components/MovieCard";
-import moviesData from "@/data/movies.json";
+import { allContent } from "@/data";
 
 export default function NewAdditionsPage() {
   // Sort by year descending, or just reverse the array assuming newer items are added at the end
-  const newItems = [...moviesData.content].reverse();
+  const newItems = [...allContent].reverse();
 
   return (
     <main className="min-h-screen bg-background pb-20" dir="rtl">

@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nextgear.space'),
   title: "سينما ماكس - أفلام ومسلسلات مترجمة",
   description: "شاهد أحدث الأفلام والمسلسلات العربية والأجنبية مترجمة بجودة عالية HD",
 };
