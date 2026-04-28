@@ -1,0 +1,30 @@
+{
+  "common": {
+    "dashboard": "لوحة القيادة",
+    "compound_interest": "الفائدة المركبة",
+    "debt_payoff": "سداد الديون",
+    "expenses": "المصروفات",
+    "settings": "الإعدادات",
+    "language": "اللغة",
+    "theme": "المظهر"
+  },
+  "dashboard": {
+    "total_balance": "الرصيد الإجمالي",
+    "monthly_income": "الدخل الشهري",
+    "monthly_expenses": "المصروفات الشهرية",
+    "recent_transactions": "المعاملات الأخيرة",
+    "add_transaction": "إضافة معاملة"
+  },
+  "calculators": {
+    "compound_title": "حاسبة الفائدة المركبة",
+    "compound_desc": "احسب كيف تنمو أموالك بمرور الوقت مع الفائدة المركبة.",
+    "initial_amount": "المبلغ الأولي",
+    "monthly_contribution": "المساهمة الشهرية",
+    "interest_rate": "معدل العائد السنوي (%)",
+    "years": "المدة (بالسنوات)",
+    "calculate": "احسب",
+    "total_amount": "المبلغ الإجمالي",
+    "total_contributions": "إجمالي المساهمات",
+    "total_interest": "إجمالي الفوائد"
+  }
+}

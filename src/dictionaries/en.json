@@ -1,0 +1,30 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "compound_interest": "Compound Interest",
+    "debt_payoff": "Debt Payoff",
+    "expenses": "Expenses",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "dashboard": {
+    "total_balance": "Total Balance",
+    "monthly_income": "Monthly Income",
+    "monthly_expenses": "Monthly Expenses",
+    "recent_transactions": "Recent Transactions",
+    "add_transaction": "Add Transaction"
+  },
+  "calculators": {
+    "compound_title": "Compound Interest Calculator",
+    "compound_desc": "Calculate how your money grows over time with compound interest.",
+    "initial_amount": "Initial Amount",
+    "monthly_contribution": "Monthly Contribution",
+    "interest_rate": "Annual Interest Rate (%)",
+    "years": "Years to Grow",
+    "calculate": "Calculate",
+    "total_amount": "Total Amount",
+    "total_contributions": "Total Contributions",
+    "total_interest": "Total Interest"
+  }
+}
