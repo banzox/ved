@@ -1,16 +1,56 @@
-# React + Vite
+# ⚡ منصة أدواتك (OmniTools Web Portal)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+منصة مجانية ومتكاملة تحتوي على أكثر من 12 أداة يومية تعمل بالكامل داخل متصفح المستخدم دون الحاجة لرفع أي ملفات لخيارات الأمان والسرعة الفائقة.
 
-Currently, two official plugins are available:
+![OmniTools Preview](https://img.shields.io/badge/Platform-Web-violet) ![License](https://img.shields.io/badge/License-MIT-blue) ![React](https://img.shields.io/badge/React-19-cyan)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠️ الأدوات المضمنة (Features)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📄 قسم الـ PDF (PDF Suite)
+- **دمج ملفات PDF**: دمج ملفات PDF متعددة في مستند واحد مرتّب.
+- **استخراج وتقسيم الـ PDF**: استخراج وتحديد صفحات معينة.
+- **تحويل الصور لـ PDF**: تحويل صور JPG/PNG إلى ملف PDF احترافي.
 
-## Expanding the Oxlint configuration
+### 🖼️ قسم الصور (Image Studio)
+- **ضغط وتقليل حجم الصور**: تقليل الحجم بنسبة تصل إلى 80% مع معاينة مباشرة.
+- **قص وتعديل أبعاد الصور**: أبعاد بالبكسل وأبعاد جاهزة (ستوري 9:16، منشور 1:1، يوتيوب 16:9).
+- **فلاتر وتأثيرات الصور**: تعديل السطوع والتباين والتشبع والألوان.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### 🎵 قسم الصوتيات (Audio Tools)
+- **محول الصيغ الصوتية**: تحويل إلى WAV/MP3 عبر WebAudio API.
+- **قاطع الصوتيات**: تحديد توقيت البداية والنهاية واستخراج مقطع صوّتي.
+
+### 📱 قسم السوشيال ميديا والتكست (Social & Text)
+- **مولد بايو إنستغرام**: سير ذاتية مزخرفة ومجهزة بالإيموجي.
+- **مزخرف النصوص والأسماء**: زخرفة بأشكال متعددة للغة العربية والإنجليزية.
+- **مولد كابشن فيسبوك وتيك توك**: اقتراح كابشن وهاشتاجات نشطة.
+- **مولد رابط واتساب المباشر**: إنشاء رابط `wa.me` مباشر برقم الهاتف.
+
+### 📦 حزم الأدوات (Tool Bundles)
+- **حزمة صناع المحتوى**: إعداد المنشور والغلاف والبايو في شاشة واحدة.
+- **حزمة المستندات**: تحويل ودمج الـ PDF متتابعاً.
+
+---
+
+## 💻 التشغيل المحلي (Local Setup)
+
+```bash
+# استنساخ المشروع
+git clone https://github.com/banzox/omnitools-hub.git
+
+# الانتقال للمجلد
+cd omnitools-hub
+
+# تثبيت الاعتمادات
+npm install
+
+# تشغيل خادم التطوير المحلي
+npm run dev
+```
+
+---
+
+## 🚀 التراخيص (License)
+مشروع مفتوح المصدر تحت رخصة **MIT**.
