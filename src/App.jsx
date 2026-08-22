@@ -1,16 +1,18 @@
 import React, { useState, useEffect, lazy } from 'react';
 import Navbar from './components/Navbar';
 import ToolModal from './components/ToolModal';
+import LegalModal from './components/legal/LegalModal';
+import { LanguageProvider, useLanguage } from './locales/LanguageContext';
 
 // Icons
 import { 
   FileText, Combine, Split, Image as ImageIcon, Zap, Crop, 
   Sliders, Music, Scissors, Camera, Sparkles, Video, MessageCircle, 
   PackageCheck, Star, ArrowUpRight, ShieldCheck, Heart, Terminal,
-  QrCode, Code2, Lock, KeyRound, Palette, Layers
+  QrCode, Code2, Lock, KeyRound, Palette, Layers, Shield, FileCheck2, Info
 } from 'lucide-react';
 
-// Lazy Loaded Tool Components for Ultra-Fast Initial Load (Code Splitting)
+// Lazy Loaded Tool Components for Ultra-Fast Initial Load
 const PdfMerger = lazy(() => import('./components/tools/PdfTools').then(m => ({ default: m.PdfMerger })));
 const ImagesToPdf = lazy(() => import('./components/tools/PdfTools').then(m => ({ default: m.ImagesToPdf })));
 const PdfSplitter = lazy(() => import('./components/tools/PdfTools').then(m => ({ default: m.PdfSplitter })));
@@ -40,10 +42,12 @@ const WhatsappLinkBuilder = lazy(() => import('./components/tools/SocialTools').
 const CreatorBundle = lazy(() => import('./components/tools/ToolBundles').then(m => ({ default: m.CreatorBundle })));
 const DocumentBundle = lazy(() => import('./components/tools/ToolBundles').then(m => ({ default: m.DocumentBundle })));
 
-export default function App() {
+function MainApp() {
+  const { lang, t, isRtl } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTool, setActiveTool] = useState(null);
+  const [activeLegalModal, setActiveLegalModal] = useState(null);
 
   // Synchronize favorites with LocalStorage
   const [favorites, setFavorites] = useState(() => {
@@ -63,17 +67,13 @@ export default function App() {
     }
   }, [favorites]);
 
-  const tools = [
+  const toolDefinitions = [
     // QR Tools
     {
       id: 'qr-generator',
       category: 'qr',
-      categoryLabel: 'رموز الـ QR',
-      title: 'استوديو الـ QR Code الذكي',
-      description: 'أنشئ رموز QR مخصصة للروابط والواي فاي والهواتف مع تحكم كامل بالألوان.',
       icon: QrCode,
       iconColor: '#8b5cf6',
-      badge: 'جديد ومميز ⚡',
       component: QrGenerator
     },
 
@@ -81,34 +81,22 @@ export default function App() {
     {
       id: 'pdf-merge',
       category: 'pdf',
-      categoryLabel: 'أدوات PDF',
-      title: 'دمج ملفات PDF',
-      description: 'تجميع عدة ملفات PDF في مستند واحد مرتّب وبسرعة عالية في المتصفح.',
       icon: Combine,
       iconColor: '#8b5cf6',
-      badge: 'شائع',
       component: PdfMerger
     },
     {
       id: 'pdf-split',
       category: 'pdf',
-      categoryLabel: 'أدوات PDF',
-      title: 'استخراج وتقسيم الـ PDF',
-      description: 'حدد أرقام الصفحات واستخرجها في ملف PDF مستقل.',
       icon: Split,
       iconColor: '#ec4899',
-      badge: 'مفيد',
       component: PdfSplitter
     },
     {
       id: 'img-to-pdf',
       category: 'pdf',
-      categoryLabel: 'أدوات PDF',
-      title: 'تحويل الصور إلى PDF',
-      description: 'حَوّل مجموعة من الصور (JPG/PNG) إلى ملف PDF احترافي وموحد.',
       icon: ImageIcon,
       iconColor: '#06b6d4',
-      badge: 'أساسي',
       component: ImagesToPdf
     },
 
@@ -116,34 +104,22 @@ export default function App() {
     {
       id: 'img-compress',
       category: 'images',
-      categoryLabel: 'أدوات الصور',
-      title: 'ضغط وتقليل حجم الصور',
-      description: 'قلّل حجم صورك بنسبة تصل إلى 80% مع المعاينة الفورية لفرق الجودة والحجم.',
       icon: Zap,
       iconColor: '#10b981',
-      badge: 'أكثر استخداماً',
       component: ImageCompressor
     },
     {
       id: 'img-crop',
       category: 'images',
-      categoryLabel: 'أدوات الصور',
-      title: 'قص وتعديل أبعاد الصور',
-      description: 'اقتطع واضبط أبعاد الصور للمنشورات والستوري (1:1, 9:16, 16:9).',
       icon: Crop,
       iconColor: '#f59e0b',
-      badge: 'أساسي',
       component: ImageCropResize
     },
     {
       id: 'img-filters',
       category: 'images',
-      categoryLabel: 'أدوات الصور',
-      title: 'استوديو الفلاتر والتأثيرات',
-      description: 'تعديل السطوع، التباين، التشبع، وإضافة تأثيرات وتعديلات لونية سريعة.',
       icon: Sliders,
       iconColor: '#ec4899',
-      badge: 'إبداعي',
       component: ImageFilters
     },
 
@@ -151,23 +127,15 @@ export default function App() {
     {
       id: 'text-counter',
       category: 'text',
-      categoryLabel: 'محلل النصوص',
-      title: 'محلل وعداد النصوص الذكي',
-      description: 'إحصاء الكلمات والحروف، تقدير وقت القراءة، وتنظيف وتغيير حالة الأحرف.',
       icon: FileText,
       iconColor: '#06b6d4',
-      badge: 'جديد 📝',
       component: TextCounter
     },
     {
       id: 'fancy-text',
       category: 'text',
-      categoryLabel: 'محلل النصوص',
-      title: 'مزخرف النصوص والأسماء',
-      description: 'زخرفة النصوص والأسماء باللغتين العربية والإنجليزية بأشكال متعددة.',
       icon: Sparkles,
       iconColor: '#f59e0b',
-      badge: 'شائع',
       component: FancyTextDecorator
     },
 
@@ -175,34 +143,22 @@ export default function App() {
     {
       id: 'json-formatter',
       category: 'dev',
-      categoryLabel: 'المطورين',
-      title: 'منسق ومحول JSON & CSV',
-      description: 'تنسيق وترتيب كود JSON، ضغطه، التحقق من الأخطاء، والتحويل لـ CSV.',
       icon: Code2,
       iconColor: '#8b5cf6',
-      badge: 'تقني 💻',
       component: JsonFormatter
     },
     {
       id: 'base64-tool',
       category: 'dev',
-      categoryLabel: 'المطورين',
-      title: 'مشفر ومفكك Base64',
-      description: 'تحويل وتشفير النصوص والصور والملفات لصيغة Base64 والعكس.',
       icon: Lock,
       iconColor: '#06b6d4',
-      badge: 'سريع',
       component: Base64Tool
     },
     {
       id: 'security-suite',
       category: 'dev',
-      categoryLabel: 'المطورين',
-      title: 'مولد كلمات المرور والهاشات',
-      description: 'توليد كلمات سر قوية مشفرة عشوائياً وحساب تجزئة SHA-256 محلياً.',
       icon: KeyRound,
       iconColor: '#10b981',
-      badge: 'أمان 🔒',
       component: SecuritySuite
     },
 
@@ -210,12 +166,8 @@ export default function App() {
     {
       id: 'color-studio',
       category: 'colors',
-      categoryLabel: 'الألوان والتصميم',
-      title: 'استوديو الألوان والتدرجات',
-      description: 'توليد تدرجات CSS حديثة، تحويل الألوان HEX/RGB، ونسخ الكود فورياً.',
       icon: Palette,
       iconColor: '#ec4899',
-      badge: 'إبداعي 🎨',
       component: ColorStudio
     },
 
@@ -223,23 +175,15 @@ export default function App() {
     {
       id: 'audio-convert',
       category: 'audio',
-      categoryLabel: 'الصوتيات',
-      title: 'محول الصيغ الصوتية (MP3/WAV)',
-      description: 'حَول أي ملف صوتي من صيغ متعددة إلى MP3 أو WAV مباشرة.',
       icon: Music,
       iconColor: '#8b5cf6',
-      badge: 'مفضل',
       component: AudioConverter
     },
     {
       id: 'audio-trim',
       category: 'audio',
-      categoryLabel: 'الصوتيات',
-      title: 'قاطع ومُقطع الصوتيات',
-      description: 'حدد التوقيت الزمني وقص مقطع صوّتي محدد بوضوح.',
       icon: Scissors,
       iconColor: '#06b6d4',
-      badge: 'سريع',
       component: AudioTrimmer
     },
 
@@ -247,34 +191,22 @@ export default function App() {
     {
       id: 'insta-bio',
       category: 'social',
-      categoryLabel: 'السوشيال ميديا',
-      title: 'مولد بايو انستغرام',
-      description: 'سير ذاتية جاهزة ومزخرفة بالإيموجي لتغيير بايو حسابك واجتذاب المتابعين.',
       icon: Camera,
       iconColor: '#ec4899',
-      badge: 'تريند',
       component: BioGenerator
     },
     {
       id: 'caption-gen',
       category: 'social',
-      categoryLabel: 'السوشيال ميديا',
-      title: 'مولد كابشن تيك توك وفيسبوك',
-      description: 'اقتراح منشورات تفاعلية وهاشتاجات نشطة لنشرها في منصتك.',
       icon: Video,
       iconColor: '#06b6d4',
-      badge: 'ذكي',
       component: CaptionGenerator
     },
     {
       id: 'wa-link',
       category: 'social',
-      categoryLabel: 'السوشيال ميديا',
-      title: 'مولد رابط واتساب المباشر',
-      description: 'أنشئ رابط مراسلة فورية لواتساب بدون حفظ رقم الهاتف.',
       icon: MessageCircle,
       iconColor: '#10b981',
-      badge: 'مهم',
       component: WhatsappLinkBuilder
     },
 
@@ -282,26 +214,30 @@ export default function App() {
     {
       id: 'creator-pack',
       category: 'bundles',
-      categoryLabel: 'حزم الأدوات',
-      title: 'حزمة صناع المحتوى',
-      description: 'منظومة كاملة: كابشن + زخرفة + ضغط الغلاف + بايو في شاشة واحدة متتابعة.',
       icon: PackageCheck,
       iconColor: '#8b5cf6',
-      badge: 'حزمة شاملة ⚡',
       component: CreatorBundle
     },
     {
       id: 'doc-pack',
       category: 'bundles',
-      categoryLabel: 'حزم الأدوات',
-      title: 'حزمة المستندات',
-      description: 'حوّل صورك لـ PDF ثم اجمعها ورتبها في ملف واحد متناسق.',
       icon: PackageCheck,
       iconColor: '#06b6d4',
-      badge: 'حزمة مستندات',
       component: DocumentBundle
     }
   ];
+
+  // Map dynamic translations to each tool
+  const tools = toolDefinitions.map((tDef) => {
+    const localized = t(tDef.id, 'tools') || {};
+    return {
+      ...tDef,
+      title: localized.title || tDef.id,
+      description: localized.description || '',
+      badge: localized.badge || '',
+      categoryLabel: localized.categoryLabel || t(tDef.category, 'categories')
+    };
+  });
 
   const toggleFavorite = (id) => {
     setFavorites((prev) => 
@@ -337,24 +273,26 @@ export default function App() {
         {/* Hero Section */}
         {activeCategory === 'all' && !searchQuery && (
           <div className="glass-panel" style={{ padding: '2.5rem', marginBottom: '2.5rem', background: 'linear-gradient(135deg, rgba(30, 27, 75, 0.6), rgba(18, 24, 41, 0.8))', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ maxWidth: '750px' }}>
-              <span className="badge badge-purple" style={{ marginBottom: '1rem' }}>✨ منصة الأدوات المتكاملة 100% بدون إنترنت (Offline PWA)</span>
+            <div style={{ maxWidth: '780px' }}>
+              <span className="badge badge-purple" style={{ marginBottom: '1rem' }}>
+                {t('badge', 'hero')}
+              </span>
               <h2 style={{ fontSize: '2.2rem', fontWeight: 900, lineHeight: 1.3, marginBottom: '0.75rem' }}>
-                كل الأدوات اليومية التي تحتاجهـا في <span className="gradient-text">مكان واحد وبسرعة فائقة!</span>
+                {t('title1', 'hero')} <span className="gradient-text">{t('titleGradient', 'hero')}</span>
               </h2>
               <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                أدوات الـ PDF، استوديو الـ QR Code، محلل النصوص، حقيبة المطورين، ضغط الصور، محولات الصوتيات، وتوليد المحتوى - كل ذلك يعمل مباشرة داخل متصفحك بسرعة فايقة وبسرية تامة.
+                {t('description', 'hero')}
               </p>
               
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <button className="btn-gradient" onClick={() => setActiveCategory('qr')}>
-                  <QrCode size={18} /> تجربة استوديو الـ QR
+                  <QrCode size={18} /> {t('ctaQr', 'hero')}
                 </button>
                 <button className="btn-secondary" onClick={() => setActiveCategory('bundles')}>
-                  <PackageCheck size={18} /> حزم الأدوات المتسلسلة
+                  <PackageCheck size={18} /> {t('ctaBundles', 'hero')}
                 </button>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  <ShieldCheck size={18} color="#10b981" /> خصوصية تامة بدون رفع ملفات
+                  <ShieldCheck size={18} color="#10b981" /> {t('securityBadge', 'hero')}
                 </div>
               </div>
             </div>
@@ -365,34 +303,24 @@ export default function App() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>
-              {activeCategory === 'all' && 'جميع الأدوات المتاحة'}
-              {activeCategory === 'pdf' && 'أدوات مستندات الـ PDF'}
-              {activeCategory === 'images' && 'استوديو تعديل وضغط الصور'}
-              {activeCategory === 'qr' && 'استوديو رموز الـ QR'}
-              {activeCategory === 'text' && 'أدوات ومحلل النصوص'}
-              {activeCategory === 'dev' && 'حقيبة أدوات المطورين والبرمجة'}
-              {activeCategory === 'colors' && 'استوديو الألوان والتدرجات'}
-              {activeCategory === 'audio' && 'محولات وقواطع الصوتيات'}
-              {activeCategory === 'social' && 'أدوات السوشيال ميديا وصناعة المحتوى'}
-              {activeCategory === 'bundles' && 'حزم الأدوات المدمجة (خطوة بخطوة)'}
-              {activeCategory === 'favorites' && 'أدواتك المفضلة'}
+              {t(activeCategory, 'categories')}
             </h2>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              تم العثور على ({filteredTools.length}) أداة جاهزة للاستخدام الفوري.
+              {t('foundTools', 'common')} ({filteredTools.length}) {t('readyToUse', 'common')}
             </p>
           </div>
         </div>
 
         {/* Tools Cards Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
-          {filteredTools.map((t) => {
-            const Icon = t.icon;
-            const isFav = favorites.includes(t.id);
+          {filteredTools.map((tItem) => {
+            const Icon = tItem.icon;
+            const isFav = favorites.includes(tItem.id);
             return (
               <div
-                key={t.id}
+                key={tItem.id}
                 className="tool-card animate-fade-in"
-                onClick={() => setActiveTool(t)}
+                onClick={() => setActiveTool(tItem)}
                 style={{
                   cursor: 'pointer',
                   display: 'flex',
@@ -406,20 +334,20 @@ export default function App() {
                   {/* Top Card Bar */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
                     <div style={{ background: 'rgba(139, 92, 246, 0.15)', padding: '0.75rem', borderRadius: '0.75rem' }}>
-                      <Icon size={22} color={t.iconColor} />
+                      <Icon size={22} color={tItem.iconColor} />
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      {t.badge && (
-                        <span className="badge badge-purple" style={{ fontSize: '0.7rem' }}>{t.badge}</span>
+                      {tItem.badge && (
+                        <span className="badge badge-purple" style={{ fontSize: '0.7rem' }}>{tItem.badge}</span>
                       )}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          toggleFavorite(t.id);
+                          toggleFavorite(tItem.id);
                         }}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.2rem', color: isFav ? '#f59e0b' : 'var(--text-muted)' }}
-                        title="إضافة للمفضلة"
+                        title={t('addToFav', 'common')}
                       >
                         <Star size={18} fill={isFav ? '#f59e0b' : 'none'} />
                       </button>
@@ -428,16 +356,16 @@ export default function App() {
 
                   {/* Title & Description */}
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    {t.title}
+                    {tItem.title}
                   </h3>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                    {t.description}
+                    {tItem.description}
                   </p>
                 </div>
 
                 {/* Bottom Card Action */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1.25rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-color)', fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-purple)' }}>
-                  <span>تشغيل الأداة</span>
+                  <span>{t('runTool', 'common')}</span>
                   <ArrowUpRight size={16} />
                 </div>
               </div>
@@ -449,10 +377,10 @@ export default function App() {
         {filteredTools.length === 0 && (
           <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
             <Sparkles size={40} color="var(--text-muted)" style={{ marginBottom: '1rem' }} />
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 700 }}>لم نجد أي أداة مطابقة لبحثك</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>جرب البحث بكلمات أخرى أو تصفح كل الفئات.</p>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 700 }}>{t('emptySearchTitle', 'common')}</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>{t('emptySearchDesc', 'common')}</p>
             <button className="btn-gradient" style={{ marginTop: '1.25rem' }} onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}>
-              عرض كل الأدوات
+              {t('viewAll', 'common')}
             </button>
           </div>
         )}
@@ -469,19 +397,67 @@ export default function App() {
         />
       )}
 
+      {/* Legal & Policy Modals (AdSense Requirements) */}
+      {activeLegalModal && (
+        <LegalModal
+          type={activeLegalModal}
+          onClose={() => setActiveLegalModal(null)}
+        />
+      )}
+
       {/* Footer */}
       <footer style={{ borderTop: '1px solid var(--border-color)', background: 'rgba(9, 13, 22, 0.95)', padding: '2rem 1.5rem', marginTop: '3rem' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <p style={{ fontWeight: 800, fontSize: '1rem' }}>أدواتك | OmniTools Hub</p>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>جميع الحقوق محفوظة © 2026 - مفتوح المصدر (MIT)</p>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <p style={{ fontWeight: 800, fontSize: '1.05rem' }}>{t('siteTitle', 'common')}</p>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{t('copyright', 'common')}</p>
+            </div>
+
+            {/* Legal Links for AdSense Approval */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', fontSize: '0.85rem' }}>
+              <button
+                onClick={() => setActiveLegalModal('privacy')}
+                style={{ background: 'none', border: 'none', color: 'var(--accent-purple)', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 600, padding: 0 }}
+              >
+                {t('privacyPolicy', 'common')}
+              </button>
+              <span style={{ color: 'var(--border-color)' }}>•</span>
+              <button
+                onClick={() => setActiveLegalModal('terms')}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 600, padding: 0 }}
+              >
+                {t('termsOfService', 'common')}
+              </button>
+              <span style={{ color: 'var(--border-color)' }}>•</span>
+              <button
+                onClick={() => setActiveLegalModal('about')}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 600, padding: 0 }}
+              >
+                {t('aboutUs', 'common')} / {t('contactUs', 'common')}
+              </button>
+            </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            صنع بكل <Heart size={16} color="#ef4444" fill="#ef4444" /> لخدمة المستخدم العربي
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+            <span>{t('madeWithLove', 'common')}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+              <ShieldCheck size={14} color="#10b981" /> Google AdSense & GDPR Ready
+            </span>
           </div>
+
         </div>
       </footer>
 
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainApp />
+    </LanguageProvider>
   );
 }
