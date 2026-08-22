@@ -22,7 +22,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. معالجة البيانات داخل المتصفح (100% Client-Side)',
-            text: 'نحن في منصة OmniTools Hub نضع خصوصية المستخدم في المقام الأول. جميع الأدوات المتاحة على هذا الموقع (بما في ذلك دمج وتقسيم مستندات PDF، ضغط الصور، تحويل ومعالجة الصوتيات، تشفير Base64 وتوليد أكواد الـ QR) تعمل بالكامل وبنسبة 100% داخل متصفح المستخدم (Client-Side Execution) باستخدام أحدث تقنيات HTML5 Canvas و WebAudio API و Web Crypto API. لا يتم أبداً رفع أو تخزين أو فحص أي من ملفاتك، صورك، أو مستنداتك على أي خوادم خارجية.'
+            text: 'نحن في منصة أدوات سبيس (SpaceTools Hub) نضع خصوصية المستخدم في المقام الأول. جميع الأدوات المتاحة على هذا الموقع (بما في ذلك دمج وتقسيم مستندات PDF، ضغط الصور، تحويل ومعالجة الصوتيات، تشفير Base64 وتوليد أكواد الـ QR) تعمل بالكامل وبنسبة 100% داخل متصفح المستخدم (Client-Side Execution) باستخدام أحدث تقنيات HTML5 Canvas و WebAudio API و Web Crypto API. لا يتم أبداً رفع أو تخزين أو فحص أي من ملفاتك، صورك، أو مستنداتك على أي خوادم خارجية.'
           },
           {
             heading: '2. ملفات تعريف الارتباط وإعلانات الطرف الثالث (Google AdSense)',
@@ -39,7 +39,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. 100% In-Browser & Client-Side Processing',
-            text: 'At OmniTools Hub, your privacy is our absolute priority. All tools provided on this portal—including PDF merging and splitting, image compression, audio conversion, Base64 encoding, and QR code generation—execute 100% locally inside your web browser via HTML5 Canvas, WebAudio API, and WebAssembly. None of your files, images, or documents are ever uploaded, processed, or stored on external servers.'
+            text: 'At SpaceTools Hub, your privacy is our absolute priority. All tools provided on this portal—including PDF merging and splitting, image compression, audio conversion, Base64 encoding, and QR code generation—execute 100% locally inside your web browser via HTML5 Canvas, WebAudio API, and WebAssembly. None of your files, images, or documents are ever uploaded, processed, or stored on external servers.'
           },
           {
             heading: '2. Cookies and Third-Party Advertising (Google AdSense)',
@@ -56,7 +56,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. Procesamiento 100% en el Navegador (Sin Servidor)',
-            text: 'En OmniTools Hub, la privacidad de nuestros usuarios es fundamental. Todas las herramientas disponibles (fusión de PDF, compresión de imágenes, conversores de audio, códigos QR y utilidades de desarrollo) se ejecutan al 100% dentro de tu navegador web. Ninguno de tus archivos, imágenes o datos se sube ni se almacena en servidores externos.'
+            text: 'En SpaceTools Hub, la privacidad de nuestros usuarios es fundamental. Todas las herramientas disponibles (fusión de PDF, compresión de imágenes, conversores de audio, códigos QR y utilidades de desarrollo) se ejecutan al 100% dentro de tu navegador web. Ninguno de tus archivos, imágenes o datos se sube ni se almacena en servidores externos.'
           },
           {
             heading: '2. Cookies y Publicidad de Terceros (Google AdSense)',
@@ -73,7 +73,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. Traitement 100% Local dans le Navigateur',
-            text: 'Chez OmniTools Hub, la confidentialité est notre engagement absolu. Tous les outils (fusion de PDF, compression d\'images, conversion audio, générateur de QR codes) fonctionnent à 100% dans votre navigateur via HTML5 et WebAudio API. Vos fichiers et documents ne sont jamais téléversés ni stockés sur des serveurs distants.'
+            text: 'Chez SpaceTools Hub, la confidentialité est notre engagement absolu. Tous les outils (fusion de PDF, compression d\'images, conversion audio, générateur de QR codes) fonctionnent à 100% dans votre navigateur via HTML5 et WebAudio API. Vos fichiers et documents ne sont jamais téléversés ni stockés sur des serveurs distants.'
           },
           {
             heading: '2. Cookies et Publicités Tiers (Google AdSense)',
@@ -90,7 +90,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. 100% Lokale Verarbeitung im Browser (Client-Side)',
-            text: 'Bei OmniTools Hub hat der Schutz Ihrer Privatsphäre oberste Priorität. Alle auf dieser Website angebotenen Werkzeuge (PDF-Zusammenführung, Bildkompression, Audiokonverter, QR-Code-Generator usw.) werden zu 100% lokal in Ihrem Browser ausgeführt. Es werden zu keinem Zeitpunkt Dateien, Bilder oder Daten auf externe Server hochgeladen oder gespeichert.'
+            text: 'Bei SpaceTools Hub hat der Schutz Ihrer Privatsphäre oberste Priorität. Alle auf dieser Website angebotenen Werkzeuge (PDF-Zusammenführung, Bildkompression, Audiokonverter, QR-Code-Generator usw.) werden zu 100% lokal in Ihrem Browser ausgeführt. Es werden zu keinem Zeitpunkt Dateien, Bilder oder Daten auf externe Server hochgeladen oder gespeichert.'
           },
           {
             heading: '2. Cookies und Drittanbieter-Werbung (Google AdSense)',
@@ -109,7 +109,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. الاستخدام المجاني والمشروع',
-            text: 'توفر منصة OmniTools Hub جميع أدواتها بشكل مجاني بالكامل للأفراد والمطورين وصناع المحتوى والشركات للاستخدام الشخصي والتجاري المشروع، وفقاً لرخصة المصدر المفتوح MIT.'
+            text: 'توفر منصة أدوات سبيس (SpaceTools Hub) جميع أدواتها بشكل مجاني بالكامل للأفراد والمطورين وصناع المحتوى والشركات للاستخدام الشخصي والتجاري المشروع، وفقاً لرخصة المصدر المفتوح MIT.'
           },
           {
             heading: '2. إخلاء المسؤولية',
@@ -122,7 +122,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. Permitted and Free Use',
-            text: 'OmniTools Hub offers all web utilities free of charge for personal, educational, and commercial purposes under the MIT Open Source License.'
+            text: 'SpaceTools Hub offers all web utilities free of charge for personal, educational, and commercial purposes under the MIT Open Source License.'
           },
           {
             heading: '2. Disclaimer of Warranties',
@@ -135,7 +135,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. Uso Libre y Gratuito',
-            text: 'OmniTools Hub ofrece todas sus herramientas de forma gratuita para uso personal y comercial bajo la Licencia de Código Abierto MIT.'
+            text: 'SpaceTools Hub ofrece todas sus herramientas de forma gratuita para uso personal y comercial bajo la Licencia de Código Abierto MIT.'
           },
           {
             heading: '2. Descargo de Responsabilidad',
@@ -148,7 +148,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. Utilisation Libre et Gratuite',
-            text: 'OmniTools Hub met à disposition l\'ensemble de ses outils gratuitement pour un usage personnel et professionnel, sous licence open source MIT.'
+            text: 'SpaceTools Hub met à disposition l\'ensemble de ses outils gratuitement pour un usage personnel et professionnel, sous licence open source MIT.'
           },
           {
             heading: '2. Exclusion de Garantie',
@@ -161,7 +161,7 @@ export default function LegalModal({ type, onClose }) {
         sections: [
           {
             heading: '1. Kostenlose und Zulässige Nutzung',
-            text: 'OmniTools Hub stellt alle Werkzeuge kostenlos für den persönlichen und geschäftlichen Gebrauch unter der MIT-Open-Source-Lizenz zur Verfügung.'
+            text: 'SpaceTools Hub stellt alle Werkzeuge kostenlos für den persönlichen und geschäftlichen Gebrauch unter der MIT-Open-Source-Lizenz zur Verfügung.'
           },
           {
             heading: '2. Haftungsausschluss',
@@ -175,7 +175,7 @@ export default function LegalModal({ type, onClose }) {
         title: 'من نحن ومعلومات الاتصال (About & Contact)',
         sections: [
           {
-            heading: 'منصة OmniTools Hub',
+            heading: 'منصة أدوات سبيس | SpaceTools Hub',
             text: 'منصة ويب متكاملة مصممة لتوفير أدوات يومية خفيفة وسريعة للمستخدمين وصناع المحتوى والمطورين حول العالم، مع التركيز على الخصوصية التامة وسرعة الأداء دون الحاجة لتحميل برامج خارجية أو تسجيل حسابات.'
           },
           {
@@ -188,8 +188,8 @@ export default function LegalModal({ type, onClose }) {
         title: 'About Us & Contact',
         sections: [
           {
-            heading: 'About OmniTools Hub',
-            text: 'OmniTools Hub is an open web utility portal crafted to empower creators, developers, and daily internet users with fast, secure, and client-side processing tools that protect user privacy.'
+            heading: 'About SpaceTools Hub',
+            text: 'SpaceTools Hub is an open web utility portal crafted to empower creators, developers, and daily internet users with fast, secure, and client-side processing tools that protect user privacy.'
           },
           {
             heading: 'Get in Touch',
@@ -201,8 +201,8 @@ export default function LegalModal({ type, onClose }) {
         title: 'Sobre Nosotros y Contacto',
         sections: [
           {
-            heading: 'Sobre OmniTools Hub',
-            text: 'OmniTools Hub es una plataforma diseñada para ofrecer herramientas web rápidas, gratuitas y seguras a desarrolladores y creadores de todo el mundo.'
+            heading: 'Sobre SpaceTools Hub',
+            text: 'SpaceTools Hub es una plataforma diseñada para ofrecer herramientas web rápidas, gratuitas y seguras a desarrolladores y creadores de todo el mundo.'
           },
           {
             heading: 'Contacto',
@@ -214,8 +214,8 @@ export default function LegalModal({ type, onClose }) {
         title: 'À Propos et Contact',
         sections: [
           {
-            heading: 'À Propos d\'OmniTools Hub',
-            text: 'OmniTools Hub est une suite d\'utilitaires web gratuits conçue pour offrir rapidité, sécurité et simplicité aux utilisateurs du monde entier.'
+            heading: 'À Propos de SpaceTools Hub',
+            text: 'SpaceTools Hub est une suite d\'utilitaires web gratuits conçue pour offrir rapidité, sécurité et simplicité aux utilisateurs du monde entier.'
           },
           {
             heading: 'Nous Contacter',
@@ -227,8 +227,8 @@ export default function LegalModal({ type, onClose }) {
         title: 'Über Uns & Kontakt',
         sections: [
           {
-            heading: 'Über OmniTools Hub',
-            text: 'OmniTools Hub ist ein modernes Web-Portal mit kostenlosen, schnellen und datenschutzfreundlichen Werkzeugen für Anwender weltweit.'
+            heading: 'Über SpaceTools Hub',
+            text: 'SpaceTools Hub ist ein modernes Web-Portal mit kostenlosen, schnellen und datenschutzfreundlichen Werkzeugen für Anwender weltweit.'
           },
           {
             heading: 'Kontaktieren Sie Uns',

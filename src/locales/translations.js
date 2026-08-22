@@ -2,8 +2,8 @@ export const translations = {
   // 🇸🇦 العربية
   ar: {
     common: {
-      siteTitle: 'أدواتك | OmniTools',
-      siteTagline: 'منصة الأدوات المجانية والمتكاملة 100% في المتصفح',
+      siteTitle: 'أدوات سبيس | SpaceTools',
+      siteTagline: 'منصة الأدوات السحابية المجانية والمتكاملة 100% في المتصفح',
       searchPlaceholder: 'ابحث عن أداة (QR، بي دي اف، ضغط صور، Base64، كابشن...)',
       pwaInstall: 'تثبيت التطبيق',
       safeBadge: '⚡ معالجة سريعة وآمنة 100%',
@@ -13,7 +13,7 @@ export const translations = {
       emptySearchTitle: 'لم نجد أي أداة مطابقة لبحثك',
       emptySearchDesc: 'جرب البحث بكلمات أخرى أو تصفح كل الفئات.',
       viewAll: 'عرض كل الأدوات',
-      copyright: 'جميع الحقوق محفوظة © 2026 - مفتوح المصدر (MIT)',
+      copyright: 'جميع الحقوق محفوظة © 2026 SpaceTools - مفتوح المصدر (MIT)',
       madeWithLove: 'صنع بكل حب لخدمة المستخدم العربي والعالمي',
       privacyPolicy: 'سياسة الخصوصية',
       termsOfService: 'شروط الاستخدام',
@@ -40,7 +40,7 @@ export const translations = {
     },
     blog: {
       blogBadge: '📚 الأدلة والمقالات التعليمية',
-      blogTitle: 'مركز المعرفة وشروحات الأدوات',
+      blogTitle: 'مركز المعرفة وشروحات أدوات سبيس',
       blogSubtitle: 'أدلة إرشادية ونصائح تخصصية لتحقيق أقصى استفادة من أدوات المنصة وزيادة إنتاجيتك.',
       readArticle: 'قراءة المقال كاملاً',
       tryToolTitle: 'هل ترغب بتجربة الأداة المشروحة الآن؟',
@@ -50,7 +50,7 @@ export const translations = {
     hero: {
       badge: '✨ منصة الأدوات المتكاملة 100% بدون إنترنت (Offline PWA)',
       title1: 'كل الأدوات اليومية التي تحتاجهـا في',
-      titleGradient: 'مكان واحد وبسرعة فائقة!',
+      titleGradient: 'أدوات سبيس وبسرعة فائقة!',
       description: 'أدوات الـ PDF، استوديو الـ QR Code، محلل النصوص، حقيبة المطورين، ضغط الصور، محولات الصوتيات، وتوليد المحتوى - كل ذلك يعمل مباشرة داخل متصفحك بسرعة فائقة وبسرية تامة.',
       ctaQr: 'تجربة استوديو الـ QR',
       ctaBundles: 'حزم الأدوات المتسلسلة',
@@ -183,7 +183,7 @@ export const translations = {
   // 🇺🇸 English
   en: {
     common: {
-      siteTitle: 'OmniTools Hub',
+      siteTitle: 'SpaceTools Hub',
       siteTagline: 'Free, Fast & Secure In-Browser Web Utilities',
       searchPlaceholder: 'Search any tool (QR, PDF Merge, Image Compress, Base64, Caption...)',
       pwaInstall: 'Install App',
@@ -194,7 +194,7 @@ export const translations = {
       emptySearchTitle: 'No tools match your query',
       emptySearchDesc: 'Try searching with other keywords or explore all categories.',
       viewAll: 'View All Tools',
-      copyright: 'All rights reserved © 2026 - Open Source (MIT License)',
+      copyright: 'All rights reserved © 2026 SpaceTools - Open Source (MIT License)',
       madeWithLove: 'Crafted with precision for creators and developers worldwide',
       privacyPolicy: 'Privacy Policy',
       termsOfService: 'Terms of Service',
@@ -221,7 +221,7 @@ export const translations = {
     },
     blog: {
       blogBadge: '📚 Guides & Knowledge Hub',
-      blogTitle: 'Knowledge Center & Tool Guides',
+      blogTitle: 'SpaceTools Knowledge Center',
       blogSubtitle: 'Expert tutorials, step-by-step walk-throughs, and optimization tips for peak productivity.',
       readArticle: 'Read Full Guide',
       tryToolTitle: 'Ready to Try the Featured Tool?',
@@ -231,7 +231,7 @@ export const translations = {
     hero: {
       badge: '✨ 100% Offline-Ready Progressive Web App (PWA)',
       title1: 'All the Daily Utilities You Need in',
-      titleGradient: 'One Blazing Fast Portal!',
+      titleGradient: 'SpaceTools Blazing Fast Portal!',
       description: 'PDF management, Smart QR generation, text analysis, developer converters, image optimization, audio tools, and social generators — executing 100% securely inside your browser.',
       ctaQr: 'Explore QR Studio',
       ctaBundles: 'Try Tool Bundles',
@@ -364,7 +364,7 @@ export const translations = {
   // 🇪🇸 Español
   es: {
     common: {
-      siteTitle: 'OmniTools Hub',
+      siteTitle: 'SpaceTools Hub',
       siteTagline: 'Herramientas Web Gratuitas, Rápidas y 100% Seguras en tu Navegador',
       searchPlaceholder: 'Buscar herramienta (QR, Fusionar PDF, Comprimir Imagen, Base64...)',
       pwaInstall: 'Instalar Aplicación',
@@ -375,7 +375,7 @@ export const translations = {
       emptySearchTitle: 'No se encontraron herramientas',
       emptySearchDesc: 'Intenta con otras palabras clave o explora todas las categorías.',
       viewAll: 'Ver Todas las Herramientas',
-      copyright: 'Todos los derechos reservados © 2026 - Código Abierto (Licencia MIT)',
+      copyright: 'Todos los derechos reservados © 2026 SpaceTools - Código Abierto (Licencia MIT)',
       madeWithLove: 'Diseñado con precisión para creadores y desarrolladores',
       privacyPolicy: 'Política de Privacidad',
       termsOfService: 'Términos de Servicio',
@@ -402,7 +402,7 @@ export const translations = {
     },
     blog: {
       blogBadge: '📚 Guías y Tutoriales',
-      blogTitle: 'Centro de Conocimiento y Guías',
+      blogTitle: 'Centro de Conocimiento SpaceTools',
       blogSubtitle: 'Tutoriales expertos y recomendaciones para optimizar tus flujos de trabajo.',
       readArticle: 'Leer Guía Completa',
       tryToolTitle: '¿Quieres Probar la Herramienta Ahora?',
@@ -412,7 +412,7 @@ export const translations = {
     hero: {
       badge: '✨ Aplicación Web Progresiva (PWA) con Modo Offline',
       title1: 'Todas las Utilidades Diarias que Necesitas en',
-      titleGradient: '¡Un Portal Ultra Rápido!',
+      titleGradient: '¡SpaceTools Portal Ultra Rápido!',
       description: 'Gestión de PDF, generador de códigos QR inteligentes, optimización de imágenes, conversores de audio y utilidades para desarrolladores ejecutadas con total privacidad en tu navegador.',
       ctaQr: 'Probar Estudio QR',
       ctaBundles: 'Ver Paquetes',
@@ -545,7 +545,7 @@ export const translations = {
   // 🇫🇷 Français
   fr: {
     common: {
-      siteTitle: 'OmniTools Hub',
+      siteTitle: 'SpaceTools Hub',
       siteTagline: 'Boîte à Outils Web Gratuite, Rapide et 100% Sécurisée dans le Navigateur',
       searchPlaceholder: 'Rechercher un outil (QR, Fusion PDF, Compression Image, Base64...)',
       pwaInstall: 'Installer l\'Application',
@@ -556,7 +556,7 @@ export const translations = {
       emptySearchTitle: 'Aucun outil ne correspond à votre recherche',
       emptySearchDesc: 'Essayez d\'autres mots-clés ou parcourez toutes les catégories.',
       viewAll: 'Voir Tous les Outils',
-      copyright: 'Tous droits réservés © 2026 - Open Source (Licence MIT)',
+      copyright: 'Tous droits réservés © 2026 SpaceTools - Open Source (Licence MIT)',
       madeWithLove: 'Conçu avec passion pour les créateurs et développeurs du monde entier',
       privacyPolicy: 'Politique de Confidentialité',
       termsOfService: 'Conditions d\'Utilisation',
@@ -583,7 +583,7 @@ export const translations = {
     },
     blog: {
       blogBadge: '📚 Guides & Tutoriels',
-      blogTitle: 'Centre de Connaissances & Guides',
+      blogTitle: 'Centre de Connaissances SpaceTools',
       blogSubtitle: 'Tutoriels et astuces d\'optimisation pour maximiser votre efficacité au quotidien.',
       readArticle: 'Lire le Guide Complet',
       tryToolTitle: 'Prêt à Utiliser l\'Outil Présenté ?',
@@ -593,7 +593,7 @@ export const translations = {
     hero: {
       badge: '✨ Application Web Progressive (PWA) avec Mode Hors Ligne',
       title1: 'Tous vos Outils Quotidiens Réunis dans',
-      titleGradient: 'Un Portail Ultra Rapide !',
+      titleGradient: 'SpaceTools Portail Ultra Rapide !',
       description: 'Traitement de PDF, génération de QR Codes intelligents, optimisation d\'images, conversion audio et outils développeurs — exécutés en toute sécurité dans votre navigateur.',
       ctaQr: 'Découvrir le Studio QR',
       ctaBundles: 'Explorer les Packs',
@@ -726,7 +726,7 @@ export const translations = {
   // 🇩🇪 Deutsch
   de: {
     common: {
-      siteTitle: 'OmniTools Hub',
+      siteTitle: 'SpaceTools Hub',
       siteTagline: 'Kostenlose, Blitzschnelle & Sichere In-Browser Web-Werkzeuge',
       searchPlaceholder: 'Werkzeug suchen (QR, PDF zusammenfügen, Bild komprimieren, Base64...)',
       pwaInstall: 'App Installieren',
@@ -737,7 +737,7 @@ export const translations = {
       emptySearchTitle: 'Keine passenden Werkzeuge gefunden',
       emptySearchDesc: 'Versuchen Sie es mit anderen Begriffen oder durchsuchen Sie alle Kategorien.',
       viewAll: 'Alle Werkzeuge Anzeigen',
-      copyright: 'Alle Rechte vorbehalten © 2026 - Open Source (MIT-Lizenz)',
+      copyright: 'Alle Rechte vorbehalten © 2026 SpaceTools - Open Source (MIT-Lizenz)',
       madeWithLove: 'Entwickelt mit Leidenschaft für Entwickler und Kreative weltweit',
       privacyPolicy: 'Datenschutzerklärung',
       termsOfService: 'Nutzungsbedingungen',
@@ -764,7 +764,7 @@ export const translations = {
     },
     blog: {
       blogBadge: '📚 Anleitungen & Wissensdatenbank',
-      blogTitle: 'Wissenszentrum & Werkzeug-Ratgeber',
+      blogTitle: 'SpaceTools Wissenszentrum',
       blogSubtitle: 'Experten-Anleitungen und Tipps für maximale Produktivität und Datensicherheit.',
       readArticle: 'Vollständigen Ratgeber Lesen',
       tryToolTitle: 'Möchten Sie das Werkzeug Direkt Ausprobieren?',
@@ -774,7 +774,7 @@ export const translations = {
     hero: {
       badge: '✨ Progressive Web App (PWA) mit Offline-Funktion',
       title1: 'Alle Täglichen Online-Werkzeuge in',
-      titleGradient: 'Einem Blitzschnellen Portal!',
+      titleGradient: 'SpaceTools Blitzschnellen Portal!',
       description: 'PDF-Verwaltung, intelligenter QR-Code-Generator, Bildoptimierung, Audiokonverter und Entwickler-Tools — alles 100% sicher und direkt in Ihrem Webbrowser.',
       ctaQr: 'QR-Studio Entdecken',
       ctaBundles: 'Pakete Ansehen',

@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'sitemap.xml'],
       manifest: {
-        name: 'أدواتك | OmniTools Hub',
-        short_name: 'OmniTools',
-        description: 'منصة متكاملة لأدوات الويب المجانية: PDF، صور، QR Code، نصوص، صوتيات، وأدوات مطورين تعمل 100% محلياً.',
+        name: 'أدوات سبيس | SpaceTools Hub',
+        short_name: 'SpaceTools',
+        description: 'منصة أدوات سبيس لأدوات الويب المجانية: PDF، صور، QR Code، نصوص، صوتيات، وأدوات مطورين تعمل 100% محلياً.',
         theme_color: '#080e1e',
         background_color: '#080e1e',
         display: 'standalone',

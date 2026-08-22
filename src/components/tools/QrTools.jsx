@@ -8,7 +8,7 @@ export function QrGenerator() {
   
   // Input fields
   const [urlInput, setUrlInput] = useState('https://nextgear.space');
-  const [textInput, setTextInput] = useState('أهلاً بك في منصة أومني تولز');
+  const [textInput, setTextInput] = useState('أهلاً بك في منصة أدوات سبيس');
   const [phoneInput, setPhoneInput] = useState('');
   const [emailInput, setEmailInput] = useState({ to: '', subject: '', body: '' });
   const [wifiInput, setWifiInput] = useState({ ssid: '', password: '', encryption: 'WPA' });
@@ -29,7 +29,7 @@ export function QrGenerator() {
       case 'url':
         return urlInput.trim() || 'https://nextgear.space';
       case 'text':
-        return textInput || 'OmniTools';
+        return textInput || 'SpaceTools';
       case 'phone':
         return phoneInput ? `tel:${phoneInput.replace(/\s+/g, '')}` : 'tel:';
       case 'email':

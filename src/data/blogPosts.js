@@ -30,7 +30,7 @@ export const blogPosts = [
       ar: [
         {
           heading: 'لماذا يعتبر دمج الـ PDF محلياً أفضل للخصوصية؟',
-          body: 'في كثير من الأحيان نحتاج لدمج السير الذاتية، العقود، أو التقارير المالية في ملف PDF واحد. معظم المواقع التقليدية تطلب منك رفع الملف إلى خوادمها، مما قد يعرض بياناتك الحساسة للخطر. في منصة OmniTools Hub، تتم عملية الدمج بالكامل داخل متصفحك عبر تقنية WebAssembly و pdf-lib دون أن يغادر ملفك جهازك مطلقاً.'
+          body: 'في كثير من الأحيان نحتاج لدمج السير الذاتية، العقود، أو التقارير المالية في ملف PDF واحد. معظم المواقع التقليدية تطلب منك رفع الملف إلى خوادمها، مما قد يعرض بياناتك الحساسة للخطر. في منصة SpaceTools Hub، تتم عملية الدمج بالكامل داخل متصفحك عبر تقنية WebAssembly و pdf-lib دون أن يغادر ملفك جهازك مطلقاً.'
         },
         {
           heading: 'خطوات دمج ملفات الـ PDF في ثوانٍ:',
@@ -44,11 +44,11 @@ export const blogPosts = [
       en: [
         {
           heading: 'Why Local In-Browser PDF Merging is Superior for Privacy',
-          body: 'Combining resumes, legal contracts, or invoices into a single PDF is a common daily task. Traditional online converters require uploading your confidential files to their servers, posing serious privacy risks. OmniTools Hub processes everything 100% on the client side using WebAssembly and pdf-lib—your files never leave your device.'
+          body: 'Combining resumes, legal contracts, or invoices into a single PDF is a common daily task. Traditional online converters require uploading your confidential files to their servers, posing serious privacy risks. SpaceTools Hub processes everything 100% on the client side using WebAssembly and pdf-lib—your files never leave your device.'
         },
         {
           heading: 'Step-by-Step Guide to Merging PDFs:',
-          body: '1. Open the "Merge PDF Documents" tool in OmniTools Hub.\n2. Drag and drop or select your PDF files from your computer or phone.\n3. Verify the order of the selected documents.\n4. Click "Merge Files & Download PDF" to instantly generate and save your merged document.'
+          body: '1. Open the "Merge PDF Documents" tool in SpaceTools Hub.\n2. Drag and drop or select your PDF files from your computer or phone.\n3. Verify the order of the selected documents.\n4. Click "Merge Files & Download PDF" to instantly generate and save your merged document.'
         },
         {
           heading: 'Pro Tips for Clean PDF Compilation:',
@@ -58,7 +58,7 @@ export const blogPosts = [
       es: [
         {
           heading: 'Por qué la fusión local de PDF es la opción más segura',
-          body: 'Unir contratos, facturas o currículums en un solo PDF es indispensable. Sin embargo, la mayoría de herramientas en línea suben tus archivos a servidores remotos. En OmniTools Hub, la fusión se realiza al 100% dentro de tu navegador web sin que tus datos salgan jamás de tu equipo.'
+          body: 'Unir contratos, facturas o currículums en un solo PDF es indispensable. Sin embargo, la mayoría de herramientas en línea suben tus archivos a servidores remotos. En SpaceTools Hub, la fusión se realiza al 100% dentro de tu navegador web sin que tus datos salgan jamás de tu equipo.'
         },
         {
           heading: 'Pasos para unir tus archivos PDF al instante:',
@@ -72,7 +72,7 @@ export const blogPosts = [
       fr: [
         {
           heading: 'Pourquoi la fusion PDF locale garantit une confidentialité totale',
-          body: 'Regrouper des CV, des factures ou des contrats en un seul document PDF est une tâche fréquente. Contrairement aux services traditionnels qui transfèrent vos données sur des serveurs tiers, OmniTools Hub exécute le traitement à 100% dans votre navigateur.'
+          body: 'Regrouper des CV, des factures ou des contrats en un seul document PDF est une tâche fréquente. Contrairement aux services traditionnels qui transfèrent vos données sur des serveurs tiers, SpaceTools Hub exécute le traitement à 100% dans votre navigateur.'
         },
         {
           heading: 'Comment fusionner vos PDF en quelques clics :',
@@ -86,7 +86,7 @@ export const blogPosts = [
       de: [
         {
           heading: 'Warum die lokale PDF-Zusammenführung mehr Datenschutz bietet',
-          body: 'Das Zusammenfügen von Verträgen, Bewerbungen oder Rechnungen zu einer einzigen PDF-Datei gehört zum Alltag. Während viele Webdienste Ihre vertraulichen Dokumente auf Server hochladen, arbeitet OmniTools Hub zu 100% lokal in Ihrem Browser.'
+          body: 'Das Zusammenfügen von Verträgen, Bewerbungen oder Rechnungen zu einer einzigen PDF-Datei gehört zum Alltag. Während viele Webdienste Ihre vertraulichen Dokumente auf Server hochladen, arbeitet SpaceTools Hub zu 100% lokal in Ihrem Browser.'
         },
         {
           heading: 'Schritte zum Zusammenfügen von PDFs:',
@@ -152,7 +152,7 @@ export const blogPosts = [
           body: '• WebP: The modern standard for web assets, offering superior compression ratios.\n• JPEG: Best for photographs with complex colors and wide cross-platform compatibility.\n• PNG: Ideal for logos, icons, and illustrations requiring transparency.'
         },
         {
-          heading: 'How to Optimize with OmniTools:',
+          heading: 'How to Optimize with SpaceTools:',
           body: 'Select your photo in the Image Compressor, set quality between 70% and 80%, monitor the live size comparison badge, and download your optimized asset instantly.'
         }
       ],
@@ -167,7 +167,7 @@ export const blogPosts = [
         },
         {
           heading: 'Cómo comprimir tus fotos:',
-          body: 'Sube tu imagen al Compresor de Imágenes de OmniTools, ajusta la calidad al 75% y descarga tu archivo optimizado en formato WebP o JPEG.'
+          body: 'Sube tu imagen al Compresor de Imágenes de SpaceTools, ajusta la calidad al 75% y descarga tu archivo optimizado en formato WebP o JPEG.'
         }
       ],
       fr: [
@@ -194,7 +194,7 @@ export const blogPosts = [
           body: '• WebP: Modernstes Webformat mit maximaler Komprimierung.\n• JPEG: Universeller Standard für Fotos.\n• PNG: Perfekt für Grafiken und Logos mit transparentem Hintergrund.'
         },
         {
-          heading: 'So funktioniert es in OmniTools:',
+          heading: 'So funktioniert es in SpaceTools:',
           body: 'Bild hochladen, Qualitätsregler auf 75% einstellen und das komprimierte Bild direkt herunterladen.'
         }
       ]
@@ -254,7 +254,7 @@ export const blogPosts = [
         },
         {
           heading: 'Brand Customization Controls:',
-          body: 'OmniTools Smart QR Studio allows you to customize foreground and background colors to match your brand palette perfectly.'
+          body: 'SpaceTools Smart QR Studio allows you to customize foreground and background colors to match your brand palette perfectly.'
         }
       ],
       es: [
@@ -268,7 +268,7 @@ export const blogPosts = [
         },
         {
           heading: 'Personalización de colores de marca:',
-          body: 'El generador QR de OmniTools permite cambiar colores de fondo y patrón para mantener una estética profesional uniforme.'
+          body: 'El generador QR de SpaceTools permite cambiar colores de fondo y patrón para mantener una estética profesional uniforme.'
         }
       ],
       fr: [
@@ -282,7 +282,7 @@ export const blogPosts = [
         },
         {
           heading: 'Personnalisation graphique :',
-          body: 'Adaptez les couleurs de votre QR Code aux teintes de votre charte graphique dans le studio OmniTools.'
+          body: 'Adaptez les couleurs de votre QR Code aux teintes de votre charte graphique dans le studio SpaceTools.'
         }
       ],
       de: [
@@ -296,7 +296,7 @@ export const blogPosts = [
         },
         {
           heading: 'Farbanpassung an Ihr Corporate Design:',
-          body: 'Passen Sie Vorder- und Hintergrundfarben im OmniTools QR-Studio nahtlos an Ihre Markenfarben an.'
+          body: 'Passen Sie Vorder- und Hintergrundfarben im SpaceTools QR-Studio nahtlos an Ihre Markenfarben an.'
         }
       ]
     }
@@ -354,7 +354,7 @@ export const blogPosts = [
           body: '• Inline small icons and SVG assets directly in CSS and HTML to eliminate extra HTTP roundtrips.\n• Store thumbnails and document previews as text strings inside JSON or NoSQL databases.\n• Safely pass binary payloads across REST APIs and email attachments.'
         },
         {
-          heading: 'How to Use the OmniTools Base64 Suite:',
+          heading: 'How to Use the SpaceTools Base64 Suite:',
           body: 'Switch between text and file modes, upload any image or paste text, and copy clean Base64 Data URIs with one click.'
         }
       ],
@@ -368,7 +368,7 @@ export const blogPosts = [
           body: '• Incrustar iconos pequeños directamente en hojas de estilo CSS para reducir peticiones HTTP.\n• Guardar fotos en bases de datos como cadenas Data URI.\n• Transmitir cargas útiles binarias de forma segura en APIs REST.'
         },
         {
-          heading: 'Cómo usar la herramienta en OmniTools:',
+          heading: 'Cómo usar la herramienta en SpaceTools:',
           body: 'Pega tu texto o sube un archivo para obtener al instante la cadena Base64 lista para ser integrada en tu código.'
         }
       ],
@@ -383,7 +383,7 @@ export const blogPosts = [
         },
         {
           heading: 'Utilisation simple :',
-          body: 'Importez votre fichier ou saisissez du texte dans l\'outil Base64 d\'OmniTools pour copier le code Data URI instantanément.'
+          body: 'Importez votre fichier ou saisissez du texte dans l\'outil Base64 d\'SpaceTools pour copier le code Data URI instantanément.'
         }
       ],
       de: [
@@ -396,7 +396,7 @@ export const blogPosts = [
           body: '• Einbetten von Icons direkt in CSS und HTML zur Vermeidung zusätzlicher HTTP-Anfragen.\n• Speichern von Bilddaten als Text-Strings in JSON oder Datenbanken.\n• Sicherer Datentransfer über REST-APIs.'
         },
         {
-          heading: 'Nutzung in OmniTools:',
+          heading: 'Nutzung in SpaceTools:',
           body: 'Wählen Sie zwischen Text- und Dateimodus, um blitzschnell Base64 Data URIs zu erzeugen und zu kopieren.'
         }
       ]
@@ -456,7 +456,7 @@ export const blogPosts = [
         },
         {
           heading: 'Generate Profiles Instantly:',
-          body: 'Use the OmniTools Social Bio Generator to create categorized, ready-to-copy profile bios tailored for tech, business, lifestyle, and aesthetic brands.'
+          body: 'Use the SpaceTools Social Bio Generator to create categorized, ready-to-copy profile bios tailored for tech, business, lifestyle, and aesthetic brands.'
         }
       ],
       es: [
@@ -469,7 +469,7 @@ export const blogPosts = [
           body: '1. Línea 1: Título o profesión con emoji.\n2. Línea 2: Propuesta de valor o temática principal.\n3. Línea 3: Logro o prueba social.\n4. Línea 4: Llamada a la acción hacia el enlace inferior 👇'
         },
         {
-          heading: 'Generación instantánea con OmniTools:',
+          heading: 'Generación instantánea con SpaceTools:',
           body: 'Prueba el Generador de Biografías para obtener textos atractivos adaptados a perfiles profesionales y creativos.'
         }
       ],
@@ -484,7 +484,7 @@ export const blogPosts = [
         },
         {
           heading: 'Génération automatique :',
-          body: 'Utilisez le générateur de bio OmniTools pour obtenir des modèles élégants en un clic.'
+          body: 'Utilisez le générateur de bio SpaceTools pour obtenir des modèles élégants en un clic.'
         }
       ],
       de: [
@@ -498,7 +498,7 @@ export const blogPosts = [
         },
         {
           heading: 'Automatische Erstellung:',
-          body: 'Nutzen Sie den OmniTools Bio-Generator für vorgefertigte, optimierte Profiltexte.'
+          body: 'Nutzen Sie den SpaceTools Bio-Generator für vorgefertigte, optimierte Profiltexte.'
         }
       ]
     }
@@ -556,7 +556,7 @@ export const blogPosts = [
           body: 'Configuring an automated greeting (e.g., "Hello, I would like to inquire about your services...") lowers the effort required from the client and increases conversion rates by over 40%.'
         },
         {
-          heading: 'Creating Your Link with OmniTools:',
+          heading: 'Creating Your Link with SpaceTools:',
           body: 'Input your phone number with country code, write your custom greeting, and copy your clean wa.me direct link for use on websites, social bios, and emails.'
         }
       ],
@@ -571,7 +571,7 @@ export const blogPosts = [
         },
         {
           heading: 'Cómo crear tu enlace:',
-          body: 'Ingresa tu número con prefijo internacional en el Generador de WhatsApp de OmniTools y copia tu enlace listo para compartir.'
+          body: 'Ingresa tu número con prefijo internacional en el Generador de WhatsApp de SpaceTools y copia tu enlace listo para compartir.'
         }
       ],
       fr: [
@@ -585,7 +585,7 @@ export const blogPosts = [
         },
         {
           heading: 'Création rapide :',
-          body: 'Saisissez votre numéro international dans le générateur OmniTools et partagez votre lien sur vos réseaux.'
+          body: 'Saisissez votre numéro international dans le générateur SpaceTools et partagez votre lien sur vos réseaux.'
         }
       ],
       de: [
@@ -598,7 +598,7 @@ export const blogPosts = [
           body: 'Ein vorformulierter Begrüßungstext erleichtert dem Kunden die Anfrage und steigert die Kontaktrate um über 40%.'
         },
         {
-          heading: 'Link in OmniTools generieren:',
+          heading: 'Link in SpaceTools generieren:',
           body: 'Telefonnummer mit Ländervorwahl eingeben, Wunschtext verfassen und den fertigen Direktlink für Webseite und Social Media kopieren.'
         }
       ]

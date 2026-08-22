@@ -3,7 +3,7 @@ import { Code2, Copy, Check, Terminal, FileCode, KeyRound, Shield, RefreshCw, Do
 import confetti from 'canvas-confetti';
 
 export function JsonFormatter() {
-  const [inputJson, setInputJson] = useState('{\n  "name": "OmniTools",\n  "features": ["PDF", "Images", "QR", "Text"],\n  "status": "online",\n  "speed": 100\n}');
+  const [inputJson, setInputJson] = useState('{\n  "name": "SpaceTools",\n  "features": ["PDF", "Images", "QR", "Text"],\n  "status": "online",\n  "speed": 100\n}');
   const [outputJson, setOutputJson] = useState('');
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
@@ -126,7 +126,7 @@ export function JsonFormatter() {
 
 export function Base64Tool() {
   const [mode, setMode] = useState('text');
-  const [textInput, setTextInput] = useState('أومني تولز - المنصة الشاملة');
+  const [textInput, setTextInput] = useState('أدوات سبيس - SpaceTools Hub');
   const [encodedOutput, setEncodedOutput] = useState('');
   const [fileBase64, setFileBase64] = useState('');
   const [copied, setCopied] = useState(false);
