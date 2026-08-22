@@ -1,11 +1,39 @@
-import React from 'react';
-import { Search, Sparkles, Star, Layers, FileText, Image, Music, Share2, PackageCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Sparkles, Star, Layers, FileText, Image, Music, Share2, PackageCheck, QrCode, Code2, Palette, Download, Smartphone } from 'lucide-react';
 
 export default function Navbar({ activeCategory, setActiveCategory, searchQuery, setSearchQuery, favoritesCount }) {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [canInstall, setCanInstall] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setCanInstall(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      setCanInstall(false);
+    }
+    setDeferredPrompt(null);
+  };
+
   const categories = [
     { id: 'all', label: 'كل الأدوات', icon: Layers },
     { id: 'pdf', label: 'أدوات PDF', icon: FileText },
     { id: 'images', label: 'أدوات الصور', icon: Image },
+    { id: 'qr', label: 'رموز الـ QR', icon: QrCode },
+    { id: 'text', label: 'محلل النصوص', icon: FileText },
+    { id: 'dev', label: 'المطورين', icon: Code2 },
+    { id: 'colors', label: 'الألوان والتصميم', icon: Palette },
     { id: 'audio', label: 'الصوتيات', icon: Music },
     { id: 'social', label: 'السوشيال ميديا', icon: Share2 },
     { id: 'bundles', label: 'حزم الأدوات', icon: PackageCheck },
@@ -36,15 +64,33 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
             <input
               type="text"
               className="glass-input"
-              placeholder="ابحث عن أداة (مثال: بي دي اف، ضغط صور، بايو...)"
+              placeholder="ابحث عن أداة (QR، بي دي اف، ضغط صور، Base64، كابشن...)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ paddingRight: '2.8rem' }}
             />
           </div>
 
-          {/* Stat Badge */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {/* Stat Badge & PWA Install Button */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            {canInstall && (
+              <button
+                onClick={handleInstallClick}
+                className="btn-secondary"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  borderColor: 'var(--accent-purple)',
+                  color: '#c084fc',
+                  padding: '0.45rem 0.9rem',
+                  fontSize: '0.8rem',
+                  fontWeight: 700
+                }}
+              >
+                <Smartphone size={16} /> تثبيت التطبيق
+              </button>
+            )}
             <span className="badge badge-purple">⚡ معالجة سريعة وآمنة 100%</span>
           </div>
 

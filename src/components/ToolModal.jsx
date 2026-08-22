@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { X, Star } from 'lucide-react';
+import React, { useEffect, Suspense } from 'react';
+import { X, Star, Loader2 } from 'lucide-react';
 
 export default function ToolModal({ tool, onClose, isFavorite, onToggleFavorite }) {
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function ToolModal({ tool, onClose, isFavorite, onToggleFavorite 
         className="glass-panel animate-fade-in"
         style={{
           width: '100%',
-          maxWidth: '750px',
+          maxWidth: '780px',
           maxHeight: '90vh',
           overflowY: 'auto',
           padding: '1.75rem',
@@ -71,9 +71,18 @@ export default function ToolModal({ tool, onClose, isFavorite, onToggleFavorite 
           </div>
         </div>
 
-        {/* Tool Component Render */}
+        {/* Tool Component Render with Suspense */}
         <div style={{ marginTop: '1rem' }}>
-          <ToolComponent />
+          <Suspense
+            fallback={
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem 1rem', gap: '0.75rem', color: 'var(--accent-purple)' }}>
+                <Loader2 size={36} className="animate-spin" />
+                <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>جاري تحميل الأداة بسرعة فائقة...</span>
+              </div>
+            }
+          >
+            <ToolComponent />
+          </Suspense>
         </div>
 
       </div>
