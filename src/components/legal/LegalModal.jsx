@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, ShieldCheck, FileText, Info, Mail } from 'lucide-react';
+import { X, ShieldCheck, FileText, Info } from 'lucide-react';
 import { useLanguage } from '../../locales/LanguageContext';
 
 export default function LegalModal({ type, onClose }) {
@@ -250,9 +250,10 @@ export default function LegalModal({ type, onClose }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'rgba(5, 8, 15, 0.85)',
-        backdropFilter: 'blur(12px)',
-        padding: '1rem'
+        background: 'rgba(3, 7, 18, 0.88)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        padding: '0.75rem'
       }}
       onClick={onClose}
     >
@@ -260,39 +261,73 @@ export default function LegalModal({ type, onClose }) {
         className="glass-panel animate-fade-in"
         style={{
           width: '100%',
-          maxWidth: '750px',
-          maxHeight: '85vh',
+          maxWidth: '780px',
+          maxHeight: '88vh',
           overflowY: 'auto',
           padding: '2rem',
           position: 'relative',
-          background: '#121829',
-          border: '1px solid var(--border-glow)'
+          background: 'radial-gradient(ellipse at top, rgba(15, 28, 65, 0.95), rgba(7, 13, 29, 0.98))',
+          border: '1px solid rgba(59, 130, 246, 0.35)',
+          borderRadius: '1.25rem',
+          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(37, 99, 235, 0.25)'
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '1.5rem',
+          borderBottom: '1px solid rgba(59, 130, 246, 0.15)',
+          paddingBottom: '1rem'
+        }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div style={{ padding: '0.5rem', background: 'rgba(139, 92, 246, 0.15)', borderRadius: '0.75rem' }}>
-              {type === 'privacy' && <ShieldCheck size={22} color="var(--accent-purple)" />}
-              {type === 'terms' && <FileText size={22} color="var(--accent-cyan)" />}
-              {type === 'about' && <Info size={22} color="var(--accent-pink)" />}
+            <div style={{
+              padding: '0.55rem',
+              background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(0, 210, 255, 0.2))',
+              borderRadius: '0.85rem',
+              border: '1px solid rgba(59, 130, 246, 0.35)'
+            }}>
+              {type === 'privacy' && <ShieldCheck size={22} color="#38bdf8" />}
+              {type === 'terms' && <FileText size={22} color="#60a5fa" />}
+              {type === 'about' && <Info size={22} color="#00d2ff" />}
             </div>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 800 }}>{activeDoc.title}</h2>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>{activeDoc.title}</h2>
           </div>
 
           <button
             onClick={onClose}
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', padding: '0.5rem', cursor: 'pointer', color: '#fff' }}
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(59, 130, 246, 0.2)',
+              borderRadius: '0.6rem',
+              padding: '0.5rem',
+              cursor: 'pointer',
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
             <X size={18} />
           </button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', lineHeight: 1.7, color: 'var(--text-color)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem', lineHeight: 1.7, color: '#e2e8f0' }}>
           {activeDoc.sections.map((sec, idx) => (
-            <div key={idx} style={{ background: 'rgba(255,255,255,0.02)', padding: '1.2rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--accent-purple)' }}>{sec.heading}</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{sec.text}</p>
+            <div
+              key={idx}
+              style={{
+                background: 'rgba(10, 20, 48, 0.6)',
+                padding: '1.25rem',
+                borderRadius: '0.85rem',
+                border: '1px solid rgba(59, 130, 246, 0.18)'
+              }}
+            >
+              <h3 style={{ fontSize: '1.02rem', fontWeight: 700, marginBottom: '0.45rem', color: '#60a5fa' }}>
+                {sec.heading}
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: '#cbd5e1', lineHeight: 1.65 }}>{sec.text}</p>
             </div>
           ))}
         </div>

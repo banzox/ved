@@ -14,7 +14,7 @@ export function QrGenerator() {
   const [wifiInput, setWifiInput] = useState({ ssid: '', password: '', encryption: 'WPA' });
 
   // Customization
-  const [fgColor, setFgColor] = useState('#8b5cf6');
+  const [fgColor, setFgColor] = useState('#0066ff');
   const [bgColor, setBgColor] = useState('#ffffff');
   const [qrSize, setQrSize] = useState(280);
   const [errorCorrection, setErrorCorrection] = useState('M');
@@ -92,17 +92,25 @@ export function QrGenerator() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <QrCode size={22} color="var(--accent-purple)" /> استوديو الـ QR Code الذكي
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+            <QrCode size={22} color="#38bdf8" /> استوديو الـ QR Code الذكي
           </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
             أنشئ رموز QR مخصصة للروابط وشبكات الواي فاي وأرقام الهواتف بألوانك المفضلة.
           </p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', background: 'rgba(255,255,255,0.03)', padding: '0.4rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
+      <div style={{
+        display: 'flex',
+        gap: '0.4rem',
+        flexWrap: 'wrap',
+        background: 'rgba(10, 20, 48, 0.6)',
+        padding: '0.4rem',
+        borderRadius: '0.85rem',
+        border: '1px solid rgba(59, 130, 246, 0.2)'
+      }}>
         {[
           { id: 'url', label: 'رابط ويب', icon: Globe },
           { id: 'wifi', label: 'شبكة Wi-Fi', icon: Wifi },
@@ -120,18 +128,19 @@ export function QrGenerator() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.4rem',
-                padding: '0.5rem 0.9rem',
-                borderRadius: '0.5rem',
+                padding: '0.5rem 0.95rem',
+                borderRadius: '0.6rem',
                 border: 'none',
-                background: isActive ? 'linear-gradient(135deg, #8b5cf6, #ec4899)' : 'transparent',
-                color: isActive ? '#fff' : 'var(--text-muted)',
-                fontWeight: 600,
-                fontSize: '0.85rem',
+                background: isActive ? 'linear-gradient(135deg, #1d4ed8, #0284c7)' : 'transparent',
+                color: isActive ? '#ffffff' : '#94a3b8',
+                fontWeight: 700,
+                fontSize: '0.84rem',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
+                boxShadow: isActive ? '0 0 15px rgba(2, 132, 199, 0.4)' : 'none'
               }}
             >
-              <Icon size={16} />
+              <Icon size={15} color={isActive ? '#38bdf8' : 'currentColor'} />
               {tab.label}
             </button>
           );
@@ -147,7 +156,7 @@ export function QrGenerator() {
           {/* Dynamic Inputs */}
           {qrType === 'url' && (
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem' }}>رابط الموقع (URL):</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem', color: '#cbd5e1' }}>رابط الموقع (URL):</label>
               <input
                 type="url"
                 className="glass-input"
@@ -161,7 +170,7 @@ export function QrGenerator() {
           {qrType === 'wifi' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>اسم شبكة الواي فاي (SSID):</label>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>اسم شبكة الواي فاي (SSID):</label>
                 <input
                   type="text"
                   className="glass-input"
@@ -171,7 +180,7 @@ export function QrGenerator() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>كلمة المرور:</label>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>كلمة المرور:</label>
                 <input
                   type="text"
                   className="glass-input"
@@ -181,7 +190,7 @@ export function QrGenerator() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>نوع التشفير:</label>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>نوع التشفير:</label>
                 <select
                   className="glass-input"
                   value={wifiInput.encryption}
@@ -197,7 +206,7 @@ export function QrGenerator() {
 
           {qrType === 'text' && (
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem' }}>النص المطلوب تشفيره:</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem', color: '#cbd5e1' }}>النص المطلوب تشفيره:</label>
               <textarea
                 className="glass-input"
                 rows="4"
@@ -210,7 +219,7 @@ export function QrGenerator() {
 
           {qrType === 'phone' && (
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem' }}>رقم الهاتف (مع رمز الدولة):</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem', color: '#cbd5e1' }}>رقم الهاتف (مع رمز الدولة):</label>
               <input
                 type="tel"
                 className="glass-input"
@@ -224,7 +233,7 @@ export function QrGenerator() {
           {qrType === 'email' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>البريد المستلم:</label>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>البريد المستلم:</label>
                 <input
                   type="email"
                   className="glass-input"
@@ -234,7 +243,7 @@ export function QrGenerator() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>الموضوع:</label>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>الموضوع:</label>
                 <input
                   type="text"
                   className="glass-input"
@@ -247,9 +256,17 @@ export function QrGenerator() {
           )}
 
           {/* Color & Style Controls */}
-          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div style={{
+            background: 'rgba(10, 20, 48, 0.5)',
+            padding: '1rem',
+            borderRadius: '0.85rem',
+            border: '1px solid rgba(59, 130, 246, 0.18)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '1rem'
+          }}>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>لون الرمز:</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#93c5fd' }}>لون الرمز:</label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <input
                   type="color"
@@ -257,12 +274,12 @@ export function QrGenerator() {
                   onChange={(e) => setFgColor(e.target.value)}
                   style={{ width: '36px', height: '36px', border: 'none', borderRadius: '0.4rem', cursor: 'pointer', background: 'transparent' }}
                 />
-                <span style={{ fontSize: '0.8rem', fontFamily: 'monospace' }}>{fgColor}</span>
+                <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: '#ffffff' }}>{fgColor}</span>
               </div>
             </div>
 
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>لون الخلفية:</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#93c5fd' }}>لون الخلفية:</label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <input
                   type="color"
@@ -270,19 +287,28 @@ export function QrGenerator() {
                   onChange={(e) => setBgColor(e.target.value)}
                   style={{ width: '36px', height: '36px', border: 'none', borderRadius: '0.4rem', cursor: 'pointer', background: 'transparent' }}
                 />
-                <span style={{ fontSize: '0.8rem', fontFamily: 'monospace' }}>{bgColor}</span>
+                <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: '#ffffff' }}>{bgColor}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Right: Live Preview & Action Buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', background: 'rgba(18, 24, 41, 0.6)', padding: '1.5rem', borderRadius: '1rem', border: '1px solid var(--border-glow)' }}>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1.25rem',
+          background: 'rgba(10, 20, 48, 0.75)',
+          padding: '1.5rem',
+          borderRadius: '1rem',
+          border: '1px solid rgba(59, 130, 246, 0.3)'
+        }}>
           <div style={{
             background: bgColor,
             padding: '1.25rem',
             borderRadius: '1rem',
-            boxShadow: '0 12px 30px rgba(0,0,0,0.3)',
+            boxShadow: '0 12px 35px rgba(0,0,0,0.5)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

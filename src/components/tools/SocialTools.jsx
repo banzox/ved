@@ -43,24 +43,24 @@ export function BioGenerator() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Camera size={20} color="var(--accent-pink)" /> مولد بايو انستغرام احترافي
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Camera size={20} color="#38bdf8" /> مولد بايو انستغرام احترافي
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>ولّد سير ذاتية (Bio) مجهزة بالإيموجي والتنسيقات الجذابة لحسابك.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>ولّد سير ذاتية (Bio) مجهزة بالإيموجي والتنسيقات الجذابة لحسابك.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>اسم الحساب / الشخصية:</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>اسم الحساب / الشخصية:</label>
           <input type="text" className="glass-input" placeholder="مثال: أحمد علي" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>المجال / التخصص:</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>المجال / التخصص:</label>
           <input type="text" className="glass-input" placeholder="مثال: مصمم جرافيك، رائد أعمال" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
       </div>
 
       <div>
-        <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>تصنيف البايو:</label>
+        <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>تصنيف البايو:</label>
         <select className="glass-input" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="tech">💻 تقني ومطور (Tech & Developer)</option>
           <option value="business">💼 أعمال وتجسير مبيعات (Business)</option>
@@ -74,7 +74,7 @@ export function BioGenerator() {
       </button>
 
       {generatedBio && (
-        <div style={{ background: 'rgba(18, 24, 41, 0.9)', padding: '1.25rem', borderRadius: '0.75rem', border: '1px solid var(--accent-pink)', position: 'relative' }}>
+        <div style={{ background: 'rgba(10, 20, 48, 0.7)', padding: '1.25rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.35)', position: 'relative' }}>
           <pre style={{ fontFamily: 'inherit', fontSize: '0.95rem', whiteSpace: 'pre-wrap', color: '#fff', lineHeight: 1.6 }}>{generatedBio}</pre>
           
           <button onClick={copyToClipboard} className="btn-secondary" style={{ marginTop: '1rem', width: '100%' }}>
@@ -107,10 +107,10 @@ export function FancyTextDecorator() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Sparkles size={20} color="var(--accent-purple)" /> زخرفة النصوص والأسماء
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Sparkles size={20} color="#60a5fa" /> زخرفة النصوص والأسماء
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>أدخل أي نص أو اسم باللغة العربية أو الإنجليزية واصل على نصوص مزخرفة بضغطة زر.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>أدخل أي نص أو اسم باللغة العربية أو الإنجليزية واصل على نصوص مزخرفة بضغطة زر.</p>
 
       <input type="text" className="glass-input" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="أدخل النص هنا..." />
 
@@ -118,8 +118,8 @@ export function FancyTextDecorator() {
         {arabicDecorations.map((fn, i) => {
           const decorated = fn(inputText || 'نص تجريبي');
           return (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '0.5rem', border: '1px solid var(--border-color)' }}>
-              <span style={{ fontSize: '1rem', fontWeight: 600 }}>{decorated}</span>
+            <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', background: 'rgba(10, 20, 48, 0.6)', borderRadius: '0.6rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 600, color: '#f8fafc' }}>{decorated}</span>
               <button onClick={() => copyText(decorated)} className="btn-secondary" style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}>
                 <Copy size={14} /> نسخ
               </button>
@@ -152,14 +152,14 @@ export function CaptionGenerator() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Video size={20} color="var(--accent-cyan)" /> مولد كابشن فيسبوك وتيك توك
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Video size={20} color="#00d2ff" /> مولد كابشن فيسبوك وتيك توك
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>أصنع منشورات وكابشن تفاعلي مع الهاشتاجات النشطة لمنصاتك.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>أصنع منشورات وكابشن تفاعلي مع الهاشتاجات النشطة لمنصاتك.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>المنصة المستهدفة:</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>المنصة المستهدفة:</label>
           <select className="glass-input" value={platform} onChange={(e) => setPlatform(e.target.value)}>
             <option value="tiktok">🎵 تيك توك (TikTok)</option>
             <option value="facebook">📘 فيسبوك (Facebook)</option>
@@ -167,7 +167,7 @@ export function CaptionGenerator() {
           </select>
         </div>
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>موضوع المنشور:</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>موضوع المنشور:</label>
           <input type="text" className="glass-input" placeholder="مثال: التسويق، البرمجة..." value={topic} onChange={(e) => setTopic(e.target.value)} />
         </div>
       </div>
@@ -177,8 +177,8 @@ export function CaptionGenerator() {
       </button>
 
       {resultCaption && (
-        <div style={{ background: 'rgba(18, 24, 41, 0.9)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--accent-cyan)' }}>
-          <pre style={{ fontFamily: 'inherit', fontSize: '0.9rem', whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{resultCaption}</pre>
+        <div style={{ background: 'rgba(10, 20, 48, 0.7)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.35)' }}>
+          <pre style={{ fontFamily: 'inherit', fontSize: '0.9rem', whiteSpace: 'pre-wrap', lineHeight: 1.6, color: '#f8fafc' }}>{resultCaption}</pre>
           <button onClick={() => { navigator.clipboard.writeText(resultCaption); alert('تم نسخ الكابشن!'); }} className="btn-secondary" style={{ marginTop: '0.75rem', width: '100%' }}>
             <Copy size={16} /> نسخ النص كاملاً
           </button>
@@ -203,29 +203,29 @@ export function WhatsappLinkBuilder() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <MessageCircle size={20} color="#10b981" /> مولد رابط واتساب المباشر
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <MessageCircle size={20} color="#38bdf8" /> مولد رابط واتساب المباشر
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>أنشئ رابط مراسلة فورية لواتساب بدون الحاجة لحفظ الرقم في جهات الاتصال.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>أنشئ رابط مراسلة فورية لواتساب بدون الحاجة لحفظ الرقم في جهات الاتصال.</p>
 
       <div>
-        <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>رقم الهاتف مع رمز الدولة (مثال: 249912345678):</label>
+        <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>رقم الهاتف مع رمز الدولة (مثال: 249912345678):</label>
         <input type="text" className="glass-input" placeholder="2499xxxxxxx أو 9665xxxxxxx" value={phone} onChange={(e) => setPhone(e.target.value)} />
       </div>
 
       <div>
-        <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>رسالة ترحيبية مجهزة مسبقاً:</label>
+        <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>رسالة ترحيبية مجهزة مسبقاً:</label>
         <textarea className="glass-input" rows="3" value={message} onChange={(e) => setMessage(e.target.value)} />
       </div>
 
-      <button onClick={buildLink} className="btn-gradient" style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}>
+      <button onClick={buildLink} className="btn-gradient">
         <Send size={18} /> إنشاء الرابط المباشر
       </button>
 
       {generatedLink && (
-        <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid #10b981', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <p style={{ fontSize: '0.85rem', wordBreak: 'break-all', fontWeight: 600, color: '#34d399' }}>{generatedLink}</p>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ background: 'rgba(10, 20, 48, 0.7)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.35)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <p style={{ fontSize: '0.85rem', wordBreak: 'break-all', fontWeight: 600, color: '#38bdf8' }}>{generatedLink}</p>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <a href={generatedLink} target="_blank" rel="noreferrer" className="btn-gradient" style={{ flex: 1, textDecoration: 'none' }}>
               <Send size={16} /> فتح الدردشة الآن
             </a>

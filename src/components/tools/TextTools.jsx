@@ -107,39 +107,39 @@ export function TextCounter() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <FileText size={22} color="var(--accent-cyan)" /> محلل وعداد النصوص الذكي
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+          <FileText size={22} color="#38bdf8" /> محلل وعداد النصوص الذكي
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
           إحصاء دقيق للكلمات والحروف، حساب وقت القراءة، أدوات تنظيف وتبديل حالة الأحرف.
         </p>
       </div>
 
       {/* Stats Cards Bar */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.75rem' }}>
-        <div style={{ background: 'rgba(139, 92, 246, 0.1)', padding: '0.85rem', borderRadius: '0.75rem', border: '1px solid var(--border-glow)', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>الكلمات</span>
-          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-purple)', margin: 0 }}>{words}</p>
+        <div style={{ background: 'rgba(37, 99, 235, 0.12)', padding: '0.85rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.3)', textAlign: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>الكلمات</span>
+          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>{words}</p>
         </div>
 
-        <div style={{ background: 'rgba(6, 182, 212, 0.1)', padding: '0.85rem', borderRadius: '0.75rem', border: '1px solid rgba(6, 182, 212, 0.3)', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>الحروف (مع مسافات)</span>
-          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-cyan)', margin: 0 }}>{charsWithSpaces}</p>
+        <div style={{ background: 'rgba(6, 182, 212, 0.12)', padding: '0.85rem', borderRadius: '0.85rem', border: '1px solid rgba(6, 182, 212, 0.3)', textAlign: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: '#67e8f9' }}>الحروف (مع مسافات)</span>
+          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>{charsWithSpaces}</p>
         </div>
 
-        <div style={{ background: 'rgba(236, 72, 153, 0.1)', padding: '0.85rem', borderRadius: '0.75rem', border: '1px solid rgba(236, 72, 153, 0.3)', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>الحروف (بدون مسافات)</span>
-          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-pink)', margin: 0 }}>{charsWithoutSpaces}</p>
+        <div style={{ background: 'rgba(56, 189, 248, 0.12)', padding: '0.85rem', borderRadius: '0.85rem', border: '1px solid rgba(56, 189, 248, 0.3)', textAlign: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: '#bae6fd' }}>الحروف (بدون مسافات)</span>
+          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>{charsWithoutSpaces}</p>
         </div>
 
-        <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '0.85rem', borderRadius: '0.75rem', border: '1px solid rgba(16, 185, 129, 0.3)', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>الفقرات / الجمل</span>
-          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: '#10b981', margin: 0 }}>{paragraphs} / {sentences}</p>
+        <div style={{ background: 'rgba(16, 185, 129, 0.12)', padding: '0.85rem', borderRadius: '0.85rem', border: '1px solid rgba(16, 185, 129, 0.3)', textAlign: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: '#a7f3d0' }}>الفقرات / الجمل</span>
+          <p style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399', margin: 0 }}>{paragraphs} / {sentences}</p>
         </div>
 
-        <div style={{ background: 'rgba(245, 158, 11, 0.1)', padding: '0.85rem', borderRadius: '0.75rem', border: '1px solid rgba(245, 158, 11, 0.3)', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>وقت القراءة المقدر</span>
-          <p style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f59e0b', margin: 0 }}>~{readingTimeMinutes} دقيقة</p>
+        <div style={{ background: 'rgba(245, 158, 11, 0.12)', padding: '0.85rem', borderRadius: '0.85rem', border: '1px solid rgba(245, 158, 11, 0.3)', textAlign: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: '#fde68a' }}>وقت القراءة المقدر</span>
+          <p style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fbbf24', margin: 0 }}>~{readingTimeMinutes} دقيقة</p>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export function TextCounter() {
         
         {/* Case Converters */}
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>تبديل الحالة:</span>
+          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#93c5fd' }}>تبديل الحالة:</span>
           <button className="btn-secondary" style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem' }} onClick={() => transformCase('upper')}>UPPERCASE</button>
           <button className="btn-secondary" style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem' }} onClick={() => transformCase('lower')}>lowercase</button>
           <button className="btn-secondary" style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem' }} onClick={() => transformCase('title')}>Title Case</button>
@@ -169,7 +169,7 @@ export function TextCounter() {
 
         {/* Text Cleaners */}
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>أدوات التنظيف:</span>
+          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#93c5fd' }}>أدوات التنظيف:</span>
           <button className="btn-secondary" style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem' }} onClick={cleanExtraSpaces}>إزالة المسافات الزائدة</button>
           <button className="btn-secondary" style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem' }} onClick={removeEmptyLines}>حذف الأسطر الفارغة</button>
           <button className="btn-secondary" style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem' }} onClick={removeDuplicates}>حذف الأسطر المكررة</button>
@@ -177,14 +177,14 @@ export function TextCounter() {
         </div>
 
         {/* Global Action Buttons */}
-        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
-          <button onClick={copyToClipboard} className="btn-gradient" style={{ flex: 1 }}>
+        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+          <button onClick={copyToClipboard} className="btn-gradient" style={{ flex: 1, minWidth: '160px' }}>
             {copied ? <><Check size={18} color="#10b981" /> تم النسخ بنجاح</> : <><Copy size={18} /> نسخ النص المعدل</>}
           </button>
           <button onClick={downloadText} className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <Download size={18} /> حفظ كملف TXT
           </button>
-          <button onClick={() => setText('')} className="btn-secondary" style={{ color: '#ef4444' }}>
+          <button onClick={() => setText('')} className="btn-secondary" style={{ color: '#f87171' }}>
             <Trash2 size={18} /> مسح
           </button>
         </div>

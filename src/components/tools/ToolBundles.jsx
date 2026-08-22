@@ -18,12 +18,12 @@ export function CreatorBundle() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(59, 130, 246, 0.2)', paddingBottom: '1rem' }}>
         <div>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <PackageCheck size={22} color="var(--accent-purple)" /> حزمة صناع المحتوى (Content Creator Pack)
+          <h3 style={{ fontSize: '1.3rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+            <PackageCheck size={22} color="#38bdf8" /> حزمة صناع المحتوى (Content Creator Pack)
           </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>مجموعة أدوات متكاملة لإعداد منشورك وتجهيز حسابك بجميع التفاصيل في محطة واحدة.</p>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>مجموعة أدوات متكاملة لإعداد منشورك وتجهيز حسابك بجميع التفاصيل في محطة واحدة.</p>
         </div>
       </div>
 
@@ -36,14 +36,15 @@ export function CreatorBundle() {
             style={{
               padding: '0.5rem 1rem',
               borderRadius: '0.75rem',
-              border: activeStep === idx ? '1px solid var(--accent-purple)' : '1px solid var(--border-color)',
-              background: activeStep === idx ? 'rgba(139, 92, 246, 0.2)' : 'rgba(255,255,255,0.03)',
-              color: activeStep === idx ? '#fff' : 'var(--text-muted)',
+              border: activeStep === idx ? '1px solid rgba(56, 189, 248, 0.7)' : '1px solid rgba(59, 130, 246, 0.2)',
+              background: activeStep === idx ? 'linear-gradient(135deg, rgba(29, 78, 216, 0.45), rgba(6, 182, 212, 0.25))' : 'rgba(10, 20, 48, 0.5)',
+              color: activeStep === idx ? '#ffffff' : '#94a3b8',
               fontFamily: 'inherit',
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: '0.85rem',
               cursor: 'pointer',
-              whiteSpace: 'nowrap'
+              whiteSpace: 'nowrap',
+              boxShadow: activeStep === idx ? '0 0 15px rgba(37, 99, 235, 0.35)' : 'none'
             }}
           >
             {s.title}
@@ -52,7 +53,7 @@ export function CreatorBundle() {
       </div>
 
       {/* Active Step Content */}
-      <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
+      <div style={{ background: 'rgba(10, 20, 48, 0.5)', padding: '1.25rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
         <StepComponent />
       </div>
 
@@ -88,11 +89,11 @@ export function DocumentBundle() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div>
-        <h3 style={{ fontSize: '1.3rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <FileText size={22} color="var(--accent-cyan)" /> حزمة المستندات (Document Pack)
+      <div style={{ borderBottom: '1px solid rgba(59, 130, 246, 0.2)', paddingBottom: '1rem' }}>
+        <h3 style={{ fontSize: '1.3rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+          <FileText size={22} color="#00d2ff" /> حزمة المستندات (Document Pack)
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>حوّل صورك لملفات PDF ثم اجمعها ورتبها في ملف نهائي موحد بسهولة.</p>
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>حوّل صورك لملفات PDF ثم اجمعها ورتبها في ملف نهائي موحد بسهولة.</p>
       </div>
 
       <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -103,11 +104,11 @@ export function DocumentBundle() {
             style={{
               padding: '0.5rem 1rem',
               borderRadius: '0.75rem',
-              border: activeStep === idx ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
-              background: activeStep === idx ? 'rgba(6, 182, 212, 0.2)' : 'rgba(255,255,255,0.03)',
-              color: activeStep === idx ? '#fff' : 'var(--text-muted)',
+              border: activeStep === idx ? '1px solid rgba(0, 210, 255, 0.7)' : '1px solid rgba(59, 130, 246, 0.2)',
+              background: activeStep === idx ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.45), rgba(6, 182, 212, 0.25))' : 'rgba(10, 20, 48, 0.5)',
+              color: activeStep === idx ? '#ffffff' : '#94a3b8',
               fontFamily: 'inherit',
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: '0.85rem',
               cursor: 'pointer'
             }}
@@ -117,7 +118,7 @@ export function DocumentBundle() {
         ))}
       </div>
 
-      <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
+      <div style={{ background: 'rgba(10, 20, 48, 0.5)', padding: '1.25rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
         <StepComponent />
       </div>
     </div>

@@ -71,17 +71,17 @@ export function JsonFormatter() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Code2 size={22} color="var(--accent-purple)" /> منسق ومحول الـ JSON & CSV
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+          <Code2 size={22} color="#38bdf8" /> منسق ومحول الـ JSON & CSV
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
           تنسيق كود JSON، ضغطه، التحقق من سلامته البرمجية، وتحويله لملف CSV بضغطة زر.
         </p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem' }}>الـ JSON المدخل:</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem', color: '#cbd5e1' }}>الـ JSON المدخل:</label>
           <textarea
             className="glass-input"
             rows="10"
@@ -92,12 +92,12 @@ export function JsonFormatter() {
         </div>
 
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem' }}>النتيجة المنسقة / المحولة:</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.4rem', color: '#cbd5e1' }}>النتيجة المنسقة / المحولة:</label>
           <textarea
             className="glass-input"
             rows="10"
             readOnly
-            style={{ fontFamily: 'monospace', fontSize: '0.85rem', background: 'rgba(0,0,0,0.3)' }}
+            style={{ fontFamily: 'monospace', fontSize: '0.85rem', background: 'rgba(0,0,0,0.4)', borderColor: error ? '#f87171' : 'rgba(59, 130, 246, 0.2)' }}
             value={outputJson || (error ? `❌ خطأ في الـ JSON:\n${error}` : 'اضغط على أحد أزرار المعالجة أدناه...')}
           />
         </div>
@@ -167,10 +167,10 @@ export function Base64Tool() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Lock size={22} color="var(--accent-cyan)" /> مشفر ومفكك Base64 (نصوص وملفات)
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+          <Lock size={22} color="#00d2ff" /> مشفر ومفكك Base64 (نصوص وملفات)
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
           تشفير وفك تشفير النصوص والملفات والصور إلى صيغة Base64 مباشرة.
         </p>
       </div>
@@ -200,7 +200,7 @@ export function Base64Tool() {
             onChange={(e) => setTextInput(e.target.value)}
           />
 
-          <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <button onClick={encodeText} className="btn-gradient">
               تشفير إلى Base64
             </button>
@@ -210,8 +210,8 @@ export function Base64Tool() {
           </div>
 
           {encodedOutput && (
-            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
-              <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>النتيجة:</label>
+            <div style={{ background: 'rgba(10, 20, 48, 0.5)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+              <label style={{ fontSize: '0.8rem', color: '#93c5fd', display: 'block', marginBottom: '0.3rem' }}>النتيجة:</label>
               <textarea className="glass-input" rows="4" readOnly value={encodedOutput} style={{ fontFamily: 'monospace' }} />
               <button
                 onClick={() => {
@@ -231,8 +231,8 @@ export function Base64Tool() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <input type="file" onChange={handleFileUpload} className="glass-input" />
           {fileBase64 && (
-            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
-              <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>Base64 Data URI:</label>
+            <div style={{ background: 'rgba(10, 20, 48, 0.5)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+              <label style={{ fontSize: '0.8rem', color: '#93c5fd', display: 'block', marginBottom: '0.3rem' }}>Base64 Data URI:</label>
               <textarea className="glass-input" rows="6" readOnly value={fileBase64} style={{ fontFamily: 'monospace', fontSize: '0.8rem' }} />
               <button
                 onClick={() => {
@@ -301,26 +301,26 @@ export function SecuritySuite() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
           <Shield size={22} color="#10b981" /> مولد كلمات المرور والهاشات الآمنة
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
           توليد كلمات سر عشوائية عالية التشفير وحساب تجزئة SHA-256 محلياً.
         </p>
       </div>
 
       {/* Password Generator */}
-      <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <h4 style={{ fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <KeyRound size={18} color="#10b981" /> مولد كلمات المرور القوية
+      <div style={{ background: 'rgba(10, 20, 48, 0.5)', padding: '1.25rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <h4 style={{ fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+          <KeyRound size={18} color="#38bdf8" /> مولد كلمات المرور القوية
         </h4>
 
         <div>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>طول كلمة المرور: ({passLength} حرف)</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>طول كلمة المرور: ({passLength} حرف)</label>
           <input type="range" min="8" max="64" value={passLength} onChange={(e) => setPassLength(Number(e.target.value))} style={{ width: '100%' }} />
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.85rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.85rem', color: '#94a3b8' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer' }}>
             <input type="checkbox" checked={includeUpper} onChange={(e) => setIncludeUpper(e.target.checked)} /> أحرف كبيرة (A-Z)
           </label>
@@ -340,8 +340,8 @@ export function SecuritySuite() {
         </button>
 
         {generatedPassword && (
-          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', background: 'rgba(16, 185, 129, 0.1)', padding: '0.75rem 1rem', borderRadius: '0.5rem', border: '1px solid #10b981' }}>
-            <span style={{ fontFamily: 'monospace', fontSize: '1.1rem', fontWeight: 700, color: '#34d399', flex: 1, wordBreak: 'break-all' }}>{generatedPassword}</span>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', background: 'rgba(37, 99, 235, 0.15)', padding: '0.75rem 1rem', borderRadius: '0.6rem', border: '1px solid rgba(59, 130, 246, 0.4)' }}>
+            <span style={{ fontFamily: 'monospace', fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', flex: 1, wordBreak: 'break-all' }}>{generatedPassword}</span>
             <button
               onClick={() => {
                 navigator.clipboard.writeText(generatedPassword);
@@ -357,9 +357,9 @@ export function SecuritySuite() {
       </div>
 
       {/* SHA-256 Hasher */}
-      <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <h4 style={{ fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <Terminal size={18} color="var(--accent-cyan)" /> حاسبة الهاش الفورية (SHA-256)
+      <div style={{ background: 'rgba(10, 20, 48, 0.5)', padding: '1.25rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <h4 style={{ fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+          <Terminal size={18} color="#00d2ff" /> حاسبة الهاش الفورية (SHA-256)
         </h4>
         <input
           type="text"
@@ -370,8 +370,8 @@ export function SecuritySuite() {
         />
         {sha256Hash && (
           <div>
-            <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>SHA-256 Hash:</label>
-            <p style={{ fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', background: 'rgba(0,0,0,0.3)', padding: '0.75rem', borderRadius: '0.5rem' }}>{sha256Hash}</p>
+            <label style={{ fontSize: '0.75rem', color: '#93c5fd' }}>SHA-256 Hash:</label>
+            <p style={{ fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', background: 'rgba(0,0,0,0.4)', padding: '0.75rem', borderRadius: '0.5rem', color: '#ffffff' }}>{sha256Hash}</p>
           </div>
         )}
       </div>

@@ -3,8 +3,8 @@ import { Palette, Copy, Check, Sparkles, RefreshCw, Layers } from 'lucide-react'
 import confetti from 'canvas-confetti';
 
 export function ColorStudio() {
-  const [color1, setColor1] = useState('#8b5cf6');
-  const [color2, setColor2] = useState('#ec4899');
+  const [color1, setColor1] = useState('#0066ff');
+  const [color2, setColor2] = useState('#00d2ff');
   const [gradientAngle, setGradientAngle] = useState(135);
   const [gradientType, setGradientType] = useState('linear');
   const [copied, setCopied] = useState(false);
@@ -37,19 +37,22 @@ export function ColorStudio() {
   };
 
   const generateRandomColors = () => {
-    const randomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-    setColor1(randomColor());
-    setColor2(randomColor());
+    const blues = ['#0066ff', '#00d2ff', '#38bdf8', '#1d4ed8', '#0284c7', '#2563eb', '#60a5fa', '#0f172a', '#ffffff'];
+    const c1 = blues[Math.floor(Math.random() * blues.length)];
+    let c2 = blues[Math.floor(Math.random() * blues.length)];
+    if (c1 === c2) c2 = '#00d2ff';
+    setColor1(c1);
+    setColor2(c2);
     confetti({ particleCount: 40 });
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Palette size={22} color="var(--accent-pink)" /> استوديو الألوان والتدرجات (Gradient Studio)
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+          <Palette size={22} color="#00d2ff" /> استوديو الألوان والتدرجات (Gradient Studio)
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
           ابتكر تدرجات لونية عصرية، تحويل الصيغ (HEX/RGB)، وانسخ كود الـ CSS المباشر.
         </p>
       </div>
@@ -63,7 +66,7 @@ export function ColorStudio() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 12px 30px rgba(0,0,0,0.3)',
+          boxShadow: '0 12px 35px rgba(0,0,0,0.5)',
           border: '1px solid rgba(255,255,255,0.2)',
           transition: 'all 0.3s ease',
         }}
@@ -72,12 +75,13 @@ export function ColorStudio() {
           onClick={copyCss}
           className="btn-secondary"
           style={{
-            background: 'rgba(0,0,0,0.6)',
+            background: 'rgba(5, 10, 24, 0.75)',
             backdropFilter: 'blur(10px)',
             color: '#fff',
             border: '1px solid rgba(255,255,255,0.2)',
-            padding: '0.6rem 1.2rem',
+            padding: '0.65rem 1.3rem',
             fontSize: '0.9rem',
+            fontWeight: 700
           }}
         >
           {copied ? <><Check size={16} color="#10b981" /> تم نسخ الـ CSS!</> : <><Copy size={16} /> نسخ كود التدرج CSS</>}
@@ -85,11 +89,11 @@ export function ColorStudio() {
       </div>
 
       {/* Controls */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', background: 'rgba(10, 20, 48, 0.6)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
         
         {/* Color 1 */}
         <div>
-          <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>اللون الأول (Start Color):</label>
+          <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>اللون الأول (Start Color):</label>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <input
               type="color"
@@ -109,7 +113,7 @@ export function ColorStudio() {
 
         {/* Color 2 */}
         <div>
-          <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>اللون الثاني (End Color):</label>
+          <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>اللون الثاني (End Color):</label>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <input
               type="color"
@@ -130,7 +134,7 @@ export function ColorStudio() {
         {/* Angle */}
         {gradientType === 'linear' && (
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>زاوية التدرج: ({gradientAngle}°)</label>
+            <label style={{ fontSize: '0.8rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>زاوية التدرج: ({gradientAngle}°)</label>
             <input
               type="range"
               min="0"
@@ -146,7 +150,7 @@ export function ColorStudio() {
       {/* Buttons */}
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
         <button onClick={generateRandomColors} className="btn-gradient">
-          <Sparkles size={16} /> توليد ألوان عشوائية مبهرة
+          <Sparkles size={16} /> توليد ألوان زرقاء ملكية مبهرة
         </button>
         <button
           className={`btn-secondary ${gradientType === 'linear' ? 'btn-gradient' : ''}`}

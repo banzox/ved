@@ -67,19 +67,19 @@ export function ImageCompressor() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Zap size={20} color="var(--accent-purple)" /> ضغط وتقليل حجم الصور
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Zap size={20} color="#00d2ff" /> ضغط وتقليل حجم الصور
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>قلّل حجم الصور مع المعاينة الفورية لفرق الحجم دون التأثير على الجودة الملحوظة.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>قلّل حجم الصور مع المعاينة الفورية لفرق الحجم دون التأثير على الجودة الملحوظة.</p>
 
       <input type="file" accept="image/*" onChange={handleImageUpload} className="glass-input" />
 
       {previewUrl && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* Controls */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', background: 'rgba(10, 20, 48, 0.6)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>مستوى الضغط والجودة: ({Math.round(quality * 100)}%)</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>مستوى الضغط والجودة: ({Math.round(quality * 100)}%)</label>
               <input
                 type="range"
                 min="0.1"
@@ -92,7 +92,7 @@ export function ImageCompressor() {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>صيغة التصدير المستهدفة:</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>صيغة التصدير المستهدفة:</label>
               <select className="glass-input" value={format} onChange={(e) => setFormat(e.target.value)}>
                 <option value="image/webp">WebP (أفضل ضغط وأداء ممتاز)</option>
                 <option value="image/jpeg">JPEG / JPG (متوافق مع الجميع)</option>
@@ -102,25 +102,25 @@ export function ImageCompressor() {
           </div>
 
           {/* Stats Bar */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', background: 'rgba(139, 92, 246, 0.1)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-glow)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', background: 'rgba(37, 99, 235, 0.12)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.35)' }}>
             <div style={{ textAlign: 'center' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>الحجم الأصلي:</span>
-              <p style={{ fontWeight: 800, fontSize: '1.1rem' }}>{(originalSize / 1024).toFixed(1)} KB</p>
+              <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>الحجم الأصلي:</span>
+              <p style={{ fontWeight: 800, fontSize: '1.1rem', color: '#ffffff' }}>{(originalSize / 1024).toFixed(1)} KB</p>
             </div>
 
             <div style={{ textAlign: 'center' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>الحجم بعد الضغط:</span>
-              <p style={{ fontWeight: 800, fontSize: '1.1rem', color: '#10b981' }}>{(compressedSize / 1024).toFixed(1)} KB</p>
+              <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>الحجم بعد الضغط:</span>
+              <p style={{ fontWeight: 800, fontSize: '1.1rem', color: '#34d399' }}>{(compressedSize / 1024).toFixed(1)} KB</p>
             </div>
 
             <div style={{ textAlign: 'center' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>نسبة التوفير:</span>
-              <p style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--accent-purple)' }}>-{savingsPercent}%</p>
+              <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>نسبة التوفير:</span>
+              <p style={{ fontWeight: 800, fontSize: '1.1rem', color: '#00d2ff' }}>-{savingsPercent}%</p>
             </div>
           </div>
 
           {/* Image Preview */}
-          <div style={{ textAlign: 'center', border: '1px dashed var(--border-color)', borderRadius: '0.75rem', padding: '1rem', maxHeight: '350px', overflow: 'hidden' }}>
+          <div style={{ textAlign: 'center', border: '1px dashed rgba(59, 130, 246, 0.3)', borderRadius: '0.85rem', padding: '1rem', maxHeight: '350px', overflow: 'hidden', background: 'rgba(5, 10, 24, 0.6)' }}>
             <img src={compressedBlob ? URL.createObjectURL(compressedBlob) : previewUrl} alt="compressed preview" style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '0.5rem', objectFit: 'contain' }} />
           </div>
 
@@ -138,8 +138,6 @@ export function ImageCropResize() {
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(600);
   const [aspectRatio, setAspectRatio] = useState('free');
-
-  const canvasRef = useRef(null);
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
@@ -186,10 +184,10 @@ export function ImageCropResize() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Crop size={20} color="var(--accent-cyan)" /> قص وتعديل أبعاد الصور
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Crop size={20} color="#60a5fa" /> قص وتعديل أبعاد الصور
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>غير أبعاد الصورة بالبكسل أو اختر أبعاد جاهزة لمنصات السوشيال ميديا.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>غير أبعاد الصورة بالبكسل أو اختر أبعاد جاهزة لمنصات السوشيال ميديا.</p>
 
       <input type="file" accept="image/*" onChange={handleUpload} className="glass-input" />
 
@@ -197,7 +195,7 @@ export function ImageCropResize() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Quick Presets */}
           <div>
-            <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.5rem' }}>أبعاد جاهزة (Presets):</label>
+            <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.5rem', color: '#cbd5e1' }}>أبعاد جاهزة (Presets):</label>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button className={`btn-secondary ${aspectRatio === '1:1' ? 'btn-gradient' : ''}`} onClick={() => applyPreset('1:1')}>🟩 مربع 1:1 (Insta Post)</button>
               <button className={`btn-secondary ${aspectRatio === '9:16' ? 'btn-gradient' : ''}`} onClick={() => applyPreset('9:16')}>📱 ستوري 9:16 (Reels/TikTok)</button>
@@ -208,11 +206,11 @@ export function ImageCropResize() {
           {/* Width Height Inputs */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>العرض (Width px):</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>العرض (Width px):</label>
               <input type="number" className="glass-input" value={width} onChange={(e) => setWidth(parseInt(e.target.value) || 100)} />
             </div>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>الارتفاع (Height px):</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>الارتفاع (Height px):</label>
               <input type="number" className="glass-input" value={height} onChange={(e) => setHeight(parseInt(e.target.value) || 100)} />
             </div>
           </div>
@@ -269,34 +267,34 @@ export function ImageFilters() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Sliders size={20} color="var(--accent-pink)" /> استوديو التأثيرات والفلاتر
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Sliders size={20} color="#38bdf8" /> استوديو التأثيرات والفلاتر
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>عدّل الإضاءة، التشبع، والتباين وأضف تأثير أبيض وأسود بلمسة واحدة.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>عدّل الإضاءة، التشبع، والتباين وأضف تأثير أبيض وأسود بلمسة واحدة.</p>
 
       <input type="file" accept="image/*" onChange={handleUpload} className="glass-input" />
 
       {imageSrc && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(5, 10, 24, 0.6)', borderRadius: '0.85rem' }}>
             <img src={imageSrc} alt="filter preview" style={filterStyle} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '0.75rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', background: 'rgba(10, 20, 48, 0.6)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 600 }}>السطوع ({brightness}%):</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#93c5fd' }}>السطوع ({brightness}%):</label>
               <input type="range" min="20" max="200" value={brightness} onChange={(e) => setBrightness(e.target.value)} style={{ width: '100%' }} />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 600 }}>التباين ({contrast}%):</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#93c5fd' }}>التباين ({contrast}%):</label>
               <input type="range" min="20" max="200" value={contrast} onChange={(e) => setContrast(e.target.value)} style={{ width: '100%' }} />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 600 }}>التشبع ({saturate}%):</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#93c5fd' }}>التشبع ({saturate}%):</label>
               <input type="range" min="0" max="200" value={saturate} onChange={(e) => setSaturate(e.target.value)} style={{ width: '100%' }} />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 600 }}>أبيض وأسود ({grayscale}%):</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#93c5fd' }}>أبيض وأسود ({grayscale}%):</label>
               <input type="range" min="0" max="100" value={grayscale} onChange={(e) => setGrayscale(e.target.value)} style={{ width: '100%' }} />
             </div>
           </div>

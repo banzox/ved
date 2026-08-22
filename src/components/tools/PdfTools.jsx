@@ -50,43 +50,43 @@ export function PdfMerger() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Combine size={20} color="var(--accent-purple)" /> دمج ملفات PDF
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Combine size={20} color="#38bdf8" /> دمج ملفات PDF
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>قم بتجميع عدة ملفات PDF في مستند واحد مرتّب وبسرعة عالية في المتصفح.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>قم بتجميع عدة ملفات PDF في مستند واحد مرتّب وبسرعة عالية في المتصفح.</p>
 
       {/* File Upload Box */}
       <label style={{
-        border: '2px dashed var(--border-glow)',
+        border: '2px dashed rgba(59, 130, 246, 0.4)',
         borderRadius: '1rem',
         padding: '2rem',
         textAlign: 'center',
         cursor: 'pointer',
-        background: 'rgba(139, 92, 246, 0.05)',
+        background: 'rgba(37, 99, 235, 0.06)',
         display: 'block'
       }}>
-        <FilePlus size={36} color="var(--accent-purple)" style={{ marginBottom: '0.5rem' }} />
-        <p style={{ fontWeight: 600 }}>اضغط لاختيار ملفات PDF أو اسحبها هنا</p>
-        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>يمكنك اختيار أكثر من ملف دفعة واحدة</span>
+        <FilePlus size={36} color="#38bdf8" style={{ marginBottom: '0.5rem' }} />
+        <p style={{ fontWeight: 700, color: '#ffffff' }}>اضغط لاختيار ملفات PDF أو اسحبها هنا</p>
+        <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>يمكنك اختيار أكثر من ملف دفعة واحدة</span>
         <input type="file" accept="application/pdf" multiple onChange={handleFileChange} style={{ display: 'none' }} />
       </label>
 
       {/* File List */}
       {files.length > 0 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <h4 style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>الملفات المختارة ({files.length}):</h4>
+          <h4 style={{ fontSize: '0.85rem', color: '#94a3b8' }}>الملفات المختارة ({files.length}):</h4>
           {files.map((file, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '0.5rem', border: '1px solid var(--border-color)' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 600, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: '80%' }}>
+            <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.65rem 1rem', background: 'rgba(10, 20, 48, 0.6)', borderRadius: '0.6rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: '80%', color: '#f8fafc' }}>
                 {i + 1}. {file.name} ({Math.round(file.size / 1024)} KB)
               </span>
-              <button onClick={() => removeFile(i)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>
+              <button onClick={() => removeFile(i)} style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', display: 'flex' }}>
                 <Trash2 size={16} />
               </button>
             </div>
           ))}
 
-          <button onClick={mergePdfs} disabled={isProcessing} className="btn-gradient" style={{ marginTop: '1rem' }}>
+          <button onClick={mergePdfs} disabled={isProcessing} className="btn-gradient" style={{ marginTop: '0.75rem' }}>
             {isProcessing ? <><Loader2 size={18} className="animate-spin" /> جاري الدمج...</> : <><Combine size={18} /> دمج الملفات الآن وتحميل الـ PDF</>}
           </button>
         </div>
@@ -149,32 +149,32 @@ export function ImagesToPdf() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <ImageIcon size={20} color="var(--accent-cyan)" /> تحويل الصور إلى PDF
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <ImageIcon size={20} color="#00d2ff" /> تحويل الصور إلى PDF
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>حَوّل مجموعة من الصور (JPG/PNG) إلى ملف PDF احترافي وموحد.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>حَوّل مجموعة من الصور (JPG/PNG) إلى ملف PDF احترافي وموحد.</p>
 
       <label style={{
-        border: '2px dashed rgba(6, 182, 212, 0.4)',
+        border: '2px dashed rgba(0, 210, 255, 0.4)',
         borderRadius: '1rem',
         padding: '2rem',
         textAlign: 'center',
         cursor: 'pointer',
-        background: 'rgba(6, 182, 212, 0.05)',
+        background: 'rgba(0, 210, 255, 0.05)',
         display: 'block'
       }}>
-        <ImageIcon size={36} color="var(--accent-cyan)" style={{ marginBottom: '0.5rem' }} />
-        <p style={{ fontWeight: 600 }}>اختيار الصور من الجهاز</p>
-        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>تدعم صيغ PNG و JPG</span>
+        <ImageIcon size={36} color="#00d2ff" style={{ marginBottom: '0.5rem' }} />
+        <p style={{ fontWeight: 700, color: '#ffffff' }}>اختيار الصور من الجهاز</p>
+        <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>تدعم صيغ PNG و JPG</span>
         <input type="file" accept="image/png, image/jpeg" multiple onChange={handleImageChange} style={{ display: 'none' }} />
       </label>
 
       {images.length > 0 && (
         <div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>الصور المختارة ({images.length}):</p>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem' }}>الصور المختارة ({images.length}):</p>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
             {images.map((img, i) => (
-              <div key={i} style={{ width: '70px', height: '70px', borderRadius: '0.5rem', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
+              <div key={i} style={{ width: '70px', height: '70px', borderRadius: '0.5rem', overflow: 'hidden', border: '1px solid rgba(59, 130, 246, 0.3)' }}>
                 <img src={URL.createObjectURL(img)} alt="thumb" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             ))}
@@ -206,7 +206,6 @@ export function PdfSplitter() {
       const totalPages = srcPdf.getPageCount();
       const pageIndicesToKeep = [];
 
-      // Parse range string like "1-3, 5"
       const parts = pageRange.split(',');
       for (let part of parts) {
         part = part.trim();
@@ -254,17 +253,17 @@ export function PdfSplitter() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Split size={20} color="var(--accent-pink)" /> استخراج وتقسيم الـ PDF
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Split size={20} color="#60a5fa" /> استخراج وتقسيم الـ PDF
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>حدد الصفحات التي تريد استخراجها وحفظها في مستند مستقل.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>حدد الصفحات التي تريد استخراجها وحفظها في مستند مستقل.</p>
 
       <input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])} className="glass-input" />
 
       {file && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '0.5rem' }}>
           <div>
-            <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>أرقام الصفحات للاستخراج (مثال: 1-3 أو 1, 4, 7):</label>
+            <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>أرقام الصفحات للاستخراج (مثال: 1-3 أو 1, 4, 7):</label>
             <input type="text" className="glass-input" value={pageRange} onChange={(e) => setPageRange(e.target.value)} />
           </div>
 

@@ -55,17 +55,17 @@ export function AudioConverter() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Music size={20} color="var(--accent-purple)" /> محول الصيغ الصوتية (MP3/WAV)
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Music size={20} color="#38bdf8" /> محول الصيغ الصوتية (MP3/WAV)
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>حَول أي ملف صوتي إلى صيغة WAV عالية الدقة أو MP3 في المتصفح.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>حَول أي ملف صوتي إلى صيغة WAV عالية الدقة أو MP3 في المتصفح.</p>
 
       <input type="file" accept="audio/*" onChange={handleAudioUpload} className="glass-input" />
 
       {audioFile && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
-            <p style={{ fontSize: '0.85rem', fontWeight: 600 }}>الملف المحدد: {audioFile.name} ({(audioFile.size / 1024 / 1024).toFixed(2)} MB)</p>
+          <div style={{ background: 'rgba(10, 20, 48, 0.6)', padding: '1rem', borderRadius: '0.85rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+            <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#f8fafc' }}>الملف المحدد: {audioFile.name} ({(audioFile.size / 1024 / 1024).toFixed(2)} MB)</p>
           </div>
 
           <button onClick={convertAudio} disabled={isConverting} className="btn-gradient">
@@ -152,10 +152,10 @@ export function AudioTrimmer() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Scissors size={20} color="var(--accent-pink)" /> قاطع ومقطع الصوتيات
+      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffffff' }}>
+        <Scissors size={20} color="#00d2ff" /> قاطع ومقطع الصوتيات
       </h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>حدد التوقيت الزمني لقص واستخراج مقطع صوّتي محدد بوضوح.</p>
+      <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>حدد التوقيت الزمني لقص واستخراج مقطع صوّتي محدد بوضوح.</p>
 
       <input type="file" accept="audio/*" onChange={handleUpload} className="glass-input" />
 
@@ -163,17 +163,17 @@ export function AudioTrimmer() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>وقت البداية (بالثواني):</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>وقت البداية (بالثواني):</label>
               <input type="number" min="0" max={duration} className="glass-input" value={startTime} onChange={(e) => setStartTime(Number(e.target.value))} />
             </div>
 
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem' }}>وقت النهاية (بالثواني):</label>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', marginBottom: '0.3rem', color: '#cbd5e1' }}>وقت النهاية (بالثواني):</label>
               <input type="number" min="1" max={duration} className="glass-input" value={endTime} onChange={(e) => setEndTime(Number(e.target.value))} />
             </div>
           </div>
 
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>إجمالي مدة الملف الاصلي: {duration} ثانية</p>
+          <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>إجمالي مدة الملف الاصلي: {duration} ثانية</p>
 
           <button onClick={trimAudio} disabled={isProcessing} className="btn-gradient">
             {isProcessing ? 'جاري القص...' : <><Scissors size={18} /> قص المقطع الصوتي وتحميله</>}
