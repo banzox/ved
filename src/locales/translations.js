@@ -21,7 +21,8 @@ export const translations = {
       contactUs: 'اتصل بنا',
       close: 'إغلاق',
       loadingTool: 'جاري تحميل الأداة بسرعة فائقة...',
-      addToFav: 'إضافة للمفضلة'
+      addToFav: 'إضافة للمفضلة',
+      linkCopied: 'تم نسخ الرابط للحافظة بنجاح!'
     },
     categories: {
       all: 'كل الأدوات',
@@ -34,7 +35,17 @@ export const translations = {
       audio: 'الصوتيات',
       social: 'السوشيال ميديا',
       bundles: 'حزم الأدوات',
+      blog: 'المدونة والشروحات',
       favorites: 'المفضلة'
+    },
+    blog: {
+      blogBadge: '📚 الأدلة والمقالات التعليمية',
+      blogTitle: 'مركز المعرفة وشروحات الأدوات',
+      blogSubtitle: 'أدلة إرشادية ونصائح تخصصية لتحقيق أقصى استفادة من أدوات المنصة وزيادة إنتاجيتك.',
+      readArticle: 'قراءة المقال كاملاً',
+      tryToolTitle: 'هل ترغب بتجربة الأداة المشروحة الآن؟',
+      tryToolSubtitle: 'جميع الأدوات مجانية 100% وتعمل محلياً داخل متصفحك بأمان تام وسرية كاملة.',
+      launchToolNow: 'تشغيل الأداة مباشرة'
     },
     hero: {
       badge: '✨ منصة الأدوات المتكاملة 100% بدون إنترنت (Offline PWA)',
@@ -191,7 +202,8 @@ export const translations = {
       contactUs: 'Contact',
       close: 'Close',
       loadingTool: 'Loading tool seamlessly...',
-      addToFav: 'Add to favorites'
+      addToFav: 'Add to favorites',
+      linkCopied: 'Link copied to clipboard successfully!'
     },
     categories: {
       all: 'All Tools',
@@ -204,7 +216,17 @@ export const translations = {
       audio: 'Audio Tools',
       social: 'Social & Creators',
       bundles: 'Step-by-Step Bundles',
+      blog: 'Blog & Knowledge',
       favorites: 'Favorites'
+    },
+    blog: {
+      blogBadge: '📚 Guides & Knowledge Hub',
+      blogTitle: 'Knowledge Center & Tool Guides',
+      blogSubtitle: 'Expert tutorials, step-by-step walk-throughs, and optimization tips for peak productivity.',
+      readArticle: 'Read Full Guide',
+      tryToolTitle: 'Ready to Try the Featured Tool?',
+      tryToolSubtitle: 'All tools are 100% free and process locally inside your browser with complete privacy.',
+      launchToolNow: 'Launch Tool Directly'
     },
     hero: {
       badge: '✨ 100% Offline-Ready Progressive Web App (PWA)',
@@ -361,7 +383,8 @@ export const translations = {
       contactUs: 'Contacto',
       close: 'Cerrar',
       loadingTool: 'Cargando herramienta...',
-      addToFav: 'Añadir a favoritos'
+      addToFav: 'Añadir a favoritos',
+      linkCopied: '¡Enlace copiado al portapapeles con éxito!'
     },
     categories: {
       all: 'Todas',
@@ -374,7 +397,17 @@ export const translations = {
       audio: 'Audio y Sonido',
       social: 'Redes Sociales',
       bundles: 'Paquetes Guiados',
+      blog: 'Blog y Guías',
       favorites: 'Favoritos'
+    },
+    blog: {
+      blogBadge: '📚 Guías y Tutoriales',
+      blogTitle: 'Centro de Conocimiento y Guías',
+      blogSubtitle: 'Tutoriales expertos y recomendaciones para optimizar tus flujos de trabajo.',
+      readArticle: 'Leer Guía Completa',
+      tryToolTitle: '¿Quieres Probar la Herramienta Ahora?',
+      tryToolSubtitle: 'Todas las herramientas son 100% gratuitas y procesan tus datos localmente.',
+      launchToolNow: 'Abrir Herramienta'
     },
     hero: {
       badge: '✨ Aplicación Web Progresiva (PWA) con Modo Offline',
@@ -531,7 +564,8 @@ export const translations = {
       contactUs: 'Contact',
       close: 'Fermer',
       loadingTool: 'Chargement ultra rapide...',
-      addToFav: 'Ajouter aux favoris'
+      addToFav: 'Ajouter aux favoris',
+      linkCopied: 'Lien copié dans le presse-papiers avec succès !'
     },
     categories: {
       all: 'Tous',
@@ -544,7 +578,17 @@ export const translations = {
       audio: 'Outils Audio',
       social: 'Réseaux Sociaux',
       bundles: 'Packs Guidés',
+      blog: 'Blog & Tutoriels',
       favorites: 'Favoris'
+    },
+    blog: {
+      blogBadge: '📚 Guides & Tutoriels',
+      blogTitle: 'Centre de Connaissances & Guides',
+      blogSubtitle: 'Tutoriels et astuces d\'optimisation pour maximiser votre efficacité au quotidien.',
+      readArticle: 'Lire le Guide Complet',
+      tryToolTitle: 'Prêt à Utiliser l\'Outil Présenté ?',
+      tryToolSubtitle: 'Tous les outils sont 100% gratuits et s\'exécutent localement dans votre navigateur.',
+      launchToolNow: 'Lancer l\'Outil'
     },
     hero: {
       badge: '✨ Application Web Progressive (PWA) avec Mode Hors Ligne',
@@ -701,7 +745,8 @@ export const translations = {
       contactUs: 'Kontakt',
       close: 'Schließen',
       loadingTool: 'Lade Werkzeug blitzschnell...',
-      addToFav: 'Zu Favoriten hinzufügen'
+      addToFav: 'Zu Favoriten hinzufügen',
+      linkCopied: 'Link erfolgreich in die Zwischenablage kopiert!'
     },
     categories: {
       all: 'Alle',
@@ -714,7 +759,17 @@ export const translations = {
       audio: 'Audio-Tools',
       social: 'Social Media',
       bundles: 'Schritt-für-Schritt',
+      blog: 'Blog & Ratgeber',
       favorites: 'Favoriten'
+    },
+    blog: {
+      blogBadge: '📚 Anleitungen & Wissensdatenbank',
+      blogTitle: 'Wissenszentrum & Werkzeug-Ratgeber',
+      blogSubtitle: 'Experten-Anleitungen und Tipps für maximale Produktivität und Datensicherheit.',
+      readArticle: 'Vollständigen Ratgeber Lesen',
+      tryToolTitle: 'Möchten Sie das Werkzeug Direkt Ausprobieren?',
+      tryToolSubtitle: 'Alle Werkzeuge sind 100% kostenlos und verarbeiten Daten sicher im Browser.',
+      launchToolNow: 'Werkzeug Direkt Starten'
     },
     hero: {
       badge: '✨ Progressive Web App (PWA) mit Offline-Funktion',

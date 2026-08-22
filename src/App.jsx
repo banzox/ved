@@ -2,6 +2,8 @@ import React, { useState, useEffect, lazy } from 'react';
 import Navbar from './components/Navbar';
 import ToolModal from './components/ToolModal';
 import LegalModal from './components/legal/LegalModal';
+import BlogSection from './components/blog/BlogSection';
+import ArticleModal from './components/blog/ArticleModal';
 import { LanguageProvider, useLanguage } from './locales/LanguageContext';
 
 // Icons
@@ -10,7 +12,7 @@ import {
   Sliders, Music, Scissors, Camera, Sparkles, Video, MessageCircle, 
   PackageCheck, Star, ArrowUpRight, ShieldCheck, Heart, Terminal,
   QrCode, Code2, Lock, KeyRound, Palette, Layers, Shield, FileCheck2, Info,
-  ArrowRight
+  ArrowRight, BookOpen
 } from 'lucide-react';
 
 // Lazy Loaded Tool Components for Ultra-Fast Initial Load
@@ -49,6 +51,7 @@ function MainApp() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTool, setActiveTool] = useState(null);
   const [activeLegalModal, setActiveLegalModal] = useState(null);
+  const [activeArticle, setActiveArticle] = useState(null);
 
   // Synchronize favorites with LocalStorage
   const [favorites, setFavorites] = useState(() => {
@@ -246,6 +249,13 @@ function MainApp() {
     );
   };
 
+  const handleOpenToolById = (toolId) => {
+    const targetTool = tools.find((t) => t.id === toolId);
+    if (targetTool) {
+      setActiveTool(targetTool);
+    }
+  };
+
   const filteredTools = tools.filter((t) => {
     const matchesSearch = t.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           t.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -318,6 +328,9 @@ function MainApp() {
                 <button className="btn-secondary" onClick={() => setActiveCategory('bundles')}>
                   <PackageCheck size={17} color="#38bdf8" /> {t('ctaBundles', 'hero')}
                 </button>
+                <button className="btn-secondary" onClick={() => setActiveCategory('blog')}>
+                  <BookOpen size={17} color="#60a5fa" /> {t('blogBadge', 'blog') || 'المدونة والشروحات'}
+                </button>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: '#93c5fd', padding: '0.4rem 0.6rem' }}>
                   <ShieldCheck size={17} color="#38bdf8" /> {t('securityBadge', 'hero')}
                 </div>
@@ -326,124 +339,136 @@ function MainApp() {
           </div>
         )}
 
-        {/* Tools Section Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.2px' }}>
-              {t(activeCategory, 'categories')}
-            </h2>
-            <p style={{ fontSize: '0.84rem', color: '#94a3b8', marginTop: '0.15rem' }}>
-              {t('foundTools', 'common')} ({filteredTools.length}) {t('readyToUse', 'common')}
-            </p>
-          </div>
-        </div>
+        {/* View Mode: If Blog category is chosen, display Blog Section directly */}
+        {activeCategory === 'blog' ? (
+          <BlogSection onSelectPost={(post) => setActiveArticle(post)} />
+        ) : (
+          <>
+            {/* Tools Section Header */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <div>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.2px' }}>
+                  {t(activeCategory, 'categories')}
+                </h2>
+                <p style={{ fontSize: '0.84rem', color: '#94a3b8', marginTop: '0.15rem' }}>
+                  {t('foundTools', 'common')} ({filteredTools.length}) {t('readyToUse', 'common')}
+                </p>
+              </div>
+            </div>
 
-        {/* Responsive Tools Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(285px, 1fr))',
-          gap: '1.15rem'
-        }}>
-          {filteredTools.map((tItem) => {
-            const Icon = tItem.icon;
-            const isFav = favorites.includes(tItem.id);
-            return (
-              <div
-                key={tItem.id}
-                className="tool-card animate-fade-in"
-                onClick={() => setActiveTool(tItem)}
-                style={{
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: '215px'
-                }}
-              >
-                <div>
-                  {/* Top Card Bar */}
-                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.9rem' }}>
-                    <div style={{
-                      background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(6, 182, 212, 0.15))',
-                      padding: '0.65rem',
-                      borderRadius: '0.75rem',
+            {/* Responsive Tools Cards Grid */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(285px, 1fr))',
+              gap: '1.15rem'
+            }}>
+              {filteredTools.map((tItem) => {
+                const Icon = tItem.icon;
+                const isFav = favorites.includes(tItem.id);
+                return (
+                  <div
+                    key={tItem.id}
+                    className="tool-card animate-fade-in"
+                    onClick={() => setActiveTool(tItem)}
+                    style={{
+                      cursor: 'pointer',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '1px solid rgba(59, 130, 246, 0.25)'
-                    }}>
-                      <Icon size={21} color={tItem.iconColor || '#38bdf8'} />
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                      {tItem.badge && (
-                        <span className="badge badge-blue" style={{ fontSize: '0.7rem' }}>
-                          {tItem.badge}
-                        </span>
-                      )}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleFavorite(tItem.id);
-                        }}
-                        style={{
-                          background: 'rgba(255,255,255,0.03)',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                          borderRadius: '0.45rem',
-                          cursor: 'pointer',
-                          padding: '0.35rem',
-                          color: isFav ? '#f59e0b' : '#64748b',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      minHeight: '215px'
+                    }}
+                  >
+                    <div>
+                      {/* Top Card Bar */}
+                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.9rem' }}>
+                        <div style={{
+                          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(6, 182, 212, 0.15))',
+                          padding: '0.65rem',
+                          borderRadius: '0.75rem',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          transition: 'all 0.15s ease'
-                        }}
-                        title={t('addToFav', 'common')}
-                      >
-                        <Star size={16} fill={isFav ? '#f59e0b' : 'none'} />
-                      </button>
+                          border: '1px solid rgba(59, 130, 246, 0.25)'
+                        }}>
+                          <Icon size={21} color={tItem.iconColor || '#38bdf8'} />
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          {tItem.badge && (
+                            <span className="badge badge-blue" style={{ fontSize: '0.7rem' }}>
+                              {tItem.badge}
+                            </span>
+                          )}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite(tItem.id);
+                            }}
+                            style={{
+                              background: 'rgba(255,255,255,0.03)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                              borderRadius: '0.45rem',
+                              cursor: 'pointer',
+                              padding: '0.35rem',
+                              color: isFav ? '#f59e0b' : '#64748b',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              transition: 'all 0.15s ease'
+                            }}
+                            title={t('addToFav', 'common')}
+                          >
+                            <Star size={16} fill={isFav ? '#f59e0b' : 'none'} />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Title & Description */}
+                      <h3 style={{ fontSize: '1.08rem', fontWeight: 800, marginBottom: '0.45rem', color: '#ffffff', lineHeight: 1.3 }}>
+                        {tItem.title}
+                      </h3>
+                      <p style={{ fontSize: '0.84rem', color: '#94a3b8', lineHeight: 1.55 }}>
+                        {tItem.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom Card Action Link */}
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      marginTop: '1.15rem',
+                      paddingTop: '0.7rem',
+                      borderTop: '1px solid rgba(59, 130, 246, 0.12)',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      color: '#60a5fa'
+                    }}>
+                      <span>{t('runTool', 'common')}</span>
+                      <ArrowUpRight size={15} color="#38bdf8" />
                     </div>
                   </div>
+                );
+              })}
+            </div>
 
-                  {/* Title & Description */}
-                  <h3 style={{ fontSize: '1.08rem', fontWeight: 800, marginBottom: '0.45rem', color: '#ffffff', lineHeight: 1.3 }}>
-                    {tItem.title}
-                  </h3>
-                  <p style={{ fontSize: '0.84rem', color: '#94a3b8', lineHeight: 1.55 }}>
-                    {tItem.description}
-                  </p>
-                </div>
-
-                {/* Bottom Card Action Link */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginTop: '1.15rem',
-                  paddingTop: '0.7rem',
-                  borderTop: '1px solid rgba(59, 130, 246, 0.12)',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  color: '#60a5fa'
-                }}>
-                  <span>{t('runTool', 'common')}</span>
-                  <ArrowUpRight size={15} color="#38bdf8" />
-                </div>
+            {/* Empty State */}
+            {filteredTools.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
+                <Sparkles size={42} color="#60a5fa" style={{ marginBottom: '1rem' }} />
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>{t('emptySearchTitle', 'common')}</h3>
+                <p style={{ fontSize: '0.88rem', color: '#94a3b8', marginTop: '0.4rem' }}>{t('emptySearchDesc', 'common')}</p>
+                <button className="btn-gradient" style={{ marginTop: '1.25rem' }} onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}>
+                  {t('viewAll', 'common')}
+                </button>
               </div>
-            );
-          })}
-        </div>
+            )}
 
-        {/* Empty State */}
-        {filteredTools.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
-            <Sparkles size={42} color="#60a5fa" style={{ marginBottom: '1rem' }} />
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>{t('emptySearchTitle', 'common')}</h3>
-            <p style={{ fontSize: '0.88rem', color: '#94a3b8', marginTop: '0.4rem' }}>{t('emptySearchDesc', 'common')}</p>
-            <button className="btn-gradient" style={{ marginTop: '1.25rem' }} onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}>
-              {t('viewAll', 'common')}
-            </button>
-          </div>
+            {/* Render Blog Section on the Home Page below tools */}
+            {activeCategory === 'all' && !searchQuery && (
+              <BlogSection onSelectPost={(post) => setActiveArticle(post)} />
+            )}
+          </>
         )}
 
       </main>
@@ -455,6 +480,15 @@ function MainApp() {
           onClose={() => setActiveTool(null)}
           isFavorite={favorites.includes(activeTool.id)}
           onToggleFavorite={toggleFavorite}
+        />
+      )}
+
+      {/* Active Blog Article Modal */}
+      {activeArticle && (
+        <ArticleModal
+          post={activeArticle}
+          onClose={() => setActiveArticle(null)}
+          onOpenTool={handleOpenToolById}
         />
       )}
 
@@ -481,8 +515,15 @@ function MainApp() {
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.2rem' }}>{t('copyright', 'common')}</p>
             </div>
 
-            {/* Legal Links */}
+            {/* Legal & Blog Links */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', fontSize: '0.84rem' }}>
+              <button
+                onClick={() => setActiveCategory('blog')}
+                style={{ background: 'none', border: 'none', color: '#38bdf8', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 700, padding: 0 }}
+              >
+                {t('blogBadge', 'blog') || 'المدونة والشروحات'}
+              </button>
+              <span style={{ color: 'rgba(59, 130, 246, 0.3)' }}>•</span>
               <button
                 onClick={() => setActiveLegalModal('privacy')}
                 style={{ background: 'none', border: 'none', color: '#60a5fa', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 600, padding: 0 }}
@@ -509,7 +550,7 @@ function MainApp() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(59, 130, 246, 0.1)', paddingTop: '1rem', fontSize: '0.8rem', color: '#64748b', flexWrap: 'wrap', gap: '0.5rem' }}>
             <span>{t('madeWithLove', 'common')}</span>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#38bdf8' }}>
-              <ShieldCheck size={15} color="#00d2ff" /> Google AdSense & GDPR Ready
+              <ShieldCheck size={15} color="#00d2ff" /> Google AdSense & SEO Optimized
             </span>
           </div>
 

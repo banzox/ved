@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Sparkles, Star, Layers, FileText, Image, Music, Share2, PackageCheck, QrCode, Code2, Palette, Globe, Smartphone, ChevronDown } from 'lucide-react';
+import { Search, Sparkles, Star, Layers, FileText, Image, Music, Share2, PackageCheck, QrCode, Code2, Palette, Globe, Smartphone, ChevronDown, BookOpen } from 'lucide-react';
 import { useLanguage } from '../locales/LanguageContext';
 
 export default function Navbar({ activeCategory, setActiveCategory, searchQuery, setSearchQuery, favoritesCount }) {
@@ -50,6 +50,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
     { id: 'audio', label: t('audio', 'categories'), icon: Music },
     { id: 'social', label: t('social', 'categories'), icon: Share2 },
     { id: 'bundles', label: t('bundles', 'categories'), icon: PackageCheck },
+    { id: 'blog', label: t('blog', 'categories') || 'المدونة', icon: BookOpen },
     { id: 'favorites', label: `${t('favorites', 'categories')} (${favoritesCount})`, icon: Star },
   ];
 
