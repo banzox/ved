@@ -8,13 +8,13 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'icons.svg', 'robots.txt', 'sitemap.xml'],
+      includeAssets: ['favicon.svg', 'robots.txt', 'sitemap.xml'],
       manifest: {
         name: 'أدواتك | OmniTools Hub',
         short_name: 'OmniTools',
         description: 'منصة متكاملة لأدوات الويب المجانية: PDF، صور، QR Code، نصوص، صوتيات، وأدوات مطورين تعمل 100% محلياً.',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        theme_color: '#080e1e',
+        background_color: '#080e1e',
         display: 'standalone',
         orientation: 'portrait',
         dir: 'rtl',
@@ -29,7 +29,10 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,txt,woff2}']
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,txt,woff2}'],
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
       }
     })
   ]
